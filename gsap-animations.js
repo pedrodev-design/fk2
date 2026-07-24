@@ -237,7 +237,9 @@
                         trigger: section,
                         start: 'top top',
                         end: 'bottom bottom',
-                        scrub: isMobile ? 2.8 : 3.2,
+                        // Keep the transition perceptible even after an aggressive wheel/trackpad gesture.
+                        // This matches the slower, immersive catch-up used by the Frisokar card campaign.
+                        scrub: 8,
                         invalidateOnRefresh: true,
                         onUpdate: (self) => {
                             const visualProgress = self.animation
@@ -263,33 +265,33 @@
                     }, 0.05)
                     .to(frame, {
                         clipPath: 'inset(0% 0% 0% round 0px)',
-                        duration: 0.56,
+                        duration: 0.72,
                         ease: 'power2.inOut'
                     }, 0.12)
                     .to(video, {
                         scale: 1,
-                        duration: 0.64,
+                        duration: 0.78,
                         ease: 'power2.inOut'
                     }, 0.12)
                     .to(shade, {
                         opacity: 0.68,
                         duration: 0.25,
                         ease: 'power1.out'
-                    }, 0.48)
+                    }, 0.62)
                     .to(reveal, {
                         opacity: 1,
                         y: 0,
                         filter: 'blur(0px)',
-                        duration: 0.2,
+                        duration: 0.22,
                         ease: 'power3.out'
-                    }, 0.58)
+                    }, 0.7)
                     .to(revealParts, {
                         opacity: 1,
                         y: 0,
                         stagger: 0.025,
-                        duration: 0.2,
+                        duration: 0.22,
                         ease: 'power3.out'
-                    }, 0.6);
+                    }, 0.74);
 
                 return () => {
                     section.setAttribute('data-theme', 'light');

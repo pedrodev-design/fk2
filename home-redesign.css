@@ -158,9 +158,9 @@ body { background-color: #fff !important; }
 
 /* Motion-enabled layout: the video starts as a precise frame and becomes the page. */
 .home-premium-hero.is-motion-ready {
-    height: 295vh;
-    height: 295svh;
-    min-height: 2300px;
+    height: 420vh;
+    height: 420svh;
+    min-height: 3200px;
 }
 
 .home-premium-hero.is-motion-ready .home-premium-hero-stage {
@@ -286,7 +286,7 @@ body { background-color: #fff !important; }
 
 @media (max-width: 768px) {
     .home-premium-hero {
-        --home-hero-start-clip: inset(54% 4% 6% round 19px);
+        --home-hero-start-clip: inset(56% 4% 6% round 19px);
     }
 
     .home-premium-hero-stage {
@@ -295,27 +295,34 @@ body { background-color: #fff !important; }
 
     .home-premium-hero-mark {
         width: 36px;
-        margin-bottom: 19px;
+        margin-bottom: 22px;
+    }
+
+    .home-premium-hero-kicker {
+        margin-bottom: 24px;
     }
 
     .home-premium-hero-kicker,
     .home-premium-hero-reveal-kicker {
-        margin-bottom: 19px;
         font-size: 0.59rem;
         letter-spacing: 0.26em;
     }
 
+    .home-premium-hero-reveal-kicker {
+        margin-bottom: 20px;
+    }
+
     .home-premium-hero-intro h1 {
         font-size: clamp(2.3rem, 11.8vw, 4.1rem);
-        line-height: 0.9;
+        line-height: 0.94;
         letter-spacing: -0.055em;
     }
 
     .home-premium-hero-intro p {
         max-width: 390px;
-        margin-top: 23px;
+        margin-top: 28px;
         font-size: 0.94rem;
-        line-height: 1.58;
+        line-height: 1.65;
     }
 
     .home-premium-hero-frame {
@@ -331,6 +338,7 @@ body { background-color: #fff !important; }
 
     .home-premium-hero-reveal h2 {
         font-size: clamp(2.85rem, 14vw, 4.5rem);
+        line-height: 0.92;
     }
 
     .home-premium-hero-actions {
@@ -343,9 +351,9 @@ body { background-color: #fff !important; }
     }
 
     .home-premium-hero.is-motion-ready {
-        height: 265vh;
-        height: 265svh;
-        min-height: 2050px;
+        height: 380vh;
+        height: 380svh;
+        min-height: 2700px;
     }
 
     .home-premium-hero.is-motion-ready .home-premium-hero-stage {
@@ -369,9 +377,9 @@ body { background-color: #fff !important; }
 
     .home-premium-hero.is-motion-ready .home-premium-hero-reveal p {
         max-width: 340px;
-        margin-top: 22px;
+        margin-top: 26px;
         font-size: 0.92rem;
-        line-height: 1.55;
+        line-height: 1.62;
     }
 
     .home-premium-hero.is-motion-ready .home-premium-hero-scroll {
@@ -382,7 +390,7 @@ body { background-color: #fff !important; }
 
 @media (max-width: 390px) {
     .home-premium-hero {
-        --home-hero-start-clip: inset(56% 4% 6% round 17px);
+        --home-hero-start-clip: inset(59% 4% 6% round 17px);
     }
 
     .home-premium-hero-intro h1 {
@@ -460,13 +468,13 @@ body { background-color: #fff !important; }
 
 @media (max-width: 599px) and (max-height: 819px) {
     .home-premium-hero {
-        --home-hero-start-clip: inset(65% 4% 5% round 17px);
+        --home-hero-start-clip: inset(68% 4% 5% round 17px);
     }
 }
 
 @media (max-width: 599px) and (max-height: 649px) {
     .home-premium-hero {
-        --home-hero-start-clip: inset(64% 4% 4% round 16px);
+        --home-hero-start-clip: inset(68% 4% 4% round 16px);
     }
 
     .home-premium-hero.is-motion-ready .home-premium-hero-intro {
@@ -498,7 +506,7 @@ body { background-color: #fff !important; }
 
 @media (min-width: 600px) and (max-width: 768px) and (max-height: 850px) {
     .home-premium-hero {
-        --home-hero-start-clip: inset(60% 5% 5% round 18px);
+        --home-hero-start-clip: inset(63% 5% 5% round 18px);
     }
 }
 
