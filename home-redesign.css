@@ -483,29 +483,56 @@ body { background-color: #fff !important; }
 .sust-cta {
     display: inline-flex;
     align-items: center;
-    gap: 15px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #000;
+    gap: 18px;
+    min-height: 54px;
+    padding: 7px 8px 7px 24px;
+    border: 1px solid #fff;
+    border-radius: 999px;
     background: #fff;
-    padding: 18px 40px;
-    border-radius: 4px;
+    color: #111;
+    font-size: 0.75rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 0.14em;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition:
+        background-color 0.35s ease,
+        border-color 0.35s ease,
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.sust-cta span {
-    transition: transform 0.3s ease;
+.sust-cta-arrow {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    flex: 0 0 38px;
+    border-radius: 50%;
+    background: #111;
+    color: #fff;
+    font-size: 1rem;
+    letter-spacing: 0;
+    transition:
+        background-color 0.35s ease,
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.sust-cta:hover {
-    background: #e0e0e0;
+.sust-cta:hover,
+.sust-cta:focus-visible {
+    border-color: #ecece8;
+    background: #ecece8;
+    transform: translateY(-3px);
 }
 
-.sust-cta:hover span {
-    transform: translateX(5px);
+.sust-cta:hover .sust-cta-arrow,
+.sust-cta:focus-visible .sust-cta-arrow {
+    background: #242424;
+    transform: translateX(3px);
+}
+
+.sust-cta:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
 }
 
 /* CTA Banner */
@@ -537,46 +564,56 @@ body { background-color: #fff !important; }
 .btn-primary {
     position: relative;
     isolation: isolate;
-    overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    background: #fff;
-    color: #111;
-    padding: 15px 30px;
-    border: 1px solid rgba(255,255,255,0.9);
-    border-radius: 4px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    transition: color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
-}
-.btn-primary::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
+    gap: 18px;
+    min-height: 54px;
+    padding: 7px 8px 7px 24px;
+    border: 1px solid #111;
+    border-radius: 999px;
     background: #111;
-    transform: scaleX(0);
-    transform-origin: right center;
-    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: none;
+    transition:
+        background-color 0.35s ease,
+        border-color 0.35s ease,
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.btn-primary:hover {
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+    border-color: #242424;
+    background: #242424;
     color: #fff;
     transform: translateY(-3px);
-    box-shadow: 0 16px 36px rgba(0,0,0,0.2);
 }
-.btn-primary:hover::before {
-    transform: scaleX(1);
-    transform-origin: left center;
-}
+
 .btn-arrow {
-    display: inline-block;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    flex: 0 0 38px;
+    border-radius: 50%;
+    background: #f3f3f0;
+    color: #111;
+    font-size: 1rem;
+    letter-spacing: 0;
+    transition:
+        background-color 0.35s ease,
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.btn-primary:hover .btn-arrow {
-    transform: translateX(5px);
+
+.btn-primary:hover .btn-arrow,
+.btn-primary:focus-visible .btn-arrow {
+    background: #fff;
+    transform: translateX(3px);
 }
 .btn-primary:focus-visible {
     outline: 2px solid #fff;
@@ -912,8 +949,9 @@ body { background-color: #fff !important; }
     }
     .sust-cta {
         width: 100%;
-        justify-content: center;
-        padding: 18px 20px;
+        max-width: 320px;
+        justify-content: space-between;
+        padding: 7px 8px 7px 20px;
     }
 
     /* CTA */

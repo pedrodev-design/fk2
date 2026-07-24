@@ -171,38 +171,124 @@
        6. UNIVERSAL BLUR-UP REVEAL ON SCROLL
     ========================================================================= */
     function setupScrollReveals() {
+        const revealOnce = (target, fromVars, trigger = target) => {
+            gsap.from(target, {
+                ...fromVars,
+                scrollTrigger: {
+                    trigger,
+                    start: 'top 88%',
+                    once: true
+                },
+                clearProps: 'opacity,transform,filter'
+            });
+        };
 
-        // Section labels
-        gsap.utils.toArray('.home-section-label').forEach((el) => {
-            gsap.from(el, {
-                scrollTrigger: { trigger: el, start: 'top 88%' },
+        // Text is scoped to <main>, so the navigation header is never affected.
+        const groupedContentSelector = [
+            '.home-stat',
+            '.home-brands-logos',
+            '.solution-card',
+            '.cap-feat',
+            '.abt-feat',
+            '.sust-pillar',
+            '.sust-stat'
+        ].join(',');
+
+        const textElements = gsap.utils.toArray(
+            'main h1, main h2, main h3, main h4, main p, ' +
+            'main .home-section-label, main .f-label, ' +
+            'main .f-statement-label, main .f-vision-label'
+        ).filter((el) => !el.closest(groupedContentSelector));
+
+        const initiallyVisibleText = [];
+        const scrollText = [];
+
+        textElements.forEach((el) => {
+            const rect = el.getBoundingClientRect();
+            const isInitiallyVisible = rect.top < window.innerHeight * 0.94 && rect.bottom > 0;
+            (isInitiallyVisible ? initiallyVisibleText : scrollText).push(el);
+        });
+
+        if (initiallyVisibleText.length) {
+            gsap.from(initiallyVisibleText, {
                 opacity: 0,
-                x: -20,
-                duration: 0.8,
+                y: 28,
+                filter: 'blur(14px)',
+                duration: 1.05,
+                stagger: 0.08,
+                delay: 0.14,
+                ease: 'power3.out',
+                clearProps: 'opacity,transform,filter'
+            });
+        }
+
+        scrollText.forEach((el) => {
+            revealOnce(el, {
+                opacity: 0,
+                y: 28,
+                filter: 'blur(14px)',
+                duration: 1.05,
                 ease: 'power3.out'
             });
         });
 
-        // Headings — blur + translate
-        gsap.utils.toArray('.home-stats-section h2, .home-brands-header h2, .home-solutions-section h2, .capacity-content h2, .about-content h2, .sust-text h2').forEach((el) => {
-            gsap.from(el, {
-                scrollTrigger: { trigger: el, start: 'top 85%' },
+        // Repeated content enters as one coordinated group.
+        [
+            { items: '.home-stat', trigger: '.home-stats-container' },
+            { items: '.home-brands-logos a', trigger: '.home-brands-logos' },
+            { items: '.solution-card', trigger: '.home-solutions-grid' },
+            { items: '.cap-feat', trigger: '.capacity-features' },
+            { items: '.abt-feat', trigger: '.about-features' },
+            { items: '.sust-pillar', trigger: '.sust-pillars' },
+            { items: '.sust-stat', trigger: '.sust-stat-grid' },
+            { items: '.footer-column', trigger: '.footer-links-area' }
+        ].forEach(({ items, trigger }) => {
+            const elements = gsap.utils.toArray(items);
+            const triggerEl = document.querySelector(trigger);
+            if (!elements.length || !triggerEl) return;
+
+            revealOnce(elements, {
                 opacity: 0,
-                y: 50,
-                filter: 'blur(16px)',
-                duration: 1.2,
-                ease: 'power4.out'
-            });
+                y: 32,
+                filter: 'blur(12px)',
+                stagger: 0.1,
+                duration: 1,
+                ease: 'power3.out'
+            }, triggerEl);
         });
 
-        // Paragraphs — staggered soft blur
-        gsap.utils.toArray('.about-content > p, .capacity-content > p, .sust-text p, .home-brands-desc p').forEach((el) => {
-            gsap.from(el, {
-                scrollTrigger: { trigger: el, start: 'top 88%' },
+        // Animate wrappers so image/video sizing and inner parallax stay intact.
+        gsap.utils.toArray(
+            '.hero-video, .f-hero-banner, .capacity-image, .about-image, ' +
+            '.f-statement-img, .f-camp-media'
+        ).forEach((el) => {
+            const rect = el.getBoundingClientRect();
+            const isInitiallyVisible = rect.top < window.innerHeight * 0.94 && rect.bottom > 0;
+            const animation = {
                 opacity: 0,
-                y: 30,
-                filter: 'blur(8px)',
-                duration: 1,
+                scale: 0.985,
+                filter: 'blur(18px)',
+                duration: 1.25,
+                ease: 'power3.out',
+                clearProps: 'opacity,transform,filter'
+            };
+
+            if (isInitiallyVisible) {
+                gsap.from(el, { ...animation, delay: 0.08 });
+            } else {
+                revealOnce(el, animation);
+            }
+        });
+
+        gsap.utils.toArray(
+            'main .hero-cta, main .sust-cta, main .cta-banner-buttons, main .f-camp-cta, ' +
+            '.footer-brand-area, .footer-contact-area, .footer-bottom'
+        ).forEach((el) => {
+            revealOnce(el, {
+                opacity: 0,
+                y: 24,
+                filter: 'blur(10px)',
+                duration: 0.95,
                 ease: 'power3.out'
             });
         });
@@ -214,20 +300,6 @@
     function setupStatsAnimation() {
         const stats = gsap.utils.toArray('.home-stat');
         if (!stats.length) return;
-
-        // Stagger in from below with blur
-        gsap.from(stats, {
-            scrollTrigger: {
-                trigger: '.home-stats-section',
-                start: 'top 80%'
-            },
-            opacity: 0,
-            y: 60,
-            filter: 'blur(12px)',
-            stagger: 0.12,
-            duration: 1,
-            ease: 'power4.out'
-        });
 
         // Animated number counter
         stats.forEach((stat) => {
@@ -495,6 +567,20 @@
                 }
             });
         }
+
+        const statementImg = document.querySelector('.f-statement-img img');
+        if (statementImg) {
+            gsap.to(statementImg, {
+                yPercent: -4,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.f-statement',
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1.8
+                }
+            });
+        }
     }
 
     /* =========================================================================
@@ -553,13 +639,13 @@
 
         // Parallax on statement image
         gsap.to('.f-statement-img img', {
-            yPercent: -10,
+            yPercent: -4,
             ease: 'none',
             scrollTrigger: {
                 trigger: '.f-statement',
                 start: 'top bottom',
                 end: 'bottom top',
-                scrub: 1.5
+                scrub: 1.8
             }
         });
 
@@ -569,20 +655,13 @@
             opacity: 0, y: 40, filter: 'blur(12px)', duration: 1.1, ease: 'power4.out'
         });
 
-        // Campaign section — images cascade then text
-        const campTl = gsap.timeline({
-            scrollTrigger: { trigger: '.f-campaign', start: 'top 75%' }
+        // Campaign section — clean reveal; the film animation remains the focus
+        gsap.from('.f-camp-media', {
+            scrollTrigger: { trigger: '.f-campaign', start: 'top 82%' },
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power2.out'
         });
-        campTl.from('.f-camp-img-box', {
-            opacity: 0, y: 70, scale: 0.94, filter: 'blur(14px)',
-            stagger: 0.15, duration: 1.1, ease: 'power4.out'
-        }).from('.f-camp-text p', {
-            opacity: 0, y: 30, filter: 'blur(8px)',
-            stagger: 0.15, duration: 0.9, ease: 'power3.out'
-        }, '-=0.6')
-        .from('.f-camp-text h3', {
-            opacity: 0, y: 20, filter: 'blur(8px)', duration: 0.9, ease: 'power3.out'
-        }, '-=0.5');
     }
 
     /* =========================================================================
@@ -595,19 +674,11 @@
             return;
         }
 
-        // Run all animations
-        initHeroAnimations();
+        // One reveal system prevents duplicated animations from competing.
         setupScrollReveals();
         setupStatsAnimation();
-        setupBrandsAnimation();
-        setupCardsAnimation();
-        setupCapacityAnimation();
-        setupAboutAnimation();
-        setupSustainabilityAnimation();
-        setupCTAAnimation();
         setupMarqueeParallax();
         setupParallax();
-        setupFrisokarAnimations();
 
         // Refresh ScrollTrigger after DOM is ready
         ScrollTrigger.refresh();
