@@ -177,7 +177,7 @@
         const stage = section.querySelector('.home-premium-hero-stage');
         const intro = section.querySelector('.home-premium-hero-intro');
         const introParts = gsap.utils.toArray(
-            '.home-premium-hero-kicker, ' +
+            '.home-premium-hero-mark, .home-premium-hero-kicker, ' +
             '.home-premium-hero-intro h1, .home-premium-hero-intro p',
             section
         );

@@ -176,7 +176,7 @@ body { background-color: #fff !important; }
 
 .home-premium-hero.is-motion-ready .home-premium-hero-intro {
     position: absolute;
-    top: clamp(158px, 18vh, 190px);
+    top: clamp(118px, 15vh, 164px);
     right: 24px;
     left: 24px;
     width: auto;
@@ -353,7 +353,7 @@ body { background-color: #fff !important; }
     }
 
     .home-premium-hero.is-motion-ready .home-premium-hero-intro {
-        top: clamp(136px, 17svh, 158px);
+        top: clamp(102px, 13.5svh, 126px);
         right: clamp(14px, 4vw, 24px);
         left: clamp(14px, 4vw, 24px);
     }
@@ -409,7 +409,7 @@ body { background-color: #fff !important; }
     }
 
     .home-premium-hero.is-motion-ready .home-premium-hero-intro {
-        top: 140px;
+        top: 104px;
     }
 
     .home-premium-hero.is-motion-ready .home-premium-hero-frame {
@@ -423,7 +423,7 @@ body { background-color: #fff !important; }
     }
 
     .home-premium-hero.is-motion-ready .home-premium-hero-intro {
-        top: clamp(138px, 15vh, 164px);
+        top: clamp(108px, 13vh, 138px);
     }
 
     .home-premium-hero-intro h1 {
@@ -433,11 +433,11 @@ body { background-color: #fff !important; }
 
 @media (max-height: 720px) and (min-width: 769px) {
     .home-premium-hero {
-        --home-hero-start-clip: inset(62% 14% 5% round 22px);
+        --home-hero-start-clip: inset(67% 14% 5% round 22px);
     }
 
     .home-premium-hero.is-motion-ready .home-premium-hero-intro {
-        top: 112px;
+        top: 90px;
     }
 
     .home-premium-hero-mark {
@@ -470,7 +470,7 @@ body { background-color: #fff !important; }
     }
 
     .home-premium-hero.is-motion-ready .home-premium-hero-intro {
-        top: 110px;
+        top: 94px;
     }
 
     .home-premium-hero-mark {
@@ -492,7 +492,7 @@ body { background-color: #fff !important; }
 
 @media (max-width: 340px) and (max-height: 649px) {
     .home-premium-hero {
-        --home-hero-start-clip: inset(68% 4% 4% round 16px);
+        --home-hero-start-clip: inset(72% 4% 4% round 16px);
     }
 }
 
@@ -504,13 +504,13 @@ body { background-color: #fff !important; }
 
 @media (min-width: 769px) and (max-width: 1170px) and (min-height: 501px) and (max-height: 850px) {
     .home-premium-hero {
-        --home-hero-start-clip: inset(64% 10% 5% round 21px);
+        --home-hero-start-clip: inset(67% 10% 5% round 21px);
     }
 }
 
 @media (max-height: 500px) and (orientation: landscape) {
     .home-premium-hero {
-        --home-hero-start-clip: inset(68% 22% 4% round 14px);
+        --home-hero-start-clip: inset(74% 22% 4% round 14px);
     }
 
     .home-premium-hero.is-motion-ready .home-premium-hero-stage {
@@ -522,7 +522,9 @@ body { background-color: #fff !important; }
     }
 
     .home-premium-hero-mark {
-        display: none;
+        display: block;
+        width: 28px;
+        margin-bottom: 8px;
     }
 
     .home-premium-hero-kicker {
