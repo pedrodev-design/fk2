@@ -1633,44 +1633,43 @@ ul {
     line-height: 1.65;
 }
 
-.f-scroll-camp-hint {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 24px;
-    color: #777;
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-}
-
-.f-scroll-camp-hint i {
-    position: relative;
-    width: 38px;
-    height: 1px;
-    overflow: hidden;
-    background: #d2d2d2;
-}
-
-.f-scroll-camp-hint i::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: #111;
-    transform: translateX(-100%);
-    animation: f-camp-hint-line 1.8s ease-in-out infinite;
-}
-
-@keyframes f-camp-hint-line {
-    50%,
-    100% {
-        transform: translateX(100%);
-    }
-}
-
 .f-scroll-camp-outro {
     display: none;
+}
+
+.f-scroll-camp-center {
+    display: none;
+}
+
+.f-scroll-campaign.is-motion-ready .f-scroll-camp-center {
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    z-index: 3;
+    display: flex;
+    width: min(28vw, 390px);
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.f-scroll-camp-center span {
+    margin-bottom: 14px;
+    color: #777;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    line-height: 1;
+}
+
+.f-scroll-camp-center strong {
+    color: #111;
+    font-size: clamp(1.55rem, 2.4vw, 2.65rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.045em;
 }
 
 .f-scroll-camp-cards {
@@ -1872,9 +1871,19 @@ ul {
         line-height: 1.55;
     }
 
-    .f-scroll-camp-hint {
-        margin-top: 18px;
-        font-size: 0.55rem;
+    .f-scroll-campaign.is-motion-ready .f-scroll-camp-center {
+        width: min(48vw, 180px);
+    }
+
+    .f-scroll-camp-center span {
+        margin-bottom: 10px;
+        font-size: 0.48rem;
+        letter-spacing: 0.22em;
+    }
+
+    .f-scroll-camp-center strong {
+        font-size: clamp(1.05rem, 5.4vw, 1.35rem);
+        line-height: 1.04;
     }
 
     .f-scroll-camp-cards {
@@ -1921,11 +1930,6 @@ ul {
         top: auto;
         height: auto;
         min-height: 720px;
-    }
-
-    .f-scroll-camp-hint i::after {
-        animation: none;
-        transform: none;
     }
 
     .f-scroll-card:nth-child(n + 6) {

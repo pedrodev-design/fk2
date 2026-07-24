@@ -597,9 +597,12 @@
         const cards = gsap.utils.toArray('.f-scroll-card', section);
         const intro = section.querySelector('.f-scroll-camp-intro');
         const outro = section.querySelector('.f-scroll-camp-outro');
+        const centerCopy = section.querySelector('.f-scroll-camp-center');
         const cta = section.querySelector('.f-scroll-camp-cta');
+        const introParts = gsap.utils.toArray('.f-scroll-camp-intro .f-scroll-camp-kicker, .f-scroll-camp-intro h2, .f-scroll-camp-intro p', section);
+        const outroParts = gsap.utils.toArray('.f-scroll-camp-outro .f-scroll-camp-kicker, .f-scroll-camp-outro h2, .f-scroll-camp-outro p', section);
 
-        if (!stage || !cards.length || !intro || !outro || !cta) return;
+        if (!stage || !cards.length || !intro || !outro || !centerCopy || !cta) return;
 
         section.classList.add('is-motion-ready');
 
@@ -615,10 +618,10 @@
             const lineY = height * (isMobile ? 0.055 : 0.07);
 
             const circleRadius = Math.min(
-                width * (isMobile ? 0.42 : 0.285),
-                height * (isMobile ? 0.27 : 0.31)
+                width * (isMobile ? 0.45 : 0.3),
+                height * (isMobile ? 0.29 : 0.35)
             );
-            const circleCenterY = height * (isMobile ? 0.055 : 0.07);
+            const circleCenterY = height * 0.02;
 
             const arcRadius = Math.min(
                 width * (isMobile ? 0.94 : 0.7),
@@ -643,9 +646,9 @@
                     return {
                         x,
                         y: Math.sin(radians) * circleRadius + circleCenterY,
-                        rotationY: -(x / circleRadius) * (isMobile ? 15 : 18),
-                        rotationZ: Math.sin(radians) * (isMobile ? 5 : 7),
-                        scale: isMobile ? 0.86 : 0.94
+                        rotationY: 0,
+                        rotationZ: angle + 90,
+                        scale: isMobile ? 0.78 : 0.88
                     };
                 }),
                 arc: cards.map((card, index) => {
@@ -681,7 +684,16 @@
         };
 
         setInitialLayout();
-        gsap.set(outro, { opacity: 0, y: 28, filter: 'blur(14px)' });
+        gsap.set(intro, { opacity: 1 });
+        gsap.set(outro, { opacity: 1 });
+        gsap.set(outroParts, { opacity: 0, y: 26, filter: 'blur(14px)' });
+        gsap.set(centerCopy, {
+            xPercent: -50,
+            yPercent: -50,
+            opacity: 0,
+            scale: 0.88,
+            filter: 'blur(14px)'
+        });
         gsap.set(cta, { opacity: 0, y: 18, filter: 'blur(8px)' });
 
         const timeline = gsap.timeline({
@@ -703,39 +715,55 @@
                 rotationY: (index) => layout.circle[index].rotationY,
                 rotationZ: (index) => layout.circle[index].rotationZ,
                 scale: (index) => layout.circle[index].scale,
-                duration: 0.48,
+                duration: 0.38,
                 ease: 'power1.inOut'
             }, 0)
-            .to(intro, {
+            .to(introParts, {
                 opacity: 0,
-                y: -28,
+                y: -22,
                 filter: 'blur(14px)',
-                duration: 0.2,
+                stagger: 0.018,
+                duration: 0.17,
+                ease: 'power3.in'
+            }, 0.08)
+            .to(centerCopy, {
+                opacity: 1,
+                scale: 1,
+                filter: 'blur(0px)',
+                duration: 0.14,
+                ease: 'power3.out'
+            }, 0.27)
+            .to(centerCopy, {
+                opacity: 0,
+                scale: 1.06,
+                filter: 'blur(12px)',
+                duration: 0.12,
                 ease: 'power2.in'
-            }, 0.12)
+            }, 0.52)
             .to(cards, {
                 x: (index) => layout.arc[index].x,
                 y: (index) => layout.arc[index].y,
                 rotationY: (index) => layout.arc[index].rotationY,
                 rotationZ: (index) => layout.arc[index].rotationZ,
                 scale: (index) => layout.arc[index].scale,
-                duration: 0.52,
+                duration: 0.38,
                 ease: 'power2.inOut'
-            }, 0.48)
-            .to(outro, {
+            }, 0.62)
+            .to(outroParts, {
                 opacity: 1,
                 y: 0,
                 filter: 'blur(0px)',
-                duration: 0.24,
+                stagger: 0.018,
+                duration: 0.18,
                 ease: 'power3.out'
-            }, 0.68)
+            }, 0.7)
             .to(cta, {
                 opacity: 1,
                 y: 0,
                 filter: 'blur(0px)',
-                duration: 0.18,
+                duration: 0.14,
                 ease: 'power3.out'
-            }, 0.82);
+            }, 0.86);
     }
 
     /* =========================================================================
