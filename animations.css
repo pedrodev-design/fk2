@@ -1,0 +1,180 @@
+/* ==========================================================================
+   PREMIUM ANIMATIONS - GSAP + LENIS SYSTEM
+   Estilo Awwwards - FK Grupo
+   ========================================================================== */
+
+/* HTML/Body for Lenis */
+html.lenis, html.lenis body {
+    height: auto;
+}
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}
+
+/* Will-change for animated elements */
+.anim-blur-up,
+.anim-split-char,
+.home-stat,
+.solution-card,
+.home-brands-logos img,
+.capacity-content,
+.capacity-image,
+.about-image,
+.about-content {
+    will-change: transform, opacity, filter;
+}
+
+/* Initial state before animations kick in */
+[data-anim="blur-up"] {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(12px);
+}
+[data-anim="fade-left"] {
+    opacity: 0;
+    transform: translateX(-60px);
+    filter: blur(8px);
+}
+[data-anim="fade-right"] {
+    opacity: 0;
+    transform: translateX(60px);
+    filter: blur(8px);
+}
+[data-anim="scale-up"] {
+    opacity: 0;
+    transform: scale(0.85);
+    filter: blur(6px);
+}
+[data-anim="char-reveal"] {
+    overflow: hidden;
+    display: block;
+}
+
+/* Magnetic Button Effect */
+.magnetic-btn {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+
+
+/* Section entrance lines */
+.section-line {
+    display: block;
+    width: 0;
+    height: 1px;
+    background: #111;
+    margin-bottom: 40px;
+    transition: width 0.8s ease;
+}
+
+/* Hero text split lines for char animation */
+.split-line {
+    display: block;
+    overflow: hidden;
+    line-height: 1.1;
+}
+.split-line .inner {
+    display: block;
+    transform: translateY(110%);
+}
+
+/* Header scroll shrink transition */
+.glass-header {
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.glass-header.header-shrunk {
+    padding: 12px 0 !important;
+    backdrop-filter: blur(30px) saturate(180%) !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+}
+
+/* Adaptive Header - over DARK section = white text */
+.glass-header.header-light-text {
+    background: rgba(0, 0, 0, 0.05) !important;
+    backdrop-filter: blur(20px) !important;
+}
+.glass-header.header-light-text .main-nav a,
+.glass-header.header-light-text .header-actions i,
+.glass-header.header-light-text .search-bar input {
+    color: #fff !important;
+}
+/* Hover in dark section → white pill */
+.glass-header.header-light-text .main-nav>ul>li>a:hover {
+    background: rgba(255,255,255,0.15) !important;
+    color: #fff !important;
+}
+.glass-header.header-light-text .search-bar {
+    border-color: rgba(255,255,255,0.3) !important;
+    background: rgba(255,255,255,0.1) !important;
+}
+.glass-header.header-light-text .search-bar input::placeholder {
+    color: rgba(255,255,255,0.6) !important;
+}
+.glass-header.header-light-text .logo img {
+    filter: brightness(0) invert(1) !important;
+}
+
+/* Adaptive Header - over LIGHT section = dark nav text, black logo, dark search pill */
+.glass-header.header-dark-text {
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(30px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(0,0,0,0.06) !important;
+}
+.glass-header.header-dark-text .main-nav a,
+.glass-header.header-dark-text .header-actions i {
+    color: #111 !important;
+}
+/* Hover in light section → dark grey pill */
+.glass-header.header-dark-text .main-nav>ul>li>a:hover {
+    background: rgba(0,0,0,0.07) !important;
+    color: #000 !important;
+}
+/* Logo → BLACK on light background (original logo is white, so invert it) */
+.glass-header.header-dark-text .logo img {
+    filter: brightness(0) !important;
+}
+/* Search bar stays as dark pill with white text for contrast */
+.glass-header.header-dark-text .search-bar {
+    background: #111 !important;
+    border-color: #111 !important;
+    border-radius: 50px !important;
+}
+.glass-header.header-dark-text .search-bar i,
+.glass-header.header-dark-text .search-bar input {
+    color: #fff !important;
+}
+.glass-header.header-dark-text .search-bar input::placeholder {
+    color: rgba(255,255,255,0.7) !important;
+}
+
+/* Adaptive Mega Menu */
+.glass-header.header-dark-text .mega-menu {
+    background: #ffffff; /* Solid white background */
+    box-shadow: 0 30px 60px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(0,0,0,0.05);
+}
+.glass-header.header-dark-text .mega-logo {
+    filter: brightness(0); /* Black logos */
+}
+
+/* Progress bar */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(to right, #111, #666);
+    z-index: 100000;
+    width: 0%;
+    transition: width 0.1s linear;
+}

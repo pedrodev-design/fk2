@@ -1,0 +1,728 @@
+body { background-color: #fff !important; }
+/* ==========================================================================
+   NEW HOME REDESIGN (WHITE/LIGHT THEME)
+   ========================================================================== */
+
+/* Typography & General */
+.home-section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #666;
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* Stats Section */
+.home-stats-section {
+    background: #fff;
+    padding: 60px 50px;
+    border-bottom: 1px solid #eaeaea;
+}
+.home-stats-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    text-align: center;
+}
+.home-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    border-right: 1px solid #eaeaea;
+}
+.home-stat:last-child {
+    border-right: none;
+}
+.home-stat img {
+    height: 45px;
+    width: auto;
+    filter: invert(0.2); 
+    opacity: 0.8;
+}
+.home-stat-text h3 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #111;
+}
+.home-stat-text p {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Brands Section */
+.home-brands-section {
+    background: #fff;
+    padding: 100px 50px;
+}
+.home-brands-header {
+    max-width: 1000px;
+    margin: 0 auto 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+.home-brands-header h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #111;
+    line-height: 1.2;
+}
+.home-brands-desc p {
+    font-size: 1.25rem;
+    color: #555;
+    line-height: 1.6;
+}
+.home-brands-logos {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+}
+.home-brands-logos img {
+    max-height: 50px;
+    opacity: 0.75;
+    filter: brightness(0);
+    transition: all 0.4s ease;
+}
+.home-brands-logos img:hover {
+    opacity: 1;
+    filter: brightness(0);
+    transform: scale(1.08);
+}
+/* Force black for all invert-logo class in this section */
+.home-brands-logos .invert-logo {
+    filter: brightness(0) !important;
+    opacity: 0.75;
+}
+
+/* Solutions Section */
+.home-solutions-section {
+    background: #fafafa;
+    padding: 100px 50px;
+}
+.home-solutions-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.home-solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+.solution-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.solution-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.solution-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+.solution-card-content {
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.solution-card-content h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #111;
+    margin-bottom: 15px;
+}
+.solution-card-content p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+.solution-link {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #111;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: auto;
+}
+
+/* Capacity Section */
+.home-capacity-section {
+    background: #111;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    min-height: 500px;
+}
+.capacity-content {
+    flex: 1;
+    padding: 100px 50px 100px 10%;
+}
+.capacity-content h2 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+    line-height: 1.1;
+}
+.capacity-content > p {
+    font-size: 1.4rem;
+    color: #bbb;
+    line-height: 1.6;
+    margin-bottom: 60px;
+    max-width: 700px;
+}
+.capacity-features {
+    display: flex;
+    gap: 50px;
+}
+.cap-feat {
+    display: flex;
+    gap: 20px;
+}
+.cap-feat i {
+    font-size: 2.2rem;
+    color: #fff;
+    margin-top: 5px;
+}
+.cap-feat h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.cap-feat p {
+    font-size: 1rem;
+    color: #999;
+    line-height: 1.5;
+}
+.capacity-image {
+    flex: 1;
+    height: 100%;
+    min-height: 500px;
+}
+.capacity-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 40px 0 0 40px;
+}
+
+/* About System Section */
+.home-about-section {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding: 100px 50px;
+    max-width: 100%; padding-left: 20px; padding-right: 20px;
+    margin: 0 auto;
+    gap: 80px;
+}
+.about-image {
+    flex: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 16 / 9;
+}
+.about-image img, .about-image iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;
+}
+.about-content {
+    flex: 1;
+}
+.about-content h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #111;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+.about-content > p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 50px;
+}
+.about-features {
+    display: flex;
+    gap: 30px;
+}
+.abt-feat {
+    display: flex;
+    gap: 15px;
+}
+.abt-feat i {
+    font-size: 1.5rem;
+    color: #111;
+    margin-top: 5px;
+}
+.abt-feat h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 8px;
+}
+.abt-feat p {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* Sustainability Section - Premium Redesign */
+.home-sustainability-section {
+    background: #000; /* Dark background for premium feel */
+    color: #fff;
+    padding: 140px 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Optional subtle texture/gradient for depth */
+.home-sustainability-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.03) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.sust-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 100px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.sust-left .home-section-label {
+    color: #888;
+    border-bottom: none;
+    letter-spacing: 4px;
+    font-size: 0.75rem;
+    padding-bottom: 0;
+    margin-bottom: 30px;
+}
+
+.sust-left h2 {
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 30px;
+}
+
+.sust-left p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #b0b0b0;
+    margin-bottom: 50px;
+    max-width: 500px;
+    font-weight: 300;
+}
+
+.sust-pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sust-pillar {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    max-width: 400px;
+}
+
+.sust-pillar-num {
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.sust-pillar-label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Right side stats grid */
+.sust-stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 30px;
+    margin-bottom: 60px;
+}
+
+.sust-stat {
+    background: rgba(255,255,255,0.03);
+    padding: 35px 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: transform 0.4s ease, background 0.4s ease;
+}
+
+.sust-stat:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.06);
+}
+
+.sust-stat h3 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 15px;
+    letter-spacing: -2px;
+}
+
+.sust-stat p {
+    font-size: 0.9rem;
+    color: #888;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+.sust-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #000;
+    background: #fff;
+    padding: 18px 40px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.sust-cta span {
+    transition: transform 0.3s ease;
+}
+
+.sust-cta:hover {
+    background: #e0e0e0;
+}
+
+.sust-cta:hover span {
+    transform: translateX(5px);
+}
+
+/* CTA Banner */
+.home-cta-banner {
+    background: url('banner-especialista.png') center/cover no-repeat;
+    padding: 100px 50px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+.home-cta-banner h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+}
+.cta-banner-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+}
+.btn-primary {
+    background: #fff;
+    color: #111;
+    padding: 15px 30px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: transform 0.3s;
+}
+.btn-primary:hover {
+    transform: translateY(-3px);
+}
+.btn-secondary {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.5);
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+.btn-secondary:hover {
+    background: #fff;
+    color: #111;
+}
+
+
+/* ==========================================================================
+   RESPONSIVE — ALL SCREENS
+   ========================================================================== */
+
+/* ---- XL: Large laptops / monitors (1280px) ---- */
+@media (max-width: 1280px) {
+    .home-stats-container {
+        max-width: 100%;
+        padding: 0 40px;
+    }
+    .home-solutions-container,
+    .home-brands-header,
+    .home-brands-logos {
+        max-width: 100%;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    .home-about-section,
+    .home-capacity-section {
+        padding: 100px 60px;
+        gap: 60px;
+    }
+    .home-sustainability-section {
+        padding: 100px 60px;
+    }
+    .home-solutions-section {
+        padding: 100px 60px;
+    }
+}
+
+/* ---- LG: Tablets landscape / small laptops (1024px) ---- */
+@media (max-width: 1024px) {
+    /* Stats */
+    .home-stats-section { padding: 50px 30px; }
+    .home-stats-container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding: 0;
+    }
+    .home-stat:nth-child(4),
+    .home-stat:nth-child(5) {
+        border-right: none;
+    }
+    .home-stat-text h3 { font-size: 1.8rem; }
+
+    /* Brands */
+    .home-brands-section { padding: 80px 30px; }
+    .home-brands-header {
+        max-width: 100%;
+        padding: 0;
+        margin-bottom: 40px;
+    }
+    .home-brands-header h2 { font-size: 2.2rem; }
+    .home-brands-logos {
+        max-width: 100%;
+        padding: 0;
+        gap: 35px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .home-brands-logos img { max-height: 35px; }
+
+    /* Solutions */
+    .home-solutions-section { padding: 80px 30px; }
+    .home-solutions-container { max-width: 100%; }
+    .home-solutions-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    /* Capacity */
+    .home-capacity-section {
+        flex-direction: column;
+        padding: 80px 40px;
+        min-height: unset;
+    }
+    .capacity-content {
+        padding: 0;
+        max-width: 100%;
+    }
+    .capacity-content h2 { font-size: 3rem; }
+    .capacity-content > p { font-size: 1.1rem; max-width: 100%; }
+    .capacity-image {
+        width: 100%;
+        min-height: 400px;
+    }
+    .capacity-image img { border-radius: 16px; }
+    .capacity-features { gap: 30px; }
+
+    /* About */
+    .home-about-section {
+        flex-direction: column;
+        padding: 80px 40px;
+        gap: 50px;
+    }
+    .about-image { max-width: 100%; }
+    .about-content { max-width: 100%; }
+    .about-content h2 { font-size: 2rem; }
+
+    /* Sustainability */
+    .home-sustainability-section { padding: 100px 40px; }
+    .sust-text h2 { font-size: 2.5rem; }
+    .sust-buttons { flex-direction: row; flex-wrap: wrap; }
+    .sust-btn { padding: 16px 30px; font-size: 0.9rem; }
+}
+
+/* ---- MD: Tablets portrait (768px) ---- */
+@media (max-width: 768px) {
+    /* Stats */
+    .home-stats-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+    }
+    .home-stat {
+        border-right: none;
+        border-bottom: 1px solid #eaeaea;
+        padding: 25px 15px;
+    }
+    .home-stat:nth-child(odd) { border-right: 1px solid #eaeaea; }
+    .home-stat-text h3 { font-size: 1.6rem; }
+    .home-stat-text p { font-size: 0.78rem; }
+
+    /* Brands */
+    .home-brands-section { padding: 70px 25px; }
+    .home-brands-header h2 { font-size: 1.9rem; }
+    .home-brands-logos { gap: 25px; }
+    .home-brands-logos img { max-height: 28px; }
+
+    /* Solutions */
+    .home-solutions-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    .solution-card img { height: 200px; }
+
+    /* Capacity */
+    .home-capacity-section { padding: 70px 25px; }
+    .capacity-content h2 { font-size: 2.4rem; letter-spacing: -1px; }
+    .capacity-features { flex-direction: column; gap: 25px; }
+    .cap-feat i { font-size: 1.8rem; }
+    .cap-feat h4 { font-size: 1.1rem; }
+    .capacity-image { min-height: 320px; }
+
+    /* About */
+    .home-about-section { padding: 60px 25px; gap: 40px; }
+    .about-image { min-height: auto; width: 100%; } /* Let plyr aspect ratio handle it */
+    .about-content h2 { font-size: 2rem; }
+    .about-content h2 br { display: none; }
+    .about-content > p { font-size: 1.1rem; }
+    .about-content br, .abt-feat p br { display: none; }
+    .about-features { flex-direction: column; gap: 25px; }
+    .abt-feat i { font-size: 1.8rem; }
+    .abt-feat h4 { font-size: 1.1rem; margin-bottom: 4px; }
+    .abt-feat p { font-size: 0.95rem; }
+
+    /* Sustainability */
+    .home-sustainability-section { padding: 80px 25px; }
+    .sust-text h2 { font-size: 2rem; }
+    .sust-text p { font-size: 1.1rem; }
+    .sust-buttons { flex-direction: column; align-items: center; gap: 15px; }
+    .sust-btn { width: 100%; max-width: 320px; text-align: center; padding: 18px 30px; }
+
+    /* CTA Banner */
+    .home-cta-banner { padding: 80px 25px; }
+    .home-cta-banner h2 { font-size: 2rem; }
+    .cta-banner-buttons { flex-direction: column; align-items: center; gap: 15px; }
+    .btn-primary, .btn-secondary { width: 100%; max-width: 320px; text-align: center; }
+
+    /* Marquee */
+    .marquee-track { padding: 20px 0; }
+    .marquee-item { font-size: 0.85rem; gap: 20px; }
+}
+
+/* ---- SM: Mobile (480px) ---- */
+@media (max-width: 480px) {
+    /* Stats — single column */
+    .home-stats-section { padding: 40px 20px; }
+    .home-stats-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+    }
+    .home-stat { padding: 20px 12px; }
+    .home-stat-text h3 { font-size: 1.4rem; }
+    .home-stat img { height: 32px; }
+
+    /* Brands */
+    .home-brands-section { padding: 60px 20px; }
+    .home-brands-header h2 { font-size: 1.6rem; line-height: 1.2; }
+    .home-brands-desc p { font-size: 1rem; }
+    .home-brands-logos { gap: 20px; }
+    .home-brands-logos img { max-height: 22px; }
+
+    /* Solutions — single column */
+    .home-solutions-section { padding: 60px 20px; }
+    .home-solutions-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .solution-card img { height: 220px; }
+
+    /* Capacity */
+    .home-capacity-section { padding: 60px 20px; }
+    .capacity-content h2 { font-size: 2rem; letter-spacing: -1px; }
+    .capacity-content > p { font-size: 1rem; margin-bottom: 35px; }
+
+    /* About */
+    .home-about-section { padding: 60px 20px; }
+    .about-content h2 { font-size: 1.6rem; }
+    .about-content > p { font-size: 1rem; }
+    .about-features { flex-direction: column; gap: 20px; }
+
+    /* Sustainability */
+    .home-sustainability-section { padding: 60px 20px; }
+    .sust-icon { width: 80px; height: 80px; font-size: 2.2rem; }
+    .sust-text h2 { font-size: 1.8rem; }
+    .sust-text p { font-size: 1rem; }
+
+    /* CTA */
+    .home-cta-banner { padding: 70px 20px; }
+    .home-cta-banner h2 { font-size: 1.6rem; }
+
+    /* Marquee hidden on very small screens */
+    .marquee-track { display: none; }
+}
+
+/* ---- XS: Very small phones (360px) ---- */
+@media (max-width: 360px) {
+    .home-stat-text h3 { font-size: 1.2rem; }
+    .home-brands-logos img { max-height: 18px; }
+    .capacity-content h2 { font-size: 1.7rem; }
+    .sust-text h2 { font-size: 1.5rem; }
+}
+
