@@ -1,4 +1,11 @@
 body { background-color: #fff !important; }
+
+html.home-hero-scroll-lock,
+html.home-hero-scroll-lock body {
+    overflow: hidden;
+    overscroll-behavior: none;
+}
+
 /* ==========================================================================
    NEW HOME REDESIGN (WHITE/LIGHT THEME)
    ========================================================================== */

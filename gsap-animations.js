@@ -230,8 +230,67 @@
                 });
 
                 let headerIsOverVisual = false;
+                let isCompletingMobileExit = false;
+                let mobileExitTween = null;
+                let timeline = null;
 
-                const timeline = gsap.timeline({
+                const preventMobileExitScroll = (event) => event.preventDefault();
+
+                const setMobileExitLock = (locked) => {
+                    document.documentElement.classList.toggle('home-hero-scroll-lock', locked);
+
+                    if (locked) {
+                        window.addEventListener('wheel', preventMobileExitScroll, { passive: false });
+                        window.addEventListener('touchmove', preventMobileExitScroll, { passive: false });
+                    } else {
+                        window.removeEventListener('wheel', preventMobileExitScroll);
+                        window.removeEventListener('touchmove', preventMobileExitScroll);
+                    }
+                };
+
+                const completeMobileExit = (scrollTrigger) => {
+                    if (
+                        !isMobile ||
+                        isCompletingMobileExit ||
+                        !timeline ||
+                        timeline.progress() >= 0.985
+                    ) return;
+
+                    isCompletingMobileExit = true;
+                    const exitScrollY = Math.max(0, Math.round(scrollTrigger.end - 1));
+
+                    scrollTrigger.getTween()?.kill();
+                    lenis?.stop();
+                    lenis
+                        ? lenis.scrollTo(exitScrollY, { immediate: true, force: true })
+                        : window.scrollTo(0, exitScrollY);
+
+                    setMobileExitLock(true);
+                    scrollTrigger.disable(false, false);
+
+                    const remainingProgress = 1 - timeline.progress();
+                    mobileExitTween = gsap.to(timeline, {
+                        progress: 1,
+                        duration: gsap.utils.clamp(0.85, 1.65, remainingProgress * 1.8),
+                        ease: 'power2.inOut',
+                        overwrite: true,
+                        onComplete: () => {
+                            setMobileExitLock(false);
+                            scrollTrigger.enable(false, false);
+                            lenis?.start();
+
+                            const releaseScrollY = Math.ceil(scrollTrigger.end + 1);
+                            lenis
+                                ? lenis.scrollTo(releaseScrollY, { immediate: true, force: true })
+                                : window.scrollTo(0, releaseScrollY);
+
+                            isCompletingMobileExit = false;
+                            mobileExitTween = null;
+                        }
+                    });
+                };
+
+                timeline = gsap.timeline({
                     defaults: { ease: 'none' },
                     scrollTrigger: {
                         trigger: section,
@@ -239,8 +298,9 @@
                         end: 'bottom bottom',
                         // Keep the transition perceptible even after an aggressive wheel/trackpad gesture.
                         // This matches the slower, immersive catch-up used by the Frisokar card campaign.
-                        scrub: 8,
+                        scrub: isMobile ? 5 : 8,
                         invalidateOnRefresh: true,
+                        onLeave: completeMobileExit,
                         onUpdate: (self) => {
                             const visualProgress = self.animation
                                 ? self.animation.progress()
@@ -277,23 +337,31 @@
                         opacity: 0.68,
                         duration: 0.25,
                         ease: 'power1.out'
-                    }, 0.62)
+                    }, isMobile ? 0.56 : 0.62)
                     .to(reveal, {
                         opacity: 1,
                         y: 0,
                         filter: 'blur(0px)',
                         duration: 0.22,
                         ease: 'power3.out'
-                    }, 0.7)
+                    }, isMobile ? 0.62 : 0.7)
                     .to(revealParts, {
                         opacity: 1,
                         y: 0,
                         stagger: 0.025,
                         duration: 0.22,
                         ease: 'power3.out'
-                    }, 0.74);
+                    }, isMobile ? 0.66 : 0.74)
+                    .to(reveal, {
+                        opacity: 1,
+                        duration: isMobile ? 0.32 : 0.12,
+                        ease: 'none'
+                    }, 0.96);
 
                 return () => {
+                    mobileExitTween?.kill();
+                    setMobileExitLock(false);
+                    lenis?.start();
                     section.setAttribute('data-theme', 'light');
                 };
             }
