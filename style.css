@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+:root {
+    --fk-ink-soft: #1c1c1c;
+}
+
 html {
     max-width: 100%;
     overflow-x: hidden;
@@ -1307,7 +1311,7 @@ ul {
 
 .f-hero-title {
     margin: 0 0 30px;
-    color: #000;
+    color: var(--fk-ink-soft);
     font-size: clamp(4.5rem, 7vw, 7.5rem);
     font-weight: 900;
     line-height: 0.92;
@@ -1398,7 +1402,7 @@ ul {
     font-size: clamp(2.7rem, 3.8vw, 4.2rem);
     font-weight: 900;
     line-height: 0.96;
-    color: #000;
+    color: var(--fk-ink-soft);
     letter-spacing: -0.045em;
     text-transform: uppercase;
 }
@@ -1549,7 +1553,7 @@ ul {
 
 .f-vision-text p {
     margin: 0;
-    color: #111;
+    color: var(--fk-ink-soft);
     font-size: clamp(2rem, 3.7vw, 4rem);
     font-weight: 500;
     line-height: 1.14;
@@ -1617,7 +1621,7 @@ ul {
 
 .f-scroll-camp-copy h2 {
     margin: 0;
-    color: #111;
+    color: var(--fk-ink-soft);
     font-size: clamp(2.65rem, 5vw, 5.5rem);
     font-weight: 900;
     line-height: 0.94;
@@ -1665,7 +1669,7 @@ ul {
 }
 
 .f-scroll-camp-center strong {
-    color: #111;
+    color: var(--fk-ink-soft);
     font-size: clamp(1.55rem, 2.4vw, 2.65rem);
     font-weight: 800;
     line-height: 1.02;

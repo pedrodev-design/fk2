@@ -168,6 +168,137 @@
     }
 
     /* =========================================================================
+       5.1 HOME HERO — EDITORIAL FRAME EXPANSION
+    ========================================================================= */
+    function setupHomePremiumHero() {
+        const section = document.querySelector('.home-premium-hero');
+        if (!section) return;
+
+        const stage = section.querySelector('.home-premium-hero-stage');
+        const intro = section.querySelector('.home-premium-hero-intro');
+        const introParts = gsap.utils.toArray(
+            '.home-premium-hero-kicker, ' +
+            '.home-premium-hero-intro h1, .home-premium-hero-intro p',
+            section
+        );
+        const frame = section.querySelector('.home-premium-hero-frame');
+        const video = section.querySelector('.home-premium-hero-video');
+        const shade = section.querySelector('.home-premium-hero-shade');
+        const reveal = section.querySelector('.home-premium-hero-reveal');
+        const revealParts = gsap.utils.toArray(
+            '.home-premium-hero-reveal-kicker, .home-premium-hero-reveal h2, ' +
+            '.home-premium-hero-reveal p, .home-premium-hero-actions',
+            section
+        );
+        if (!stage || !intro || !frame || !video || !shade || !reveal) return;
+
+        section.classList.add('is-motion-ready');
+
+        const media = gsap.matchMedia();
+        media.add(
+            {
+                mobile: '(max-width: 768px)',
+                desktop: '(min-width: 769px)'
+            },
+            (context) => {
+                const isMobile = context.conditions.mobile;
+                const isTablet = isMobile && window.innerWidth >= 600;
+                const initialClip = getComputedStyle(section)
+                    .getPropertyValue('--home-hero-start-clip')
+                    .trim() || 'inset(60% 18% 6% round 26px)';
+
+                gsap.set(frame, { clipPath: initialClip });
+                gsap.set(video, { scale: isMobile && !isTablet ? 1.16 : 1.12 });
+                gsap.set(shade, { opacity: 0.18 });
+                gsap.set(reveal, {
+                    xPercent: -50,
+                    yPercent: isMobile ? -43 : -44,
+                    y: 34,
+                    opacity: 0,
+                    filter: 'blur(18px)'
+                });
+                gsap.set(revealParts, { opacity: 0, y: 22 });
+
+                gsap.from(introParts, {
+                    opacity: 0,
+                    y: 24,
+                    filter: 'blur(12px)',
+                    stagger: 0.08,
+                    duration: 1.05,
+                    delay: 0.18,
+                    ease: 'power3.out'
+                });
+
+                let headerIsOverVisual = false;
+
+                const timeline = gsap.timeline({
+                    defaults: { ease: 'none' },
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: isMobile ? 2.8 : 3.2,
+                        invalidateOnRefresh: true,
+                        onUpdate: (self) => {
+                            const visualProgress = self.animation
+                                ? self.animation.progress()
+                                : self.progress;
+                            const isDark = visualProgress > 0.48;
+                            if (isDark !== headerIsOverVisual) {
+                                headerIsOverVisual = isDark;
+                                section.setAttribute('data-theme', isDark ? 'dark' : 'light');
+                                updateHeaderTheme();
+                            }
+                        }
+                    }
+                });
+
+                timeline
+                    .to(intro, {
+                        opacity: 0,
+                        y: -36,
+                        filter: 'blur(14px)',
+                        duration: 0.2,
+                        ease: 'power2.in'
+                    }, 0.05)
+                    .to(frame, {
+                        clipPath: 'inset(0% 0% 0% round 0px)',
+                        duration: 0.56,
+                        ease: 'power2.inOut'
+                    }, 0.12)
+                    .to(video, {
+                        scale: 1,
+                        duration: 0.64,
+                        ease: 'power2.inOut'
+                    }, 0.12)
+                    .to(shade, {
+                        opacity: 0.68,
+                        duration: 0.25,
+                        ease: 'power1.out'
+                    }, 0.48)
+                    .to(reveal, {
+                        opacity: 1,
+                        y: 0,
+                        filter: 'blur(0px)',
+                        duration: 0.2,
+                        ease: 'power3.out'
+                    }, 0.58)
+                    .to(revealParts, {
+                        opacity: 1,
+                        y: 0,
+                        stagger: 0.025,
+                        duration: 0.2,
+                        ease: 'power3.out'
+                    }, 0.6);
+
+                return () => {
+                    section.setAttribute('data-theme', 'light');
+                };
+            }
+        );
+    }
+
+    /* =========================================================================
        6. UNIVERSAL BLUR-UP REVEAL ON SCROLL
     ========================================================================= */
     function setupScrollReveals() {
@@ -200,7 +331,8 @@
             'main .f-statement-label, main .f-vision-label'
         ).filter((el) =>
             !el.closest(groupedContentSelector) &&
-            !el.closest('.f-scroll-campaign')
+            !el.closest('.f-scroll-campaign') &&
+            !el.closest('.home-premium-hero')
         );
 
         const initiallyVisibleText = [];
@@ -851,6 +983,7 @@
         }
 
         // One reveal system prevents duplicated animations from competing.
+        setupHomePremiumHero();
         setupFrisokarScrollCampaign();
         setupScrollReveals();
         setupStatsAnimation();

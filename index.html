@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260724-9">
-    <link rel="stylesheet" href="home-redesign.css?v=20260724-2">
+    <link rel="stylesheet" href="style.css?v=20260724-10">
+    <link rel="stylesheet" href="home-redesign.css?v=20260724-9">
     <link rel="stylesheet" href="animations.css?v=20260724-2">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <!-- Lenis Smooth Scroll -->
@@ -89,42 +89,84 @@
     </header>
 
     <main id="main-content">
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <video autoplay muted loop playsinline preload="metadata" class="hero-video" aria-hidden="true">
-                <source src="Video-institucional-homepage.mp4" type="video/mp4">
-            </video>
+        <!--
+            BACKUP DO HERO ANTERIOR — 24/07/2026
+            O conteúdo abaixo permanece intacto e inativo dentro de <template>.
+            Para reverter, basta substituir o novo hero pelo conteúdo deste template.
+        -->
+        <template id="home-hero-backup-20260724">
+            <section class="hero-section">
+                <video autoplay muted loop playsinline preload="metadata" class="hero-video" aria-hidden="true">
+                    <source src="Video-institucional-homepage.mp4" type="video/mp4">
+                </video>
 
-            <!-- Elegant gradient overlay to make white text pop without looking generic -->
-            <div class="hero-overlay"></div>
+                <div class="hero-overlay"></div>
 
-            <div class="hero-content">
-                <div class="hero-text">
-                    <p class="subtitle animate-up">DESDE 1985</p>
-                    <h1 class="title animate-up delay-1">INDÚSTRIA, DESIGN<br>E TECNOLOGIA
-                        PARA<br>TRANSFORMAR<br>AMBIENTES.</h1>
-                    <p class="description animate-up delay-2">
-                        Desde 1985, o FK Grupo conecta produção, inovação e marcas especializadas para atender ambientes
-                        corporativos, de saúde e espaços de alta performance.
-                    </p>
-                    <div class="hero-cta animate-up delay-3">
-                        <a href="#" class="cta-button cta-button-primary">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <p class="subtitle animate-up">DESDE 1985</p>
+                        <h1 class="title animate-up delay-1">INDÚSTRIA, DESIGN<br>E TECNOLOGIA
+                            PARA<br>TRANSFORMAR<br>AMBIENTES.</h1>
+                        <p class="description animate-up delay-2">
+                            Desde 1985, o FK Grupo conecta produção, inovação e marcas especializadas para atender
+                            ambientes corporativos, de saúde e espaços de alta performance.
+                        </p>
+                        <div class="hero-cta animate-up delay-3">
+                            <a href="#" class="cta-button cta-button-primary">
+                                <span class="cta-button-label">CONHEÇA O GRUPO</span>
+                                <span class="cta-button-arrow" aria-hidden="true">&rarr;</span>
+                            </a>
+                            <a href="#" class="cta-button cta-button-secondary">
+                                <span class="cta-button-label">EXPLORAR MARCAS</span>
+                                <span class="cta-button-arrow" aria-hidden="true">&rarr;</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </template>
+
+        <!-- Novo hero editorial: o quadro industrial se expande durante o scroll -->
+        <section class="home-premium-hero" data-theme="light" aria-labelledby="home-premium-hero-title">
+            <div class="home-premium-hero-stage">
+                <div class="home-premium-hero-intro">
+                    <span class="home-premium-hero-kicker">FK GRUPO · DESDE 1985</span>
+                    <h1 id="home-premium-hero-title">AMBIENTES QUE<br>MOVEM PESSOAS.</h1>
+                    <p>Design, ergonomia e engenharia reunidos em soluções para espaços corporativos, de saúde e alta
+                        performance.</p>
+                </div>
+
+                <div class="home-premium-hero-frame" aria-hidden="true">
+                    <video autoplay muted loop playsinline preload="metadata" class="home-premium-hero-video">
+                        <source src="Video-institucional-homepage.mp4" type="video/mp4">
+                    </video>
+                    <div class="home-premium-hero-shade"></div>
+                </div>
+
+                <div class="home-premium-hero-reveal">
+                    <span class="home-premium-hero-reveal-kicker">DESIGN, ENGENHARIA E ERGONOMIA</span>
+                    <h2>DA INDÚSTRIA<br>AO AMBIENTE.</h2>
+                    <p>Cinco marcas. Uma estrutura integrada. Soluções que combinam conforto, função e alto
+                        desempenho.</p>
+                    <div class="home-premium-hero-actions">
+                        <a href="#home-stats" class="cta-button cta-button-primary">
                             <span class="cta-button-label">CONHEÇA O GRUPO</span>
                             <span class="cta-button-arrow" aria-hidden="true">&rarr;</span>
                         </a>
-                        <a href="#" class="cta-button cta-button-secondary">
+                        <a href="#home-brands" class="cta-button cta-button-secondary">
                             <span class="cta-button-label">EXPLORAR MARCAS</span>
                             <span class="cta-button-arrow" aria-hidden="true">&rarr;</span>
                         </a>
                     </div>
                 </div>
+
             </div>
         </section>
 
         <!-- NOVO LAYOUT DA HOME -->
 
         <!-- Stats Section -->
-        <section class="home-stats-section">
+        <section class="home-stats-section" id="home-stats">
             <div class="home-stats-container">
                 <div class="home-stat">
                     <img src="planta-fabril.svg" alt="" loading="lazy" decoding="async">
@@ -165,7 +207,7 @@
         </section>
 
         <!-- Brands Section -->
-        <section class="home-brands-section">
+        <section class="home-brands-section" id="home-brands">
             <div class="home-brands-header">
                 <div>
                     <span class="home-section-label">GRUPO DE MARCAS</span>
@@ -343,8 +385,8 @@
             <!-- Brand / Logo -->
             <div class="footer-brand-area">
                 <a href="index.html" class="footer-home-link" aria-label="Voltar para a página inicial">
-                    <img src="fk-grupo-tit.webp" alt="FK Grupo" class="footer-logo" width="57" height="70" loading="lazy"
-                        decoding="async">
+                    <img src="fk-grupo-tit.webp" alt="FK Grupo" class="footer-logo" width="57" height="70"
+                        loading="lazy" decoding="async">
                 </a>
                 <p class="footer-tagline">Desde 1985</p>
                 <p class="footer-brand-copy">Indústria, design e tecnologia para transformar ambientes.</p>
@@ -439,7 +481,7 @@
         });
     </script>
     <!-- Premium GSAP Animations -->
-    <script src="gsap-animations.js?v=20260724-9"></script>
+    <script src="gsap-animations.js?v=20260724-14"></script>
 </body>
 
 </html>
