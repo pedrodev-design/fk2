@@ -293,7 +293,7 @@ html.home-hero-scroll-lock body {
 
 @media (max-width: 768px) {
     .home-premium-hero {
-        --home-hero-start-clip: inset(56% 4% 6% round 19px);
+        --home-hero-start-clip: inset(60% 4% 6% round 19px);
     }
 
     .home-premium-hero-stage {
@@ -397,7 +397,7 @@ html.home-hero-scroll-lock body {
 
 @media (max-width: 390px) {
     .home-premium-hero {
-        --home-hero-start-clip: inset(59% 4% 6% round 17px);
+        --home-hero-start-clip: inset(64% 4% 6% round 17px);
     }
 
     .home-premium-hero-intro h1 {

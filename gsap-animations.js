@@ -320,19 +320,19 @@
                         opacity: 0,
                         y: -36,
                         filter: 'blur(14px)',
-                        duration: 0.2,
+                        duration: 0.13,
                         ease: 'power2.in'
-                    }, 0.05)
+                    }, 0.035)
                     .to(frame, {
                         clipPath: 'inset(0% 0% 0% round 0px)',
-                        duration: 0.72,
+                        duration: 0.66,
                         ease: 'power2.inOut'
-                    }, 0.12)
+                    }, 0.18)
                     .to(video, {
                         scale: 1,
-                        duration: 0.78,
+                        duration: 0.72,
                         ease: 'power2.inOut'
-                    }, 0.12)
+                    }, 0.18)
                     .to(shade, {
                         opacity: 0.68,
                         duration: 0.25,
@@ -372,12 +372,14 @@
        6. UNIVERSAL BLUR-UP REVEAL ON SCROLL
     ========================================================================= */
     function setupScrollReveals() {
-        const revealOnce = (target, fromVars, trigger = target) => {
+        const defaultRevealStart = window.innerWidth <= 768 ? 'top 96%' : 'top 88%';
+
+        const revealOnce = (target, fromVars, trigger = target, start = defaultRevealStart) => {
             gsap.from(target, {
                 ...fromVars,
                 scrollTrigger: {
                     trigger,
-                    start: 'top 88%',
+                    start,
                     once: true
                 },
                 clearProps: 'opacity,transform,filter'
@@ -439,7 +441,11 @@
 
         // Repeated content enters as one coordinated group.
         [
-            { items: '.home-stat', trigger: '.home-stats-container' },
+            {
+                items: '.home-stat',
+                trigger: '.home-stats-section',
+                start: 'top bottom+=140'
+            },
             { items: '.home-brands-logos a', trigger: '.home-brands-logos' },
             { items: '.solution-card', trigger: '.home-solutions-grid' },
             { items: '.cap-feat', trigger: '.capacity-features' },
@@ -447,7 +453,7 @@
             { items: '.sust-pillar', trigger: '.sust-pillars' },
             { items: '.sust-stat', trigger: '.sust-stat-grid' },
             { items: '.footer-column', trigger: '.footer-links-area' }
-        ].forEach(({ items, trigger }) => {
+        ].forEach(({ items, trigger, start }) => {
             const elements = gsap.utils.toArray(items);
             const triggerEl = document.querySelector(trigger);
             if (!elements.length || !triggerEl) return;
@@ -459,7 +465,7 @@
                 stagger: 0.1,
                 duration: 1,
                 ease: 'power3.out'
-            }, triggerEl);
+            }, triggerEl, start);
         });
 
         // Animate wrappers so image/video sizing and inner parallax stay intact.
