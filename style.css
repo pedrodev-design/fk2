@@ -1714,6 +1714,11 @@ ul {
         aspect-ratio: 4 / 5;
     }
 
+    .f-camp-video {
+        transform: scale(1.34);
+        transform-origin: center 54%;
+    }
+
     .f-camp-cta {
         bottom: 22px;
         padding: 0 16px;
