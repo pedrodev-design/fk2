@@ -10,21 +10,26 @@
     /* =========================================================================
        1. LENIS SMOOTH SCROLL INIT
     ========================================================================= */
-    const lenis = new Lenis({
-        duration: 1.4,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: 'vertical',
-        gestureDirection: 'vertical',
-        smooth: true,
-        smoothTouch: false,
-        touchMultiplier: 2
-    });
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const lenis = !prefersReducedMotion && typeof Lenis === 'function'
+        ? new Lenis({
+            duration: 1.4,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            smoothTouch: false,
+            touchMultiplier: 2
+        })
+        : null;
 
-    // Sync Lenis with GSAP ticker
-    gsap.ticker.add((time) => {
-        lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0);
+    if (lenis) {
+        // Sync Lenis with GSAP ticker
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+    }
 
     /* =========================================================================
 
@@ -59,7 +64,7 @@
     darkSections.forEach(s => s.setAttribute('data-theme', 'dark'));
 
     function updateHeaderTheme() {
-        const scrollY = window.scrollY || lenis.scroll;
+        if (!header) return;
         const headerBottom = header.getBoundingClientRect().bottom;
 
         // Find which section the header is currently over
@@ -83,8 +88,8 @@
         }
     }
 
-    lenis.on('scroll', ({ scroll }) => {
-        const scrollY = scroll;
+    function handleHeaderScroll(scrollY) {
+        if (!header) return;
         const delta = scrollY - lastScrollY;
 
         // Shrink after 80px
@@ -95,17 +100,29 @@
         }
 
         // Hide on scroll down, show on scroll up
-        if (delta > 5 && scrollY > 200 && headerVisible) {
-            gsap.to(header, { y: '-110%', duration: 0.5, ease: 'power3.in' });
-            headerVisible = false;
-        } else if (delta < -5 && !headerVisible) {
-            gsap.to(header, { y: '0%', duration: 0.6, ease: 'power3.out' });
-            headerVisible = true;
+        if (!prefersReducedMotion) {
+            if (delta > 5 && scrollY > 200 && headerVisible) {
+                gsap.to(header, { y: '-110%', duration: 0.5, ease: 'power3.in' });
+                headerVisible = false;
+            } else if (delta < -5 && !headerVisible) {
+                gsap.to(header, { y: '0%', duration: 0.6, ease: 'power3.out' });
+                headerVisible = true;
+            }
         }
 
         updateHeaderTheme();
         lastScrollY = scrollY;
-    });
+    }
+
+    if (lenis) {
+        lenis.on('scroll', ({ scroll }) => {
+            handleHeaderScroll(scroll);
+        });
+    } else {
+        window.addEventListener('scroll', () => {
+            handleHeaderScroll(window.scrollY);
+        }, { passive: true });
+    }
 
     // Run once on load
     setTimeout(updateHeaderTheme, 200);
@@ -115,10 +132,13 @@
        5. HERO SECTION — CINEMATIC TEXT ENTRANCE
     ========================================================================= */
     function initHeroAnimations() {
+        const heroSection = document.querySelector('.hero-section');
+        if (!heroSection) return;
+
         const tl = gsap.timeline({ delay: 0.2 });
 
         // Hero text title lines (split by <br>)
-        const titleEl = document.querySelector('.hero-section .title');
+        const titleEl = heroSection.querySelector('.title');
         if (titleEl) {
             // Create split lines from the h1
             const text = titleEl.innerHTML;
@@ -127,7 +147,7 @@
                 `<span class="split-line"><span class="inner">${line}</span></span>`
             ).join('');
 
-            tl.to('.hero-section .split-line .inner', {
+            tl.to(titleEl.querySelectorAll('.split-line .inner'), {
                 translateY: '0%',
                 duration: 1.2,
                 stagger: 0.12,
@@ -136,13 +156,13 @@
         }
 
         // Subtitle & description fade
-        tl.from('.hero-section .subtitle', {
+        tl.from(heroSection.querySelector('.subtitle'), {
             opacity: 0, y: 15, filter: 'blur(8px)', duration: 1, ease: 'power3.out'
         }, '-=0.8')
-        .from('.hero-section .description', {
+        .from(heroSection.querySelector('.description'), {
             opacity: 0, y: 20, filter: 'blur(8px)', duration: 1, ease: 'power3.out'
         }, '-=0.7')
-        .from('.hero-section .hero-cta', {
+        .from(heroSection.querySelector('.hero-cta'), {
             opacity: 0, y: 20, duration: 0.8, ease: 'power3.out'
         }, '-=0.6');
     }
@@ -450,7 +470,7 @@
     ========================================================================= */
     function setupMarqueeParallax() {
         const inner = document.querySelector('.marquee-inner');
-        if (!inner) return;
+        if (!inner || !lenis) return;
         // Lenis velocity affects marquee speed
         lenis.on('scroll', ({ velocity }) => {
             const speed = 25 - Math.min(Math.abs(velocity) * 0.5, 20);
@@ -488,7 +508,7 @@
         const heroTitle = document.querySelector('.f-hero-title');
         if (heroTitle) {
             const lines = heroTitle.innerHTML.split('<br>');
-            heroTitle.innerHTML = lines.map(l => `<span class="split-line"><span class="inner">${l}</span></span>`).join('<br>');
+            heroTitle.innerHTML = lines.map(l => `<span class="split-line"><span class="inner">${l}</span></span>`).join(' ');
             gsap.to('.f-hero-title .split-line .inner', {
                 translateY: '0%',
                 duration: 1.3,
@@ -570,6 +590,10 @@
     ========================================================================= */
     window.addEventListener('DOMContentLoaded', () => {
 
+        if (prefersReducedMotion) {
+            updateHeaderTheme();
+            return;
+        }
 
         // Run all animations
         initHeroAnimations();

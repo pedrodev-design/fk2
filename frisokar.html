@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="animations.css">
@@ -18,6 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>gsap.registerPlugin(ScrollTrigger);</script>
 </head>
+
 <body>
 
     <!-- Header -->
@@ -25,31 +28,37 @@
         <div class="header-container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="fk-grupo-tit.webp" alt="FK Grupo Logo">
+                    <img src="fk-grupo-tit.webp" alt="FK Grupo Logo" width="57" height="70">
                 </a>
             </div>
-            
-            <nav class="main-nav">
+
+            <nav class="main-nav" id="main-navigation" aria-label="Navegação principal">
                 <ul>
                     <li class="dropdown marcas-dropdown">
-                        <a href="#">Marcas <i class="fas fa-chevron-down"></i></a>
+                        <a href="#" aria-haspopup="true" aria-expanded="false" aria-controls="brands-mega-menu">Marcas
+                            <i class="fas fa-chevron-down"></i></a>
                         <!-- Mega Menu -->
-                        <div class="mega-menu">
+                        <div class="mega-menu" id="brands-mega-menu">
                             <div class="mega-menu-container">
                                 <a href="#" class="mega-brand">
-                                    <img src="Maxdesign.png" alt="Maxdesign" class="mega-logo">
+                                    <img src="Maxdesign.png" alt="Maxdesign" class="mega-logo" width="911" height="168"
+                                        decoding="async">
                                 </a>
                                 <a href="frisokar.html" class="mega-brand">
-                                    <img src="frisokar-logo-branco.webp" alt="Frisokar" class="mega-logo">
+                                    <img src="frisokar-logo-branco.webp" alt="Frisokar" class="mega-logo" width="298"
+                                        height="65" decoding="async">
                                 </a>
                                 <a href="#" class="mega-brand">
-                                    <img src="FK-WELLNESS-AMBIENTES-DE-SAUDE_branco-scaled-e1753301969819-1400x328.png" alt="FK Wellness" class="mega-logo">
+                                    <img src="FK-WELLNESS-AMBIENTES-DE-SAUDE_branco-scaled-e1753301969819-1400x328.png"
+                                        alt="FK Wellness" class="mega-logo" width="1400" height="328" decoding="async">
                                 </a>
                                 <a href="#" class="mega-brand">
-                                    <img src="Logo-arkhe-branco.png" alt="Arkhé" class="mega-logo">
+                                    <img src="Logo-arkhe-branco.png" alt="Arkhé" class="mega-logo" width="316"
+                                        height="75" decoding="async">
                                 </a>
                                 <a href="#" class="mega-brand">
-                                    <img src="Kokuyo_logo_branco-01_resp.png" alt="Kokuyo" class="mega-logo">
+                                    <img src="Kokuyo_logo_branco-01_resp.png" alt="Kokuyo" class="mega-logo" width="196"
+                                        height="47" decoding="async">
                                 </a>
                             </div>
                         </div>
@@ -68,9 +77,10 @@
             <div class="header-actions">
                 <div class="search-bar">
                     <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Pesquisar...">
+                    <input type="text" placeholder="Pesquisar..." aria-label="Pesquisar no site">
                 </div>
-                <button class="mobile-menu-toggle" aria-label="Abrir menu">
+                <button class="mobile-menu-toggle" type="button" aria-label="Abrir menu" aria-controls="main-navigation"
+                    aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
@@ -79,16 +89,18 @@
 
     <main class="frisokar-page">
 
-        <!-- Hero: Text + Banner Card -->
-        <section class="f-hero">
+        <!-- Hero: Text + Banner -->
+        <section class="f-hero" aria-labelledby="frisokar-hero-title">
             <div class="f-hero-text">
-                <h1 class="f-hero-title">O FUTURO DO<br>ASSENTO CORPORATIVO</h1>
-                <p class="f-hero-sub">Design guiado pela ergonomia e inovação.</p>
+                <h1 class="f-hero-title" id="frisokar-hero-title">O FUTURO DO<br>ASSENTO CORPORATIVO</h1>
+                <p class="f-hero-sub">DESIGN GUIADO PELA ERGONOMIA E INOVAÇÃO.</p>
             </div>
+
             <div class="f-hero-banner">
                 <picture>
                     <source media="(max-width: 768px)" srcset="banner-mobile-cadeiras-neon-9x16.png">
-                    <img src="Frisokar-cadeira-bit.png" alt="Cadeiras Frisokar" class="f-hero-img">
+                    <img src="Frisokar-cadeira-bit.png" alt="Linha de cadeiras Frisokar em ambiente contemporâneo"
+                        class="f-hero-img" fetchpriority="high" decoding="async">
                 </picture>
             </div>
         </section>
@@ -98,11 +110,14 @@
             <div class="f-intro-container">
                 <div class="f-intro-left animate-up">
                     <span class="f-label">FRISOKAR</span>
-                    <h1 class="f-title">EXCELÊNCIA EM<br>PROCESSOS PRODUTIVOS</h1>
+                    <h2 class="f-title">EXCELÊNCIA EM<br>PROCESSOS PRODUTIVOS</h2>
                 </div>
                 <div class="f-intro-right animate-up delay-1">
-                    <p>A Frisokar é a origem do FK Grupo. Pioneira no mercado de componentes, foi por décadas a engrenagem por trás das marcas mais reconhecidas do setor, construindo com excelência o conforto e a performance dos assentos corporativos no Brasil.</p>
-                    <p>Cada giro, inclinação e apoio começou aqui. Somos referência em inovação industrial, com processos conectados para entregar desempenho onde você menos percebe e mais precisa.</p>
+                    <p>A Frisokar é a origem do FK Grupo. Pioneira no mercado de componentes, foi por décadas a
+                        engrenagem por trás das marcas mais reconhecidas do setor, construindo com excelência o conforto
+                        e a performance dos assentos corporativos no Brasil.</p>
+                    <p>Cada giro, inclinação e apoio começou aqui. Somos referência em inovação industrial, com
+                        processos conectados para entregar desempenho onde você menos percebe e mais precisa.</p>
                 </div>
             </div>
         </section>
@@ -111,11 +126,15 @@
         <section class="f-statement" data-theme="dark">
             <div class="f-statement-container">
                 <div class="f-statement-text animate-up">
-                    <p>Hoje, a Frisokar transforma matéria-prima em soluções inteligentes que combinam tecnologia, conceito e funcionalidade. Democratizamos o acesso ao mobiliário de qualidade e design no mercado nacional.</p>
+                    <span class="f-statement-label">INDÚSTRIA EM MOVIMENTO</span>
+                    <p>Hoje, a Frisokar transforma matéria-prima em <strong>soluções inteligentes</strong> que combinam
+                        tecnologia, conceito e funcionalidade. Democratizamos o acesso ao mobiliário de qualidade e
+                        design no mercado nacional.</p>
                 </div>
             </div>
             <div class="f-statement-img animate-up delay-1">
-                <img src="automacao-inteligente.png" alt="Automação Inteligente">
+                <img src="automacao-inteligente.png" alt="Automação Inteligente" width="773" height="435" loading="lazy"
+                    decoding="async">
             </div>
         </section>
 
@@ -123,7 +142,8 @@
         <section class="f-vision">
             <div class="f-vision-container">
                 <div class="f-vision-text animate-up">
-                    <p>A busca constante por novas possibilidades impulsiona nossa evolução contínua. Somos guiados por uma paixão genuína, compartilhada por quem cria e por quem usa.</p>
+                    <p>A busca constante por novas possibilidades impulsiona nossa evolução contínua. Somos guiados por
+                        uma paixão genuína, compartilhada por quem cria e por quem usa.</p>
                 </div>
             </div>
         </section>
@@ -133,15 +153,19 @@
             <div class="f-camp-container">
                 <div class="f-camp-images">
                     <div class="f-camp-img-box animate-up">
-                        <img src="frisokar-noa-pessoas-red.webp" alt="Campanha Visual Frisokar">
+                        <img src="frisokar-noa-pessoas-red.webp" alt="Campanha Visual Frisokar" width="300" height="420"
+                            loading="lazy" decoding="async">
                     </div>
                     <div class="f-camp-img-box animate-up delay-1">
-                        <img src="Frisokar-Noa.png" alt="Frisokar Noa">
+                        <img src="CARROSSEL-INSPIRACOES-OPERATIVAS-ADDIT.webp" alt="Frisokar Noa" width="1920"
+                            height="600" loading="lazy" decoding="async">
                     </div>
                 </div>
                 <div class="f-camp-text animate-up delay-2">
-                    <p>Inspirada por pessoas, a nova campanha da Frisokar vai além de uma mudança visual. É a expressão dos nossos princípios essenciais: inovação, avanço tecnológico e compromisso com o futuro.</p>
-                    <p>Com olhar atento ao amanhã, antecipamos necessidades e estabelecemos novos padrões ao alinhar design, funcionalidade e responsabilidade ambiental.</p>
+                    <p>Inspirada por pessoas, a nova campanha da Frisokar vai além de uma mudança visual. É a expressão
+                        dos nossos princípios essenciais: inovação, avanço tecnológico e compromisso com o futuro.</p>
+                    <p>Com olhar atento ao amanhã, antecipamos necessidades e estabelecemos novos padrões ao alinhar
+                        design, funcionalidade e responsabilidade ambiental.</p>
                     <h3>A Frisokar traz o futuro para o presente do seu espaço.</h3>
                     <a href="#" class="f-btn">Conheça nossos produtos</a>
                 </div>
@@ -151,16 +175,20 @@
     </main>
 
     <!-- Footer Section -->
-    <footer class="footer-section" data-theme="dark">
+    <footer class="footer-section" data-theme="dark" aria-label="Rodapé">
 
         <!-- Top area -->
         <div class="footer-top">
 
             <!-- Brand / Logo -->
             <div class="footer-brand-area">
-                <img src="fk-grupo-tit.webp" alt="FK Grupo" class="footer-logo">
+                <a href="index.html" class="footer-home-link" aria-label="Voltar para a página inicial">
+                    <img src="fk-grupo-tit.webp" alt="FK Grupo" class="footer-logo" width="57" height="70" loading="lazy"
+                        decoding="async">
+                </a>
                 <p class="footer-tagline">Desde 1985</p>
-                <div class="footer-brand-tags">
+                <p class="footer-brand-copy">Indústria, design e tecnologia para transformar ambientes.</p>
+                <div class="footer-brand-tags" aria-label="Marcas do FK Grupo">
                     <span>Maxdesign</span>
                     <span>Frisokar</span>
                     <span>FK Wellness</span>
@@ -170,7 +198,7 @@
             </div>
 
             <!-- Navigation Links -->
-            <div class="footer-links-area">
+            <nav class="footer-links-area" aria-label="Navegação do rodapé">
                 <div class="footer-column">
                     <h4>Empresa</h4>
                     <ul>
@@ -201,16 +229,16 @@
                         <li><a href="#">Manuais de Montagem</a></li>
                     </ul>
                 </div>
-            </div>
+            </nav>
 
             <!-- Contact -->
             <div class="footer-contact-area">
                 <h4>Contato</h4>
-                <p>Rod. Braz Fortunato,<br>KM2, S/N<br>Bariri – SP<br>CEP: 17255-755</p>
+                <address>Rod. Braz Fortunato,<br>KM2, S/N<br>Bariri – SP<br>CEP: 17255-755</address>
                 <div class="contact-icons">
-                    <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" title="Telefone"><i class="fas fa-phone-alt"></i></a>
-                    <a href="#" title="E-mail"><i class="far fa-envelope"></i></a>
+                    <a href="#" title="WhatsApp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" title="Telefone" aria-label="Telefone"><i class="fas fa-phone-alt"></i></a>
+                    <a href="#" title="E-mail" aria-label="E-mail"><i class="far fa-envelope"></i></a>
                 </div>
             </div>
 
@@ -218,7 +246,7 @@
 
         <!-- Bottom bar -->
         <div class="footer-bottom">
-            <p>© 2025 FK Grupo S.A. — Todos os direitos reservados.</p>
+            <p>© 2026 FK Grupo S.A. — Todos os direitos reservados.</p>
             <div class="footer-bottom-links">
                 <a href="#">Política de Privacidade</a>
                 <a href="#">Termos de Uso</a>
@@ -232,4 +260,5 @@
     <!-- Premium GSAP Animations -->
     <script src="gsap-animations.js"></script>
 </body>
+
 </html>

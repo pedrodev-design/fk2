@@ -90,16 +90,70 @@ body { background-color: #fff !important; }
     flex-wrap: wrap;
     padding: 20px 0;
 }
+.home-brands-logos a {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex: 1 1 150px;
+    align-items: center;
+    justify-content: center;
+    max-width: 180px;
+    min-width: 0;
+    outline: none;
+}
+.home-brands-logos a::before {
+    content: '';
+    position: absolute;
+    inset: -16px -18px;
+    z-index: -1;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 16px;
+    background: linear-gradient(180deg, #fff 0%, #f7f7f7 100%);
+    box-shadow: 0 14px 34px rgba(0,0,0,0.06);
+    opacity: 0;
+    transform: translateY(8px) scale(0.94);
+    transition: opacity 0.3s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.home-brands-logos a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    width: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: #111;
+    transform: translateX(-50%);
+    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
 .home-brands-logos img {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: auto !important;
+    height: auto !important;
+    max-width: 100%;
     max-height: 50px;
+    object-fit: contain;
     opacity: 0.75;
     filter: brightness(0);
-    transition: all 0.4s ease;
+    transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
 }
-.home-brands-logos img:hover {
+.home-brands-logos a:hover::before,
+.home-brands-logos a:focus-visible::before {
+    opacity: 1;
+    transform: translateY(-5px) scale(1);
+}
+.home-brands-logos a:hover::after,
+.home-brands-logos a:focus-visible::after {
+    width: 30px;
+    transform: translate(-50%, -5px);
+}
+.home-brands-logos a:hover img,
+.home-brands-logos a:focus-visible img {
     opacity: 1;
     filter: brightness(0);
-    transform: scale(1.08);
+    transform: translateY(-5px) scale(1.035);
 }
 /* Force black for all invert-logo class in this section */
 .home-brands-logos .invert-logo {
@@ -174,54 +228,65 @@ body { background-color: #fff !important; }
     color: #fff;
     display: flex;
     align-items: center;
-    min-height: 500px;
+    min-height: clamp(620px, 52vw, 760px);
+    overflow: clip;
 }
 .capacity-content {
     flex: 1;
-    padding: 100px 50px 100px 10%;
+    padding: clamp(80px, 7vw, 110px) clamp(40px, 4vw, 70px) clamp(80px, 7vw, 110px) clamp(60px, 8vw, 150px);
+    min-width: 0;
 }
 .capacity-content h2 {
-    font-size: 4rem;
+    font-size: clamp(3rem, 4vw, 4rem);
     font-weight: 800;
     margin-bottom: 30px;
     line-height: 1.1;
 }
 .capacity-content > p {
-    font-size: 1.4rem;
+    font-size: clamp(1.1rem, 1.5vw, 1.4rem);
     color: #bbb;
     line-height: 1.6;
-    margin-bottom: 60px;
+    margin-bottom: clamp(40px, 4vw, 60px);
     max-width: 700px;
 }
 .capacity-features {
-    display: flex;
-    gap: 50px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 50px);
 }
 .cap-feat {
     display: flex;
-    gap: 20px;
+    gap: clamp(12px, 1.4vw, 20px);
+    min-width: 0;
 }
 .cap-feat i {
-    font-size: 2.2rem;
+    flex: 0 0 auto;
+    font-size: clamp(1.7rem, 2.2vw, 2.2rem);
     color: #fff;
     margin-top: 5px;
 }
 .cap-feat h4 {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 1.25vw, 1.25rem);
     font-weight: 700;
     margin-bottom: 10px;
 }
 .cap-feat p {
-    font-size: 1rem;
+    font-size: clamp(0.88rem, 1vw, 1rem);
     color: #999;
     line-height: 1.5;
 }
 .capacity-image {
     flex: 1;
-    height: 100%;
+    align-self: stretch;
+    position: relative;
+    height: auto;
     min-height: 500px;
+    overflow: hidden;
 }
 .capacity-image img {
+    position: absolute;
+    inset: 0;
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -237,6 +302,7 @@ body { background-color: #fff !important; }
     max-width: 100%; padding-left: 20px; padding-right: 20px;
     margin: 0 auto;
     gap: 80px;
+    overflow: clip;
 }
 .about-image {
     flex: 1;
@@ -454,6 +520,9 @@ body { background-color: #fff !important; }
 .home-cta-banner h2 {
     font-size: 3rem;
     font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
     margin-bottom: 40px;
     position: relative;
     z-index: 2;
@@ -466,16 +535,52 @@ body { background-color: #fff !important; }
     z-index: 2;
 }
 .btn-primary {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     background: #fff;
     color: #111;
     padding: 15px 30px;
+    border: 1px solid rgba(255,255,255,0.9);
     border-radius: 4px;
     font-weight: 700;
     font-size: 0.9rem;
-    transition: transform 0.3s;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    transition: color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+}
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: #111;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .btn-primary:hover {
+    color: #fff;
     transform: translateY(-3px);
+    box-shadow: 0 16px 36px rgba(0,0,0,0.2);
+}
+.btn-primary:hover::before {
+    transform: scaleX(1);
+    transform-origin: left center;
+}
+.btn-arrow {
+    display: inline-block;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-primary:hover .btn-arrow {
+    transform: translateX(5px);
+}
+.btn-primary:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
 }
 .btn-secondary {
     background: rgba(255,255,255,0.2);
@@ -498,6 +603,24 @@ body { background-color: #fff !important; }
    ========================================================================== */
 
 /* ---- XL: Large laptops / monitors (1280px) ---- */
+@media (max-width: 1366px) {
+    .home-capacity-section {
+        min-height: 680px;
+    }
+    .capacity-content {
+        padding: 80px 44px 80px 7%;
+    }
+    .capacity-content h2 {
+        font-size: 3.25rem;
+    }
+    .capacity-content > p {
+        margin-bottom: 42px;
+    }
+    .capacity-features {
+        gap: 24px;
+    }
+}
+
 @media (max-width: 1280px) {
     .home-stats-container {
         max-width: 100%;
@@ -510,10 +633,16 @@ body { background-color: #fff !important; }
         padding-left: 40px;
         padding-right: 40px;
     }
-    .home-about-section,
-    .home-capacity-section {
+    .home-brands-logos {
+        gap: 40px;
+    }
+    .home-about-section {
         padding: 100px 60px;
         gap: 60px;
+    }
+    .home-capacity-section {
+        padding: 0;
+        gap: 0;
     }
     .home-sustainability-section {
         padding: 100px 60px;
@@ -524,7 +653,7 @@ body { background-color: #fff !important; }
 }
 
 /* ---- LG: Tablets landscape / small laptops (1024px) ---- */
-@media (max-width: 1024px) {
+@media (max-width: 1170px) {
     /* Stats */
     .home-stats-section { padding: 50px 30px; }
     .home-stats-container {
@@ -553,7 +682,9 @@ body { background-color: #fff !important; }
         flex-wrap: wrap;
         justify-content: center;
     }
-    .home-brands-logos img { max-height: 35px; }
+    .home-brands-logos img {
+        max-height: 35px;
+    }
 
     /* Solutions */
     .home-solutions-section { padding: 80px 30px; }
@@ -567,6 +698,7 @@ body { background-color: #fff !important; }
     .home-capacity-section {
         flex-direction: column;
         padding: 80px 40px;
+        gap: 50px;
         min-height: unset;
     }
     .capacity-content {
@@ -588,15 +720,32 @@ body { background-color: #fff !important; }
         padding: 80px 40px;
         gap: 50px;
     }
-    .about-image { max-width: 100%; }
+    .about-image {
+        flex: none;
+        width: 100%;
+        max-width: 900px;
+        align-self: center;
+    }
     .about-content { max-width: 100%; }
     .about-content h2 { font-size: 2rem; }
 
     /* Sustainability */
     .home-sustainability-section { padding: 100px 40px; }
-    .sust-text h2 { font-size: 2.5rem; }
-    .sust-buttons { flex-direction: row; flex-wrap: wrap; }
-    .sust-btn { padding: 16px 30px; font-size: 0.9rem; }
+    .sust-inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 70px;
+    }
+    .sust-left,
+    .sust-right {
+        min-width: 0;
+        width: 100%;
+    }
+    .sust-left p {
+        max-width: 700px;
+    }
+    .sust-pillar {
+        max-width: 100%;
+    }
 }
 
 /* ---- MD: Tablets portrait (768px) ---- */
@@ -612,6 +761,10 @@ body { background-color: #fff !important; }
         padding: 25px 15px;
     }
     .home-stat:nth-child(odd) { border-right: 1px solid #eaeaea; }
+    .home-stat:last-child {
+        grid-column: 1 / -1;
+        border-right: none;
+    }
     .home-stat-text h3 { font-size: 1.6rem; }
     .home-stat-text p { font-size: 0.78rem; }
 
@@ -619,7 +772,20 @@ body { background-color: #fff !important; }
     .home-brands-section { padding: 70px 25px; }
     .home-brands-header h2 { font-size: 1.9rem; }
     .home-brands-logos { gap: 25px; }
-    .home-brands-logos img { max-height: 28px; }
+    .home-brands-logos a {
+        flex-basis: calc(50% - 13px);
+    }
+    .home-brands-logos a::before {
+        inset: -10px -8px;
+        border-radius: 12px;
+    }
+    .home-brands-logos a::after {
+        bottom: -7px;
+    }
+    .home-brands-logos img {
+        max-width: 100%;
+        max-height: 28px;
+    }
 
     /* Solutions */
     .home-solutions-grid {
@@ -631,7 +797,10 @@ body { background-color: #fff !important; }
     /* Capacity */
     .home-capacity-section { padding: 70px 25px; }
     .capacity-content h2 { font-size: 2.4rem; letter-spacing: -1px; }
-    .capacity-features { flex-direction: column; gap: 25px; }
+    .capacity-features {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
     .cap-feat i { font-size: 1.8rem; }
     .cap-feat h4 { font-size: 1.1rem; }
     .capacity-image { min-height: 320px; }
@@ -650,10 +819,21 @@ body { background-color: #fff !important; }
 
     /* Sustainability */
     .home-sustainability-section { padding: 80px 25px; }
-    .sust-text h2 { font-size: 2rem; }
-    .sust-text p { font-size: 1.1rem; }
-    .sust-buttons { flex-direction: column; align-items: center; gap: 15px; }
-    .sust-btn { width: 100%; max-width: 320px; text-align: center; padding: 18px 30px; }
+    .sust-inner { gap: 50px; }
+    .sust-left p {
+        font-size: 1.1rem;
+        margin-bottom: 40px;
+    }
+    .sust-stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+    .sust-stat {
+        min-width: 0;
+        padding: 30px 24px;
+    }
+    .sust-stat h3 { font-size: 3rem; }
 
     /* CTA Banner */
     .home-cta-banner { padding: 80px 25px; }
@@ -706,9 +886,35 @@ body { background-color: #fff !important; }
 
     /* Sustainability */
     .home-sustainability-section { padding: 60px 20px; }
-    .sust-icon { width: 80px; height: 80px; font-size: 2.2rem; }
-    .sust-text h2 { font-size: 1.8rem; }
-    .sust-text p { font-size: 1rem; }
+    .sust-left h2 {
+        font-size: 2.8rem;
+        letter-spacing: -1.5px;
+    }
+    .sust-left p { font-size: 1rem; }
+    .sust-pillar {
+        gap: 18px;
+    }
+    .sust-pillar-label {
+        font-size: 1rem;
+    }
+    .sust-stat-grid {
+        gap: 12px;
+    }
+    .sust-stat {
+        padding: 24px 16px;
+    }
+    .sust-stat h3 {
+        font-size: 2.5rem;
+        letter-spacing: -1px;
+    }
+    .sust-stat p {
+        font-size: 0.82rem;
+    }
+    .sust-cta {
+        width: 100%;
+        justify-content: center;
+        padding: 18px 20px;
+    }
 
     /* CTA */
     .home-cta-banner { padding: 70px 20px; }
@@ -723,6 +929,6 @@ body { background-color: #fff !important; }
     .home-stat-text h3 { font-size: 1.2rem; }
     .home-brands-logos img { max-height: 18px; }
     .capacity-content h2 { font-size: 1.7rem; }
-    .sust-text h2 { font-size: 1.5rem; }
+    .sust-left h2 { font-size: 2.5rem; }
 }
 
