@@ -1562,71 +1562,195 @@ ul {
     font-weight: 500;
 }
 
-/* ---- CAMPAIGN: Full-width 3D film strip ---- */
-.f-campaign {
-    width: 100%;
-    padding: 0;
-    background: #fff;
-    overflow: hidden;
-}
-
-.f-camp-container {
+/* ---- CAMPAIGN: Scroll-driven card composition ---- */
+.f-scroll-campaign {
     position: relative;
     width: 100%;
-    max-width: none;
-    margin: 0;
+    background: #fff;
+    overflow: clip;
 }
 
-.f-camp-heading {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 2;
+.f-scroll-campaign.is-motion-ready {
+    height: 260vh;
+    height: 260svh;
+    min-height: 1700px;
+}
+
+.f-scroll-campaign-stage {
+    position: relative;
+    isolation: isolate;
     width: 100%;
-    max-width: 1600px;
+    min-height: 760px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.f-scroll-campaign.is-motion-ready .f-scroll-campaign-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    min-height: 620px;
+}
+
+.f-scroll-camp-copy {
+    position: absolute;
+    top: clamp(56px, 8vh, 96px);
+    right: 24px;
+    left: 24px;
+    z-index: 4;
+    max-width: 1080px;
     margin: 0 auto;
-    padding: clamp(62px, 6vw, 96px) clamp(24px, 5vw, 80px) 0;
     text-align: center;
     pointer-events: none;
 }
 
-.f-camp-heading h2 {
+.f-scroll-camp-kicker {
+    display: block;
+    margin-bottom: 18px;
+    color: #777;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.34em;
+    line-height: 1;
+}
+
+.f-scroll-camp-copy h2 {
     margin: 0;
     color: #111;
-    font-size: clamp(2.5rem, 5vw, 5.6rem);
+    font-size: clamp(2.65rem, 5vw, 5.5rem);
     font-weight: 900;
-    line-height: 0.95;
-    letter-spacing: -0.055em;
+    line-height: 0.94;
+    letter-spacing: -0.058em;
     text-transform: uppercase;
 }
 
-.f-camp-media {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    background: #fff;
-    line-height: 0;
+.f-scroll-camp-copy p {
+    max-width: 620px;
+    margin: 24px auto 0;
+    color: #666;
+    font-size: clamp(0.92rem, 1.1vw, 1.06rem);
+    line-height: 1.65;
 }
 
-.f-camp-video {
+.f-scroll-camp-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    color: #777;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.f-scroll-camp-hint i {
+    position: relative;
+    width: 38px;
+    height: 1px;
+    overflow: hidden;
+    background: #d2d2d2;
+}
+
+.f-scroll-camp-hint i::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #111;
+    transform: translateX(-100%);
+    animation: f-camp-hint-line 1.8s ease-in-out infinite;
+}
+
+@keyframes f-camp-hint-line {
+    50%,
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.f-scroll-camp-outro {
+    display: none;
+}
+
+.f-scroll-camp-cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(12px, 1.5vw, 24px);
+    min-height: 760px;
+    padding: 250px 0 150px;
+}
+
+.f-scroll-card {
+    width: clamp(112px, 10vw, 170px);
+    aspect-ratio: 5 / 7;
+    flex: 0 0 auto;
+    margin: 0;
+    perspective: 1200px;
+}
+
+.f-scroll-card-inner {
     width: 100%;
     height: 100%;
-    display: block;
-    object-fit: cover;
-    background: #fff;
+    overflow: hidden;
+    border-radius: clamp(12px, 1.1vw, 18px);
+    background: #f3f3f3;
+    transform-style: preserve-3d;
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.f-camp-cta {
+.f-scroll-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.f-scroll-campaign.is-motion-ready .f-scroll-camp-outro {
+    display: block;
+    opacity: 0;
+}
+
+.f-scroll-campaign.is-motion-ready .f-scroll-camp-cards {
+    position: absolute;
+    inset: 0;
+    display: block;
+    min-height: 0;
+    padding: 0;
+    perspective: 1600px;
+    pointer-events: none;
+}
+
+.f-scroll-campaign.is-motion-ready .f-scroll-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    pointer-events: auto;
+    will-change: transform, opacity;
+}
+
+.f-scroll-camp-cta {
     position: absolute;
     right: 0;
-    bottom: clamp(28px, 4.5vw, 72px);
+    bottom: clamp(28px, 5vh, 52px);
     left: 0;
-    z-index: 3;
+    z-index: 6;
     display: flex;
     justify-content: center;
     padding: 0 24px;
     pointer-events: none;
+}
+
+.f-scroll-campaign.is-motion-ready .f-scroll-camp-cta {
+    opacity: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .f-scroll-card:hover .f-scroll-card-inner {
+        transform: translateY(-8px) rotateY(7deg) scale(1.025);
+    }
 }
 
 .f-glass-button {
@@ -1710,17 +1834,62 @@ ul {
 }
 
 @media (max-width: 600px) {
-    .f-camp-media {
-        aspect-ratio: 4 / 5;
+    .f-scroll-campaign.is-motion-ready {
+        height: 240vh;
+        height: 240svh;
+        min-height: 1500px;
     }
 
-    .f-camp-video {
-        transform: scale(1.34);
-        transform-origin: center 54%;
+    .f-scroll-campaign-stage {
+        min-height: 720px;
     }
 
-    .f-camp-cta {
-        bottom: clamp(62px, 18vw, 72px);
+    .f-scroll-campaign.is-motion-ready .f-scroll-campaign-stage {
+        min-height: 600px;
+    }
+
+    .f-scroll-camp-copy {
+        top: clamp(44px, 7vh, 68px);
+        right: 20px;
+        left: 20px;
+    }
+
+    .f-scroll-camp-kicker {
+        margin-bottom: 14px;
+        font-size: 0.58rem;
+        letter-spacing: 0.28em;
+    }
+
+    .f-scroll-camp-copy h2 {
+        font-size: clamp(2.2rem, 10.8vw, 3.15rem);
+        line-height: 0.92;
+    }
+
+    .f-scroll-camp-copy p {
+        max-width: 330px;
+        margin-top: 18px;
+        font-size: 0.84rem;
+        line-height: 1.55;
+    }
+
+    .f-scroll-camp-hint {
+        margin-top: 18px;
+        font-size: 0.55rem;
+    }
+
+    .f-scroll-camp-cards {
+        min-height: 720px;
+        padding-top: 255px;
+        padding-bottom: 135px;
+    }
+
+    .f-scroll-card,
+    .f-scroll-campaign.is-motion-ready .f-scroll-card {
+        width: clamp(104px, 30vw, 124px);
+    }
+
+    .f-scroll-camp-cta {
+        bottom: clamp(24px, 4.5vh, 38px);
         padding: 0 16px;
     }
 
@@ -1736,6 +1905,31 @@ ul {
         width: 34px;
         height: 34px;
         flex-basis: 34px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .f-scroll-campaign,
+    .f-scroll-campaign.is-motion-ready {
+        height: auto;
+        min-height: 0;
+    }
+
+    .f-scroll-campaign-stage,
+    .f-scroll-campaign.is-motion-ready .f-scroll-campaign-stage {
+        position: relative;
+        top: auto;
+        height: auto;
+        min-height: 720px;
+    }
+
+    .f-scroll-camp-hint i::after {
+        animation: none;
+        transform: none;
+    }
+
+    .f-scroll-card:nth-child(n + 6) {
+        display: none;
     }
 }
 
@@ -1876,12 +2070,6 @@ ul {
         margin-bottom: 20px;
         font-size: 0.65rem;
         letter-spacing: 3px;
-    }
-    .f-camp-heading {
-        padding: 52px 24px 0;
-    }
-    .f-camp-heading h2 {
-        font-size: clamp(2.25rem, 9vw, 4rem);
     }
     .f-statement, .f-vision {
         padding: 60px 25px;

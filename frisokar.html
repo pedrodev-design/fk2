@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=20260724-5">
+    <link rel="stylesheet" href="style.css?v=20260724-6">
     <link rel="stylesheet" href="animations.css?v=20260724-2">
     <!-- Lenis Smooth Scroll -->
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
@@ -150,21 +150,66 @@
             </div>
         </section>
 
-        <!-- Campaign: full-width 3D film strip -->
-        <section class="f-campaign">
-            <div class="f-camp-container">
-                <header class="f-camp-heading">
-                    <h2>O futuro toma forma.</h2>
+        <!-- Campaign: scroll-driven image composition -->
+        <section class="f-scroll-campaign" aria-labelledby="f-scroll-campaign-title">
+            <div class="f-scroll-campaign-stage">
+                <header class="f-scroll-camp-copy f-scroll-camp-intro">
+                    <span class="f-scroll-camp-kicker">FRISOKAR EM MOVIMENTO</span>
+                    <h2 id="f-scroll-campaign-title">Formas que movem o futuro.</h2>
+                    <p>Role para descobrir como design, ergonomia e cor transformam cada ambiente.</p>
+                    <span class="f-scroll-camp-hint" aria-hidden="true">Role para explorar <i></i></span>
                 </header>
-                <div class="f-camp-media">
-                    <video class="f-camp-video" autoplay muted loop playsinline preload="metadata"
-                        aria-label="Cards tridimensionais com produtos e ambientes Frisokar">
-                        <source src="animo-film-strip-1800p.webm" type="video/webm" media="(max-width: 600px)">
-                        <source src="animo-film-strip-1440p.webm" type="video/webm">
-                        Seu navegador não suporta a reprodução deste vídeo.
-                    </video>
+
+                <header class="f-scroll-camp-copy f-scroll-camp-outro">
+                    <span class="f-scroll-camp-kicker">PERSPECTIVAS FRISOKAR</span>
+                    <h2>Uma visão. Novas perspectivas.</h2>
+                    <p>Soluções criadas para acompanhar pessoas, espaços e novas formas de trabalhar.</p>
+                </header>
+
+                <div class="f-scroll-camp-cards" aria-hidden="true">
+                    <figure class="f-scroll-card">
+                        <div class="f-scroll-card-inner"><img src="BIT.jpg" alt="" width="300" height="420"
+                                loading="lazy" decoding="async"></div>
+                    </figure>
+                    <figure class="f-scroll-card">
+                        <div class="f-scroll-card-inner"><img src="CARROSSEL-INSPIRACOES-COLABORATIVOS-NOA.jpg"
+                                alt="" width="300" height="420" loading="lazy" decoding="async"></div>
+                    </figure>
+                    <figure class="f-scroll-card">
+                        <div class="f-scroll-card-inner"><img src="CARROSSEL-INSPIRACOES-COLABORATIVOS-WALLE.jpg"
+                                alt="" width="300" height="420" loading="lazy" decoding="async"></div>
+                    </figure>
+                    <figure class="f-scroll-card">
+                        <div class="f-scroll-card-inner"><img src="CARROSSEL-INSPIRACOES-MULTIFUNCIONAIS-SATZ.webp"
+                                alt="" width="300" height="420" loading="lazy" decoding="async"></div>
+                    </figure>
+                    <figure class="f-scroll-card">
+                        <div class="f-scroll-card-inner"><img src="CARROSSEL-INSPIRACOES-OPERATIVAS-ADDIT.webp"
+                                alt="" width="300" height="420" loading="lazy" decoding="async"></div>
+                    </figure>
+                    <figure class="f-scroll-card">
+                        <div class="f-scroll-card-inner"><img src="BIT.jpg" alt="" width="300" height="420"
+                                loading="lazy" decoding="async"></div>
+                    </figure>
+                    <figure class="f-scroll-card">
+                        <div class="f-scroll-card-inner"><img src="CARROSSEL-INSPIRACOES-COLABORATIVOS-NOA.jpg"
+                                alt="" width="300" height="420" loading="lazy" decoding="async"></div>
+                    </figure>
+                    <figure class="f-scroll-card">
+                        <div class="f-scroll-card-inner"><img src="CARROSSEL-INSPIRACOES-COLABORATIVOS-WALLE.jpg"
+                                alt="" width="300" height="420" loading="lazy" decoding="async"></div>
+                    </figure>
+                    <figure class="f-scroll-card">
+                        <div class="f-scroll-card-inner"><img src="CARROSSEL-INSPIRACOES-MULTIFUNCIONAIS-SATZ.webp"
+                                alt="" width="300" height="420" loading="lazy" decoding="async"></div>
+                    </figure>
+                    <figure class="f-scroll-card">
+                        <div class="f-scroll-card-inner"><img src="CARROSSEL-INSPIRACOES-OPERATIVAS-ADDIT.webp"
+                                alt="" width="300" height="420" loading="lazy" decoding="async"></div>
+                    </figure>
                 </div>
-                <div class="f-camp-cta">
+
+                <div class="f-scroll-camp-cta">
                     <a href="#" class="f-glass-button" aria-label="Conheça as oportunidades no FK Grupo">
                         <span>Junte-se a nós</span>
                         <span class="f-glass-button-arrow" aria-hidden="true">&rarr;</span>
@@ -259,7 +304,7 @@
 
     <script src="script.js?v=20260724-2"></script>
     <!-- Premium GSAP Animations -->
-    <script src="gsap-animations.js?v=20260724-2"></script>
+    <script src="gsap-animations.js?v=20260724-6"></script>
 </body>
 
 </html>

@@ -198,7 +198,10 @@
             'main h1, main h2, main h3, main h4, main p, ' +
             'main .home-section-label, main .f-label, ' +
             'main .f-statement-label, main .f-vision-label'
-        ).filter((el) => !el.closest(groupedContentSelector));
+        ).filter((el) =>
+            !el.closest(groupedContentSelector) &&
+            !el.closest('.f-scroll-campaign')
+        );
 
         const initiallyVisibleText = [];
         const scrollText = [];
@@ -260,7 +263,7 @@
         // Animate wrappers so image/video sizing and inner parallax stay intact.
         gsap.utils.toArray(
             '.hero-video, .f-hero-banner, .capacity-image, .about-image, ' +
-            '.f-statement-img, .f-camp-media'
+            '.f-statement-img'
         ).forEach((el) => {
             const rect = el.getBoundingClientRect();
             const isInitiallyVisible = rect.top < window.innerHeight * 0.94 && rect.bottom > 0;
@@ -281,7 +284,7 @@
         });
 
         gsap.utils.toArray(
-            'main .hero-cta, main .sust-cta, main .cta-banner-buttons, main .f-camp-cta, ' +
+            'main .hero-cta, main .sust-cta, main .cta-banner-buttons, ' +
             '.footer-brand-area, .footer-contact-area, .footer-bottom'
         ).forEach((el) => {
             revealOnce(el, {
@@ -584,7 +587,159 @@
     }
 
     /* =========================================================================
-       16. FRISOKAR PAGE ANIMATIONS
+       16. FRISOKAR SCROLL-MORPH CAMPAIGN
+    ========================================================================= */
+    function setupFrisokarScrollCampaign() {
+        const section = document.querySelector('.f-scroll-campaign');
+        if (!section) return;
+
+        const stage = section.querySelector('.f-scroll-campaign-stage');
+        const cards = gsap.utils.toArray('.f-scroll-card', section);
+        const intro = section.querySelector('.f-scroll-camp-intro');
+        const outro = section.querySelector('.f-scroll-camp-outro');
+        const cta = section.querySelector('.f-scroll-camp-cta');
+
+        if (!stage || !cards.length || !intro || !outro || !cta) return;
+
+        section.classList.add('is-motion-ready');
+
+        let layout = null;
+
+        const calculateLayout = () => {
+            const width = stage.clientWidth;
+            const height = stage.clientHeight;
+            const total = cards.length;
+            const isMobile = width < 768;
+            const cardWidth = cards[0].offsetWidth || (isMobile ? 112 : 150);
+            const lineSpacing = cardWidth * (isMobile ? 0.86 : 1.08);
+            const lineY = height * (isMobile ? 0.055 : 0.07);
+
+            const circleRadius = Math.min(
+                width * (isMobile ? 0.42 : 0.285),
+                height * (isMobile ? 0.27 : 0.31)
+            );
+            const circleCenterY = height * (isMobile ? 0.055 : 0.07);
+
+            const arcRadius = Math.min(
+                width * (isMobile ? 0.94 : 0.7),
+                height * (isMobile ? 0.7 : 1.02)
+            );
+            const arcSpread = isMobile ? 112 : 126;
+            const arcApexY = height * (isMobile ? 0.055 : 0.08);
+
+            return {
+                line: cards.map((card, index) => ({
+                    x: (index - (total - 1) / 2) * lineSpacing,
+                    y: lineY,
+                    rotationY: (index - (total - 1) / 2) * (isMobile ? -1.6 : -1.2),
+                    rotationZ: 0,
+                    scale: isMobile ? 0.9 : 0.96
+                })),
+                circle: cards.map((card, index) => {
+                    const angle = -90 + (index / total) * 360;
+                    const radians = angle * Math.PI / 180;
+                    const x = Math.cos(radians) * circleRadius;
+
+                    return {
+                        x,
+                        y: Math.sin(radians) * circleRadius + circleCenterY,
+                        rotationY: -(x / circleRadius) * (isMobile ? 15 : 18),
+                        rotationZ: Math.sin(radians) * (isMobile ? 5 : 7),
+                        scale: isMobile ? 0.86 : 0.94
+                    };
+                }),
+                arc: cards.map((card, index) => {
+                    const angle = -arcSpread / 2 + (index / (total - 1)) * arcSpread;
+                    const radians = angle * Math.PI / 180;
+                    const x = Math.sin(radians) * arcRadius;
+
+                    return {
+                        x,
+                        y: arcApexY + (1 - Math.cos(radians)) * arcRadius,
+                        rotationY: -(x / arcRadius) * (isMobile ? 19 : 23),
+                        rotationZ: angle * 0.16,
+                        scale: isMobile ? 1 : 1.06
+                    };
+                })
+            };
+        };
+
+        const setInitialLayout = () => {
+            layout = calculateLayout();
+
+            gsap.set(cards, {
+                xPercent: -50,
+                yPercent: -50,
+                x: (index) => layout.line[index].x,
+                y: (index) => layout.line[index].y,
+                rotationY: (index) => layout.line[index].rotationY,
+                rotationZ: 0,
+                scale: (index) => layout.line[index].scale,
+                opacity: 1,
+                transformPerspective: 1400
+            });
+        };
+
+        setInitialLayout();
+        gsap.set(outro, { opacity: 0, y: 28, filter: 'blur(14px)' });
+        gsap.set(cta, { opacity: 0, y: 18, filter: 'blur(8px)' });
+
+        const timeline = gsap.timeline({
+            defaults: { ease: 'none' },
+            scrollTrigger: {
+                trigger: section,
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: 1.6,
+                invalidateOnRefresh: true,
+                onRefreshInit: setInitialLayout
+            }
+        });
+
+        timeline
+            .to(cards, {
+                x: (index) => layout.circle[index].x,
+                y: (index) => layout.circle[index].y,
+                rotationY: (index) => layout.circle[index].rotationY,
+                rotationZ: (index) => layout.circle[index].rotationZ,
+                scale: (index) => layout.circle[index].scale,
+                duration: 0.48,
+                ease: 'power1.inOut'
+            }, 0)
+            .to(intro, {
+                opacity: 0,
+                y: -28,
+                filter: 'blur(14px)',
+                duration: 0.2,
+                ease: 'power2.in'
+            }, 0.12)
+            .to(cards, {
+                x: (index) => layout.arc[index].x,
+                y: (index) => layout.arc[index].y,
+                rotationY: (index) => layout.arc[index].rotationY,
+                rotationZ: (index) => layout.arc[index].rotationZ,
+                scale: (index) => layout.arc[index].scale,
+                duration: 0.52,
+                ease: 'power2.inOut'
+            }, 0.48)
+            .to(outro, {
+                opacity: 1,
+                y: 0,
+                filter: 'blur(0px)',
+                duration: 0.24,
+                ease: 'power3.out'
+            }, 0.68)
+            .to(cta, {
+                opacity: 1,
+                y: 0,
+                filter: 'blur(0px)',
+                duration: 0.18,
+                ease: 'power3.out'
+            }, 0.82);
+    }
+
+    /* =========================================================================
+       17. FRISOKAR PAGE ANIMATIONS
     ========================================================================= */
     function setupFrisokarAnimations() {
         // Only run on frisokar page
@@ -655,13 +810,6 @@
             opacity: 0, y: 40, filter: 'blur(12px)', duration: 1.1, ease: 'power4.out'
         });
 
-        // Campaign section — clean reveal; the film animation remains the focus
-        gsap.from('.f-camp-media', {
-            scrollTrigger: { trigger: '.f-campaign', start: 'top 82%' },
-            opacity: 0,
-            duration: 0.8,
-            ease: 'power2.out'
-        });
     }
 
     /* =========================================================================
@@ -675,6 +823,7 @@
         }
 
         // One reveal system prevents duplicated animations from competing.
+        setupFrisokarScrollCampaign();
         setupScrollReveals();
         setupStatsAnimation();
         setupMarqueeParallax();
