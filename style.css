@@ -1854,35 +1854,35 @@ ul {
     }
 
     .f-scroll-camp-kicker {
-        margin-bottom: 14px;
-        font-size: 0.58rem;
+        margin-bottom: 16px;
+        font-size: 0.64rem;
         letter-spacing: 0.28em;
     }
 
     .f-scroll-camp-copy h2 {
-        font-size: clamp(2.2rem, 10.8vw, 3.15rem);
+        font-size: clamp(2.5rem, 12vw, 3.55rem);
         line-height: 0.92;
     }
 
     .f-scroll-camp-copy p {
-        max-width: 330px;
-        margin-top: 18px;
-        font-size: 0.84rem;
+        max-width: 350px;
+        margin-top: 20px;
+        font-size: 0.94rem;
         line-height: 1.55;
     }
 
     .f-scroll-campaign.is-motion-ready .f-scroll-camp-center {
-        width: min(48vw, 180px);
+        width: min(56vw, 220px);
     }
 
     .f-scroll-camp-center span {
-        margin-bottom: 10px;
-        font-size: 0.48rem;
+        margin-bottom: 11px;
+        font-size: 0.54rem;
         letter-spacing: 0.22em;
     }
 
     .f-scroll-camp-center strong {
-        font-size: clamp(1.05rem, 5.4vw, 1.35rem);
+        font-size: clamp(1.25rem, 6vw, 1.55rem);
         line-height: 1.04;
     }
 
@@ -1894,7 +1894,7 @@ ul {
 
     .f-scroll-card,
     .f-scroll-campaign.is-motion-ready .f-scroll-card {
-        width: clamp(104px, 30vw, 124px);
+        width: clamp(122px, 35vw, 142px);
     }
 
     .f-scroll-camp-cta {
@@ -1903,17 +1903,17 @@ ul {
     }
 
     .f-glass-button {
-        min-height: 48px;
-        gap: 14px;
-        padding: 6px 7px 6px 20px;
-        font-size: 0.68rem;
+        min-height: 54px;
+        gap: 16px;
+        padding: 7px 8px 7px 22px;
+        font-size: 0.72rem;
         letter-spacing: 0.14em;
     }
 
     .f-glass-button-arrow {
-        width: 34px;
-        height: 34px;
-        flex-basis: 34px;
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
     }
 }
 

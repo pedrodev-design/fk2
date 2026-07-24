@@ -613,18 +613,18 @@
             const height = stage.clientHeight;
             const total = cards.length;
             const isMobile = width < 768;
-            const cardWidth = cards[0].offsetWidth || (isMobile ? 112 : 150);
-            const lineSpacing = cardWidth * (isMobile ? 0.86 : 1.08);
+            const cardWidth = cards[0].offsetWidth || (isMobile ? 130 : 150);
+            const lineSpacing = cardWidth * (isMobile ? 0.84 : 1.08);
             const lineY = height * (isMobile ? 0.055 : 0.07);
 
             const circleRadius = Math.min(
-                width * (isMobile ? 0.45 : 0.3),
-                height * (isMobile ? 0.29 : 0.35)
+                width * (isMobile ? 0.49 : 0.3),
+                height * (isMobile ? 0.31 : 0.35)
             );
             const circleCenterY = height * 0.02;
 
             const arcRadius = Math.min(
-                width * (isMobile ? 0.94 : 0.7),
+                width * (isMobile ? 0.98 : 0.7),
                 height * (isMobile ? 0.7 : 1.02)
             );
             const arcSpread = isMobile ? 112 : 126;
@@ -636,7 +636,7 @@
                     y: lineY,
                     rotationY: (index - (total - 1) / 2) * (isMobile ? -1.6 : -1.2),
                     rotationZ: 0,
-                    scale: isMobile ? 0.9 : 0.96
+                    scale: isMobile ? 0.94 : 0.96
                 })),
                 circle: cards.map((card, index) => {
                     const angle = -90 + (index / total) * 360;
@@ -648,7 +648,7 @@
                         y: Math.sin(radians) * circleRadius + circleCenterY,
                         rotationY: 0,
                         rotationZ: angle + 90,
-                        scale: isMobile ? 0.78 : 0.88
+                        scale: isMobile ? 0.82 : 0.88
                     };
                 }),
                 arc: cards.map((card, index) => {
@@ -661,7 +661,7 @@
                         y: arcApexY + (1 - Math.cos(radians)) * arcRadius,
                         rotationY: -(x / arcRadius) * (isMobile ? 19 : 23),
                         rotationZ: angle * 0.16,
-                        scale: isMobile ? 1 : 1.06
+                        scale: isMobile ? 1.05 : 1.06
                     };
                 })
             };
