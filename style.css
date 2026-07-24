@@ -1571,9 +1571,9 @@ ul {
 }
 
 .f-scroll-campaign.is-motion-ready {
-    height: 260vh;
-    height: 260svh;
-    min-height: 1700px;
+    height: 380vh;
+    height: 380svh;
+    min-height: 2500px;
 }
 
 .f-scroll-campaign-stage {
@@ -1834,9 +1834,9 @@ ul {
 
 @media (max-width: 600px) {
     .f-scroll-campaign.is-motion-ready {
-        height: 240vh;
-        height: 240svh;
-        min-height: 1500px;
+        height: 340vh;
+        height: 340svh;
+        min-height: 2300px;
     }
 
     .f-scroll-campaign-stage {

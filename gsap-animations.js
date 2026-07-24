@@ -702,7 +702,7 @@
                 trigger: section,
                 start: 'top top',
                 end: 'bottom bottom',
-                scrub: 1.6,
+                scrub: 5,
                 invalidateOnRefresh: true,
                 onRefreshInit: setInitialLayout
             }
