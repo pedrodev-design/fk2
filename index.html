@@ -10,7 +10,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=20260725-4">
-    <link rel="stylesheet" href="home-redesign.css?v=20260725-5">
+    <link rel="stylesheet" href="home-redesign.css?v=20260725-6">
     <link rel="stylesheet" href="animations.css?v=20260724-2">
     <!-- Lenis Smooth Scroll -->
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
@@ -502,6 +502,7 @@
             let playerReady = false;
             let videoIsVisible = false;
             let soundIsOn = false;
+            let qualityRequests = 0;
 
             const updateSoundButton = () => {
                 if (!soundButton) return;
@@ -519,6 +520,23 @@
                 if (playerReady && videoIsVisible && !prefersReducedMotion) {
                     player.playVideo();
                 }
+            };
+
+            const requestHighestQuality = () => {
+                if (!playerReady || qualityRequests >= 3) return;
+
+                const availableLevels = player.getAvailableQualityLevels?.() || [];
+                const preferredQuality = [
+                    'highres',
+                    'hd2160',
+                    'hd1440',
+                    'hd1080',
+                    'hd720'
+                ].find((quality) => availableLevels.includes(quality)) || 'hd1080';
+
+                player.setPlaybackQuality?.(preferredQuality);
+                player.setPlaybackQualityRange?.(preferredQuality, preferredQuality);
+                qualityRequests += 1;
             };
 
             updateSoundButton();
@@ -571,7 +589,8 @@
                         modestbranding: 1,
                         playsinline: 1,
                         playlist: videoId,
-                        rel: 0
+                        rel: 0,
+                        vq: 'hd1080'
                     },
                     events: {
                         onReady: (event) => {
@@ -581,9 +600,16 @@
                             soundIsOn = false;
                             soundButton?.removeAttribute('disabled');
                             updateSoundButton();
+                            requestHighestQuality();
 
                             if (videoIsVisible && !prefersReducedMotion) {
                                 requestPlayback();
+                            }
+                        },
+                        onStateChange: (event) => {
+                            if (event.data === YT.PlayerState.PLAYING) {
+                                requestHighestQuality();
+                                window.setTimeout(requestHighestQuality, 900);
                             }
                         }
                     }

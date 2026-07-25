@@ -967,6 +967,11 @@ body { background-color: #fff !important; }
 }
 
 .about-image iframe {
+    width: 300% !important;
+    height: 300% !important;
+    max-width: none !important;
+    transform: scale(0.333334);
+    transform-origin: top left;
     pointer-events: none;
 }
 
@@ -1594,6 +1599,11 @@ body { background-color: #fff !important; }
         bottom: 14px;
         width: 42px;
         height: 42px;
+    }
+    .about-image iframe {
+        width: 600% !important;
+        height: 600% !important;
+        transform: scale(0.166667);
     }
     .about-content h2 { font-size: 2rem; }
     .about-content h2 br { display: none; }
