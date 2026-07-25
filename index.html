@@ -10,7 +10,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=20260725-4">
-    <link rel="stylesheet" href="home-redesign.css?v=20260725-4">
+    <link rel="stylesheet" href="home-redesign.css?v=20260725-5">
     <link rel="stylesheet" href="animations.css?v=20260724-2">
     <!-- Lenis Smooth Scroll -->
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
@@ -302,12 +302,10 @@
         <!-- About System Section -->
         <section class="home-about-section">
             <div class="about-image">
-                <video class="about-video" autoplay muted loop playsinline preload="metadata"
-                    aria-label="Vídeo institucional do FK Grupo">
-                    <source src="Video-institucional-homepage.mp4" type="video/mp4">
-                </video>
+                <div class="about-video about-video-youtube" id="about-video-player"
+                    aria-label="Vídeo institucional colorido do FK Grupo"></div>
                 <button class="about-video-sound" type="button" aria-label="Ativar som do vídeo"
-                    aria-pressed="false">
+                    aria-pressed="false" disabled>
                     <i class="fas fa-volume-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -491,17 +489,22 @@
     <script src="script.js?v=20260725-4"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const video = document.querySelector('.about-video');
+            const videoHost = document.querySelector('#about-video-player');
+            const videoFrame = document.querySelector('.about-image');
             const soundButton = document.querySelector('.about-video-sound');
-            if (!video) {
+            if (!videoHost || !videoFrame) {
                 return;
             }
 
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const videoId = 'bp4VyzUpuFA';
+            let player = null;
+            let playerReady = false;
+            let videoIsVisible = false;
+            let soundIsOn = false;
 
             const updateSoundButton = () => {
                 if (!soundButton) return;
-                const soundIsOn = !video.muted && video.volume > 0;
                 soundButton.setAttribute('aria-pressed', String(soundIsOn));
                 soundButton.setAttribute(
                     'aria-label',
@@ -513,41 +516,96 @@
             };
 
             const requestPlayback = () => {
-                const playRequest = video.play();
-                playRequest?.catch?.(() => {});
+                if (playerReady && videoIsVisible && !prefersReducedMotion) {
+                    player.playVideo();
+                }
             };
 
-            video.muted = true;
             updateSoundButton();
 
             soundButton?.addEventListener('click', () => {
-                video.muted = !video.muted;
-                if (!video.muted && video.volume === 0) {
-                    video.volume = 0.8;
+                if (!playerReady) return;
+
+                soundIsOn = !soundIsOn;
+                if (soundIsOn) {
+                    player.setVolume(80);
+                    player.unMute();
+                } else {
+                    player.mute();
                 }
-                requestPlayback();
+
+                if (videoIsVisible) {
+                    player.playVideo();
+                }
                 updateSoundButton();
             });
 
-            video.addEventListener('volumechange', updateSoundButton);
+            if ('IntersectionObserver' in window) {
+                const videoObserver = new IntersectionObserver(([entry]) => {
+                    videoIsVisible = entry.isIntersecting;
+                    if (!playerReady) return;
 
-            if (prefersReducedMotion) {
-                video.removeAttribute('autoplay');
-                video.pause();
+                    if (videoIsVisible && !prefersReducedMotion) {
+                        requestPlayback();
+                    } else {
+                        player.pauseVideo();
+                    }
+                }, { threshold: 0.35 });
+                videoObserver.observe(videoFrame);
+            } else {
+                videoIsVisible = true;
+            }
+
+            const createPlayer = () => {
+                player = new YT.Player(videoHost, {
+                    videoId,
+                    host: 'https://www.youtube-nocookie.com',
+                    playerVars: {
+                        autoplay: 0,
+                        controls: 0,
+                        disablekb: 1,
+                        fs: 0,
+                        iv_load_policy: 3,
+                        loop: 1,
+                        mute: 1,
+                        modestbranding: 1,
+                        playsinline: 1,
+                        playlist: videoId,
+                        rel: 0
+                    },
+                    events: {
+                        onReady: (event) => {
+                            playerReady = true;
+                            event.target.setVolume(80);
+                            event.target.mute();
+                            soundIsOn = false;
+                            soundButton?.removeAttribute('disabled');
+                            updateSoundButton();
+
+                            if (videoIsVisible && !prefersReducedMotion) {
+                                requestPlayback();
+                            }
+                        }
+                    }
+                });
+            };
+
+            if (window.YT?.Player) {
+                createPlayer();
                 return;
             }
 
-            if ('IntersectionObserver' in window) {
-                const videoObserver = new IntersectionObserver(([entry]) => {
-                    if (entry.isIntersecting) {
-                        requestPlayback();
-                    } else {
-                        video.pause();
-                    }
-                }, { threshold: 0.35 });
-                videoObserver.observe(video);
-            } else {
-                requestPlayback();
+            const previousYouTubeReady = window.onYouTubeIframeAPIReady;
+            window.onYouTubeIframeAPIReady = () => {
+                previousYouTubeReady?.();
+                createPlayer();
+            };
+
+            if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+                const apiScript = document.createElement('script');
+                apiScript.src = 'https://www.youtube.com/iframe_api';
+                apiScript.async = true;
+                document.head.appendChild(apiScript);
             }
         });
     </script>
