@@ -1681,6 +1681,10 @@ ul {
     max-width: 720px;
 }
 
+.f-statement-mobile-title {
+    display: none;
+}
+
 .f-statement-label {
     display: flex;
     align-items: center;
@@ -2299,42 +2303,99 @@ ul {
         font-size: 0.65rem;
         letter-spacing: 3px;
     }
-    .f-statement, .f-vision {
+    .f-vision {
         padding: 60px 25px;
     }
     .f-statement {
-        gap: 34px;
+        display: flex;
+        gap: 0;
+        padding: 96px 20px 54px;
+        background: #0c0c0c;
+    }
+    .f-statement::before {
+        display: none;
+    }
+    .f-statement-container {
+        padding: 0;
+    }
+    .f-statement-text {
+        width: 100%;
+        max-width: 34rem;
+    }
+    .f-statement-mobile-title {
+        display: block;
+        margin: 0 0 24px;
+        color: #f2f2f0;
+        font-size: clamp(2.15rem, 10.5vw, 2.75rem);
+        font-weight: 800;
+        line-height: 0.96;
+        letter-spacing: -0.055em;
+        text-transform: uppercase;
     }
     .f-statement-label {
         gap: 12px;
-        margin-bottom: 22px;
-        font-size: 0.66rem;
+        margin-bottom: 30px;
+        color: rgba(255,255,255,0.5);
+        font-size: 0.62rem;
+        letter-spacing: 0.24em;
     }
     .f-statement-label::before {
-        width: 28px;
+        width: 30px;
+        background: rgba(255,255,255,0.35);
     }
     .f-statement-text p {
-        font-size: 1.12rem;
-        line-height: 1.72;
+        max-width: 32rem;
+        font-size: 1rem;
+        line-height: 1.68;
+        color: rgba(255,255,255,0.67);
+        letter-spacing: 0;
     }
     .f-statement-img {
-        width: auto;
-        height: clamp(280px, 72vw, 380px);
+        width: 100%;
+        height: auto;
         min-height: 0;
-        margin-right: -25px;
-        border-radius: 0;
+        aspect-ratio: 4 / 3;
+        margin: 38px 0 0;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 18px;
+        background: #111;
+        isolation: isolate;
+    }
+    .f-statement-img::before {
+        content: 'FRISOKAR · DESDE 1985';
+        position: absolute;
+        left: 18px;
+        bottom: 17px;
+        z-index: 2;
+        color: rgba(255,255,255,0.76);
+        font-size: 0.56rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        pointer-events: none;
+    }
+    .f-statement-img::after {
+        background: linear-gradient(180deg, rgba(10,10,10,0) 52%, rgba(10,10,10,0.78) 100%);
+    }
+    .f-statement-img img {
+        top: -4%;
+        height: 112%;
+        object-position: 52% center;
     }
 }
 
 @media (max-width: 480px) {
-    .f-statement,
     .f-vision {
         padding-left: 20px;
         padding-right: 20px;
     }
-    .f-statement-img {
-        width: auto;
-        margin-right: -20px;
+    .f-statement {
+        padding-right: 18px;
+        padding-left: 18px;
+    }
+    .f-statement-img::before {
+        left: 16px;
+        bottom: 15px;
     }
 }
 
