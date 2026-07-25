@@ -91,12 +91,25 @@
     function handleHeaderScroll(scrollY) {
         if (!header) return;
         const delta = scrollY - lastScrollY;
+        const headerInterfaceOpen = Boolean(
+            header.querySelector('.language-switcher.is-open, .main-nav.active')
+        );
 
         // Shrink after 80px
         if (scrollY > 80) {
             header.classList.add('header-shrunk');
         } else {
             header.classList.remove('header-shrunk');
+        }
+
+        if (headerInterfaceOpen) {
+            if (!headerVisible) {
+                gsap.to(header, { y: '0%', duration: 0.35, ease: 'power3.out', overwrite: true });
+                headerVisible = true;
+            }
+            updateHeaderTheme();
+            lastScrollY = scrollY;
+            return;
         }
 
         // Hide on scroll down, show on scroll up
@@ -126,6 +139,12 @@
 
     // Run once on load
     setTimeout(updateHeaderTheme, 200);
+
+    window.addEventListener('fk:language-menu-toggle', (event) => {
+        if (!header || !event.detail?.open) return;
+        gsap.to(header, { y: '0%', duration: 0.35, ease: 'power3.out', overwrite: true });
+        headerVisible = true;
+    });
 
 
     /* =========================================================================

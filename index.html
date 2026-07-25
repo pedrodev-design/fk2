@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260724-10">
+    <link rel="stylesheet" href="style.css?v=20260725-1">
     <link rel="stylesheet" href="home-redesign.css?v=20260724-16">
     <link rel="stylesheet" href="animations.css?v=20260724-2">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
@@ -79,6 +79,34 @@
                 <div class="search-bar">
                     <i class="fas fa-search"></i>
                     <input type="text" placeholder="Pesquisar..." aria-label="Pesquisar no site">
+                </div>
+                <div class="language-switcher">
+                    <button class="language-trigger" type="button" aria-label="Selecionar idioma"
+                        aria-haspopup="menu" aria-controls="language-menu" aria-expanded="false">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="12" r="8.25"></circle>
+                            <path d="M3.9 12h16.2M12 3.75c2.25 2.2 3.35 4.95 3.35 8.25S14.25 18.05 12 20.25M12 3.75C9.75 5.95 8.65 8.7 8.65 12s1.1 6.05 3.35 8.25"></path>
+                        </svg>
+                    </button>
+                    <div class="language-menu" id="language-menu" role="menu" aria-label="Escolha o idioma">
+                        <span class="language-menu-title">Idioma</span>
+                        <button class="language-option is-active" type="button" role="menuitemradio"
+                            aria-checked="true" data-language="pt-BR">
+                            <span>Português</span><span class="language-option-mark" aria-hidden="true"></span>
+                        </button>
+                        <button class="language-option" type="button" role="menuitemradio"
+                            aria-checked="false" data-language="en">
+                            <span>English</span><span class="language-option-mark" aria-hidden="true"></span>
+                        </button>
+                        <button class="language-option" type="button" role="menuitemradio"
+                            aria-checked="false" data-language="es">
+                            <span>Español</span><span class="language-option-mark" aria-hidden="true"></span>
+                        </button>
+                        <button class="language-option" type="button" role="menuitemradio"
+                            aria-checked="false" data-language="it">
+                            <span>Italiano</span><span class="language-option-mark" aria-hidden="true"></span>
+                        </button>
+                    </div>
                 </div>
                 <button class="mobile-menu-toggle" type="button" aria-label="Abrir menu" aria-controls="main-navigation"
                     aria-expanded="false">
@@ -459,7 +487,7 @@
 
     </footer>
 
-    <script src="script.js?v=20260724-2"></script>
+    <script src="script.js?v=20260725-1"></script>
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -482,7 +510,7 @@
         });
     </script>
     <!-- Premium GSAP Animations -->
-    <script src="gsap-animations.js?v=20260724-19"></script>
+    <script src="gsap-animations.js?v=20260725-1"></script>
 </body>
 
 </html>
