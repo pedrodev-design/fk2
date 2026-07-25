@@ -9,10 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260725-2">
-    <link rel="stylesheet" href="home-redesign.css?v=20260725-2">
+    <link rel="stylesheet" href="style.css?v=20260725-3">
+    <link rel="stylesheet" href="home-redesign.css?v=20260725-4">
     <link rel="stylesheet" href="animations.css?v=20260724-2">
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <!-- Lenis Smooth Scroll -->
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <!-- GSAP + ScrollTrigger -->
@@ -303,12 +302,14 @@
         <!-- About System Section -->
         <section class="home-about-section">
             <div class="about-image">
-                <div class="plyr__video-embed" id="player">
-                    <iframe
-                        src="https://www.youtube.com/embed/qob_qC6bGxY?iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
-                        title="Vídeo institucional do FK Grupo" loading="lazy" allowfullscreen
-                        allow="autoplay; fullscreen"></iframe>
-                </div>
+                <video class="about-video" autoplay muted loop playsinline preload="metadata"
+                    aria-label="Vídeo institucional do FK Grupo">
+                    <source src="Video-institucional-homepage.mp4" type="video/mp4">
+                </video>
+                <button class="about-video-sound" type="button" aria-label="Ativar som do vídeo"
+                    aria-pressed="false">
+                    <i class="fas fa-volume-xmark" aria-hidden="true"></i>
+                </button>
             </div>
             <div class="about-content">
                 <span class="home-section-label">SOBRE O FK GRUPO</span>
@@ -487,30 +488,71 @@
 
     </footer>
 
-    <script src="script.js?v=20260725-1"></script>
-    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    <script src="script.js?v=20260725-4"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const playerElement = document.querySelector('#player');
-            if (!playerElement || typeof Plyr !== 'function') {
+            const video = document.querySelector('.about-video');
+            const soundButton = document.querySelector('.about-video-sound');
+            if (!video) {
                 return;
             }
 
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const player = new Plyr('#player', {
-                autoplay: !prefersReducedMotion,
-                muted: true,
-                controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
-                youtube: { noCookie: true, rel: 0, showinfo: 0, iv_load_policy: 3, modestbranding: 1 }
+
+            const updateSoundButton = () => {
+                if (!soundButton) return;
+                const soundIsOn = !video.muted && video.volume > 0;
+                soundButton.setAttribute('aria-pressed', String(soundIsOn));
+                soundButton.setAttribute(
+                    'aria-label',
+                    soundIsOn ? 'Desativar som do vídeo' : 'Ativar som do vídeo'
+                );
+                const icon = soundButton.querySelector('i');
+                icon?.classList.toggle('fa-volume-xmark', !soundIsOn);
+                icon?.classList.toggle('fa-volume-high', soundIsOn);
+            };
+
+            const requestPlayback = () => {
+                const playRequest = video.play();
+                playRequest?.catch?.(() => {});
+            };
+
+            video.muted = true;
+            updateSoundButton();
+
+            soundButton?.addEventListener('click', () => {
+                video.muted = !video.muted;
+                if (!video.muted && video.volume === 0) {
+                    video.volume = 0.8;
+                }
+                requestPlayback();
+                updateSoundButton();
             });
-            // Request high quality
-            player.on('ready', event => {
-                player.quality = '1080p';
-            });
+
+            video.addEventListener('volumechange', updateSoundButton);
+
+            if (prefersReducedMotion) {
+                video.removeAttribute('autoplay');
+                video.pause();
+                return;
+            }
+
+            if ('IntersectionObserver' in window) {
+                const videoObserver = new IntersectionObserver(([entry]) => {
+                    if (entry.isIntersecting) {
+                        requestPlayback();
+                    } else {
+                        video.pause();
+                    }
+                }, { threshold: 0.35 });
+                videoObserver.observe(video);
+            } else {
+                requestPlayback();
+            }
         });
     </script>
     <!-- Premium GSAP Animations -->
-    <script src="gsap-animations.js?v=20260725-2"></script>
+    <script src="gsap-animations.js?v=20260725-4"></script>
 </body>
 
 </html>

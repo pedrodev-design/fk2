@@ -1075,11 +1075,13 @@ ul {
         padding-top: 100px !important;
         padding-bottom: 40px !important;
         
-        /* Fade in instead of slide to prevent horizontal scroll bugs */
+        /* Fade in instead of moving the full overlay horizontally. */
         opacity: 0 !important;
         visibility: hidden !important;
         transform: none !important;
-        transition: opacity 0.3s ease, visibility 0.3s ease !important;
+        transition:
+            opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+            visibility 0.42s ease !important;
         
         overflow-y: auto !important;
         z-index: 10000 !important;
@@ -1109,7 +1111,23 @@ ul {
     .main-nav > ul > li {
         width: 100% !important;
         text-align: center !important;
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+            opacity 0.38s ease,
+            transform 0.58s cubic-bezier(0.22, 1, 0.36, 1);
     }
+
+    .main-nav.active > ul > li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .main-nav.active > ul > li:nth-child(1) { transition-delay: 0.06s; }
+    .main-nav.active > ul > li:nth-child(2) { transition-delay: 0.1s; }
+    .main-nav.active > ul > li:nth-child(3) { transition-delay: 0.14s; }
+    .main-nav.active > ul > li:nth-child(4) { transition-delay: 0.18s; }
+    .main-nav.active > ul > li:nth-child(5) { transition-delay: 0.22s; }
 
     /* Mobile Nav Links Styling */
     .main-nav a,
@@ -1157,22 +1175,37 @@ ul {
         background: transparent !important;
         box-shadow: none !important;
         border: none !important;
-        display: none !important; /* JS will toggle class .mobile-open */
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: none !important;
-        padding-top: 25px !important;
-        padding-bottom: 25px !important;
+        display: flex !important;
+        max-height: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        overflow: hidden !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translateY(-12px) !important;
+        pointer-events: none !important;
+        transition:
+            max-height 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+            padding 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 0.32s ease,
+            transform 0.58s cubic-bezier(0.22, 1, 0.36, 1),
+            visibility 0.32s ease !important;
     }
 
     .marcas-dropdown.mobile-open .mega-menu {
-        display: flex !important; /* Show when open */
+        max-height: 560px !important;
+        padding-top: 24px !important;
+        padding-bottom: 30px !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+        pointer-events: auto !important;
     }
 
     .mega-menu-container {
         display: flex !important;
         flex-direction: column !important;
-        gap: 30px !important;
+        gap: 24px !important;
         padding: 0 !important;
         align-items: center !important;
         width: 100% !important;
@@ -1182,8 +1215,8 @@ ul {
     .mega-logo {
         width: auto !important;
         height: auto !important;
-        max-width: 140px !important;
-        max-height: 40px !important;
+        max-width: min(48vw, 184px) !important;
+        max-height: 52px !important;
         object-fit: contain !important;
         filter: brightness(0) invert(1) !important; /* Force white on dark menu */
         opacity: 0.8 !important;
@@ -1191,6 +1224,14 @@ ul {
 
     .glass-header.header-dark-text .mega-logo {
         filter: brightness(0) !important; /* Force black on light menu */
+    }
+
+    .mega-brand {
+        display: grid !important;
+        width: min(58vw, 220px) !important;
+        min-height: 46px !important;
+        place-items: center !important;
+        padding: 4px 12px !important;
     }
 
     .hero-text {

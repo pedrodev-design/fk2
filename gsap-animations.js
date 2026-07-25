@@ -140,10 +140,30 @@
     // Run once on load
     setTimeout(updateHeaderTheme, 200);
 
-    window.addEventListener('fk:language-menu-toggle', (event) => {
+    const revealHeaderForInterface = (event) => {
         if (!header || !event.detail?.open) return;
         gsap.to(header, { y: '0%', duration: 0.35, ease: 'power3.out', overwrite: true });
         headerVisible = true;
+    };
+
+    let mobileMenuScrollY = null;
+
+    window.addEventListener('fk:language-menu-toggle', revealHeaderForInterface);
+    window.addEventListener('fk:mobile-menu-toggle', (event) => {
+        if (event.detail?.open) {
+            mobileMenuScrollY = window.scrollY;
+            lenis?.scrollTo(mobileMenuScrollY, { immediate: true, force: true });
+            lenis?.stop();
+            window.scrollTo(0, mobileMenuScrollY);
+            revealHeaderForInterface(event);
+        } else {
+            if (mobileMenuScrollY !== null) {
+                window.scrollTo(0, mobileMenuScrollY);
+                lenis?.scrollTo(mobileMenuScrollY, { immediate: true, force: true });
+            }
+            lenis?.start();
+            mobileMenuScrollY = null;
+        }
     });
 
 

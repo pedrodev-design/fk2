@@ -171,10 +171,22 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const setMenuOpen = (isOpen, returnFocus = false) => {
+        if (isOpen) {
+            window.dispatchEvent(new CustomEvent('fk:mobile-menu-toggle', {
+                detail: { open: true }
+            }));
+        }
+
         mainNav.classList.toggle('active', isOpen);
         document.body.classList.toggle('menu-open', isOpen);
         mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
         mobileMenuToggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+
+        if (!isOpen) {
+            window.dispatchEvent(new CustomEvent('fk:mobile-menu-toggle', {
+                detail: { open: false }
+            }));
+        }
 
         if (menuIcon) {
             menuIcon.classList.toggle('fa-bars', !isOpen);
@@ -241,5 +253,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.innerWidth > 1170 && mainNav.classList.contains('active')) {
             setMenuOpen(false);
         }
+    });
+
+    window.addEventListener('pageshow', (event) => {
+        if (!event.persisted) {
+            return;
+        }
+        closeLanguageMenus();
+        setMenuOpen(false);
     });
 });

@@ -942,7 +942,9 @@ body { background-color: #fff !important; }
     position: relative;
     aspect-ratio: 16 / 9;
 }
-.about-image img, .about-image iframe {
+.about-image img,
+.about-image iframe,
+.about-image video {
     width: 100%;
     height: 100%;
     display: block;
@@ -950,6 +952,46 @@ body { background-color: #fff !important; }
     top: 0;
     left: 0;
     border: none;
+}
+
+.about-video {
+    object-fit: cover;
+    background: #111;
+}
+
+.about-video-sound {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    z-index: 8;
+    display: grid;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: #fff;
+    color: #171717;
+    box-shadow: none;
+    cursor: pointer;
+    transition:
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 0.25s ease;
+}
+
+.about-video-sound:hover,
+.about-video-sound:focus-visible {
+    background: #f1f1ee;
+    transform: scale(1.06);
+}
+
+.about-video-sound:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+}
+
+.about-video-sound i {
+    font-size: 0.95rem;
 }
 .about-content {
     flex: 1;
@@ -1454,20 +1496,39 @@ body { background-color: #fff !important; }
     /* Brands */
     .home-brands-section { padding: 70px 25px; }
     .home-brands-header h2 { font-size: 1.9rem; }
-    .home-brands-logos { gap: 25px; }
+    .home-brands-logos {
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
     .home-brands-logos a {
-        flex-basis: calc(50% - 13px);
+        width: 100%;
+        max-width: none;
+        min-height: 84px;
+        padding: 18px 14px;
+        border-radius: 14px;
+    }
+    .home-brands-logos a:last-child {
+        grid-column: 1 / -1;
+        width: calc(50% - 6px);
+        justify-self: center;
     }
     .home-brands-logos a::before {
-        inset: -10px -8px;
-        border-radius: 12px;
+        inset: 0;
+        border-radius: 14px;
+        background: #fafafa;
+        box-shadow: none;
+        opacity: 1;
+        transform: none;
     }
     .home-brands-logos a::after {
         bottom: -7px;
     }
     .home-brands-logos img {
-        max-width: 100%;
-        max-height: 28px;
+        max-width: min(100%, 136px);
+        max-height: 34px;
+        opacity: 0.82;
     }
 
     /* Solutions */
@@ -1511,7 +1572,13 @@ body { background-color: #fff !important; }
 
     /* About */
     .home-about-section { padding: 60px 25px; gap: 40px; }
-    .about-image { min-height: auto; width: 100%; } /* Let plyr aspect ratio handle it */
+    .about-image { min-height: auto; width: 100%; } /* Native video keeps the 16:9 ratio */
+    .about-video-sound {
+        right: 14px;
+        bottom: 14px;
+        width: 42px;
+        height: 42px;
+    }
     .about-content h2 { font-size: 2rem; }
     .about-content h2 br { display: none; }
     .about-content > p { font-size: 1.1rem; }
@@ -1566,8 +1633,8 @@ body { background-color: #fff !important; }
     .home-brands-section { padding: 60px 20px; }
     .home-brands-header h2 { font-size: 1.6rem; line-height: 1.2; }
     .home-brands-desc p { font-size: 1rem; }
-    .home-brands-logos { gap: 20px; }
-    .home-brands-logos img { max-height: 22px; }
+    .home-brands-logos { gap: 10px; }
+    .home-brands-logos img { max-height: 32px; }
 
     /* Solutions — single column */
     .home-solutions-section { padding: 60px 20px; }
@@ -1656,7 +1723,14 @@ body { background-color: #fff !important; }
 /* ---- XS: Very small phones (360px) ---- */
 @media (max-width: 360px) {
     .home-stat-text h3 { font-size: 1.2rem; }
-    .home-brands-logos img { max-height: 18px; }
+    .home-brands-logos a {
+        min-height: 78px;
+        padding: 16px 10px;
+    }
+    .home-brands-logos img {
+        max-width: min(100%, 122px);
+        max-height: 30px;
+    }
     .capacity-content h2 { font-size: 1.7rem; }
     .sust-left h2 { font-size: 2.5rem; }
 }
