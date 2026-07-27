@@ -155,6 +155,59 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const cookieConsentKey = 'fk-cookie-consent-v1';
+    let cookieConsentAccepted = false;
+
+    try {
+        cookieConsentAccepted = window.localStorage.getItem(cookieConsentKey) === 'accepted';
+    } catch (error) {
+        // The notice remains functional when browser storage is unavailable.
+    }
+
+    if (!cookieConsentAccepted) {
+        const cookieNotice = document.createElement('aside');
+        cookieNotice.className = 'cookie-notice';
+        cookieNotice.setAttribute('role', 'region');
+        cookieNotice.setAttribute('aria-labelledby', 'cookie-notice-title');
+        cookieNotice.setAttribute('aria-describedby', 'cookie-notice-description');
+        cookieNotice.innerHTML = `
+            <div class="cookie-notice__copy">
+                <span class="cookie-notice__eyebrow">Privacidade</span>
+                <h2 id="cookie-notice-title">Uma experiência do seu jeito.</h2>
+                <p id="cookie-notice-description">
+                    Usamos cookies essenciais para lembrar suas preferências e tornar sua navegação mais fluida.
+                </p>
+            </div>
+            <button class="cookie-notice__accept" type="button">
+                <span>Aceitar</span>
+                <span class="cookie-notice__accept-icon" aria-hidden="true">→</span>
+            </button>
+        `;
+
+        document.body.appendChild(cookieNotice);
+
+        window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(() => {
+                cookieNotice.classList.add('is-visible');
+            });
+        });
+
+        cookieNotice.querySelector('.cookie-notice__accept')?.addEventListener('click', () => {
+            try {
+                window.localStorage.setItem(cookieConsentKey, 'accepted');
+            } catch (error) {
+                // Closing the notice still works for the current page.
+            }
+
+            cookieNotice.classList.remove('is-visible');
+            cookieNotice.classList.add('is-leaving');
+
+            window.setTimeout(() => {
+                cookieNotice.remove();
+            }, prefersReducedMotion ? 0 : 450);
+        });
+    }
+
     if (!mobileMenuToggle || !mainNav) {
         return;
     }
