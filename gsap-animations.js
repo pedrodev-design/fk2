@@ -276,10 +276,9 @@
                         trigger: section,
                         start: 'top top',
                         end: 'bottom bottom',
-                        // On touch screens, a longer section provides the cinematic pacing while
-                        // a moderate scrub keeps the animation reversible and prevents it from
-                        // lagging behind the sticky stage after a fast gesture.
-                        scrub: isMobile ? 1.15 : 8,
+                        // Preserve the cinematic pacing without making the interface feel
+                        // disconnected from the user's gesture when they reverse the scroll.
+                        scrub: isMobile ? 1.15 : 3.2,
                         invalidateOnRefresh: true,
                         onUpdate: (self) => {
                             const visualProgress = self.animation
@@ -396,11 +395,11 @@
         if (initiallyVisibleText.length) {
             gsap.from(initiallyVisibleText, {
                 opacity: 0,
-                y: 28,
-                filter: 'blur(14px)',
-                duration: 1.05,
-                stagger: 0.08,
-                delay: 0.14,
+                y: 18,
+                filter: 'blur(8px)',
+                duration: 0.68,
+                stagger: 0.045,
+                delay: 0.03,
                 ease: 'power3.out',
                 clearProps: 'opacity,transform,filter'
             });
@@ -409,9 +408,8 @@
         scrollText.forEach((el) => {
             revealOnce(el, {
                 opacity: 0,
-                y: 28,
-                filter: 'blur(14px)',
-                duration: 1.05,
+                y: 22,
+                duration: 0.82,
                 ease: 'power3.out'
             });
         });
@@ -437,10 +435,9 @@
 
             revealOnce(elements, {
                 opacity: 0,
-                y: 32,
-                filter: 'blur(12px)',
-                stagger: 0.1,
-                duration: 1,
+                y: 24,
+                stagger: 0.075,
+                duration: 0.78,
                 ease: 'power3.out'
             }, triggerEl, start);
         });
@@ -452,17 +449,20 @@
         ).forEach((el) => {
             const rect = el.getBoundingClientRect();
             const isInitiallyVisible = rect.top < window.innerHeight * 0.94 && rect.bottom > 0;
+            const isSignatureReveal = el.matches('.f-hero-banner');
             const animation = {
                 opacity: 0,
                 scale: 0.985,
-                filter: 'blur(18px)',
-                duration: 1.25,
+                duration: isSignatureReveal ? 0.92 : 0.78,
                 ease: 'power3.out',
                 clearProps: 'opacity,transform,filter'
             };
+            if (isSignatureReveal) {
+                animation.filter = 'blur(10px)';
+            }
 
             if (isInitiallyVisible) {
-                gsap.from(el, { ...animation, delay: 0.08 });
+                gsap.from(el, { ...animation, delay: 0.02 });
             } else {
                 revealOnce(el, animation);
             }
@@ -745,7 +745,7 @@
         const capImg = document.querySelector('.capacity-image img');
         if (capImg) {
             gsap.to(capImg, {
-                yPercent: -15,
+                yPercent: -4,
                 ease: 'none',
                 scrollTrigger: {
                     trigger: '.home-capacity-section',

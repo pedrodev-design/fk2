@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=20260727-1">
-    <link rel="stylesheet" href="animations.css?v=20260724-2">
+    <link rel="stylesheet" href="style.css?v=20260727-2">
+    <link rel="stylesheet" href="animations.css?v=20260727-1">
     <!-- Lenis Smooth Scroll -->
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <!-- GSAP + ScrollTrigger -->
@@ -35,12 +35,14 @@
             <nav class="main-nav" id="main-navigation" aria-label="Navegação principal">
                 <ul>
                     <li class="dropdown marcas-dropdown">
-                        <a href="#" aria-haspopup="true" aria-expanded="false" aria-controls="brands-mega-menu">Marcas
+                        <a href="index.html#home-brands" aria-haspopup="true" aria-expanded="false"
+                            aria-controls="brands-mega-menu">Marcas
                             <i class="fas fa-chevron-down"></i></a>
                         <!-- Mega Menu -->
                         <div class="mega-menu" id="brands-mega-menu">
                             <div class="mega-menu-container">
-                                <a href="#" class="mega-brand">
+                                <a href="https://fkgrupo.com/maxdesign-brasil/" class="mega-brand" target="_blank"
+                                    rel="noopener">
                                     <img src="Maxdesign.png" alt="Maxdesign" class="mega-logo" width="911" height="168"
                                         decoding="async">
                                 </a>
@@ -48,15 +50,18 @@
                                     <img src="frisokar-logo-branco.webp" alt="Frisokar" class="mega-logo" width="298"
                                         height="65" decoding="async">
                                 </a>
-                                <a href="#" class="mega-brand">
+                                <a href="https://fkgrupo.com/fkwellness/" class="mega-brand" target="_blank"
+                                    rel="noopener">
                                     <img src="FK-WELLNESS-AMBIENTES-DE-SAUDE_branco-scaled-e1753301969819-1400x328.png"
                                         alt="FK Wellness" class="mega-logo" width="1400" height="328" decoding="async">
                                 </a>
-                                <a href="#" class="mega-brand">
+                                <a href="https://fkgrupo.com/arkhe-mobiliario-corporativo/" class="mega-brand"
+                                    target="_blank" rel="noopener">
                                     <img src="Logo-arkhe-branco.png" alt="Arkhé" class="mega-logo" width="316"
                                         height="75" decoding="async">
                                 </a>
-                                <a href="#" class="mega-brand">
+                                <a href="https://fkgrupo.com/kokuyo-ing/" class="mega-brand" target="_blank"
+                                    rel="noopener">
                                     <img src="Kokuyo_logo_branco-01_resp.png" alt="Kokuyo" class="mega-logo" width="196"
                                         height="47" decoding="async">
                                 </a>
@@ -64,13 +69,14 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a href="#">Sustentabilidade <i class="fas fa-chevron-down"></i></a>
+                        <a href="index.html#sustentabilidade">Sustentabilidade <i class="fas fa-chevron-down"></i></a>
                     </li>
                     <li class="dropdown">
-                        <a href="#">Biblioteca <i class="fas fa-chevron-down"></i></a>
+                        <a href="https://fkgrupo.com/biblioteca/" target="_blank" rel="noopener">Biblioteca <i
+                                class="fas fa-chevron-down"></i></a>
                     </li>
-                    <li><a href="#">Carreira</a></li>
-                    <li><a href="#">Contato</a></li>
+                    <li><a href="https://fkgrupo.com/carreira/" target="_blank" rel="noopener">Carreira</a></li>
+                    <li><a href="https://fkgrupo.com/contato/" target="_blank" rel="noopener">Contato</a></li>
                 </ul>
             </nav>
 
@@ -93,16 +99,16 @@
                             aria-checked="true" data-language="pt-BR">
                             <span>Português</span><span class="language-option-mark" aria-hidden="true"></span>
                         </button>
-                        <button class="language-option" type="button" role="menuitemradio"
-                            aria-checked="false" data-language="en">
+                        <button class="language-option" type="button" role="menuitemradio" aria-checked="false"
+                            aria-disabled="true" data-language="en" disabled title="Disponível no projeto completo">
                             <span>English</span><span class="language-option-mark" aria-hidden="true"></span>
                         </button>
-                        <button class="language-option" type="button" role="menuitemradio"
-                            aria-checked="false" data-language="es">
+                        <button class="language-option" type="button" role="menuitemradio" aria-checked="false"
+                            aria-disabled="true" data-language="es" disabled title="Disponível no projeto completo">
                             <span>Español</span><span class="language-option-mark" aria-hidden="true"></span>
                         </button>
-                        <button class="language-option" type="button" role="menuitemradio"
-                            aria-checked="false" data-language="it">
+                        <button class="language-option" type="button" role="menuitemradio" aria-checked="false"
+                            aria-disabled="true" data-language="it" disabled title="Disponível no projeto completo">
                             <span>Italiano</span><span class="language-option-mark" aria-hidden="true"></span>
                         </button>
                     </div>
@@ -121,7 +127,7 @@
         <section class="f-hero" aria-labelledby="frisokar-hero-title">
             <div class="f-hero-text">
                 <h1 class="f-hero-title" id="frisokar-hero-title">O FUTURO DO<br>ASSENTO CORPORATIVO</h1>
-                <p class="f-hero-sub">DESIGN GUIADO PELA ERGONOMIA E INOVAÇÃO.</p>
+                <p class="f-hero-sub">ERGONOMIA, ENGENHARIA E DESIGN EM CADA DETALHE.</p>
             </div>
 
             <div class="f-hero-banner">
@@ -138,14 +144,13 @@
             <div class="f-intro-container">
                 <div class="f-intro-left animate-up">
                     <span class="f-label">FRISOKAR</span>
-                    <h2 class="f-title">EXCELÊNCIA EM<br>PROCESSOS PRODUTIVOS</h2>
+                    <h2 class="f-title">DO COMPONENTE AO<br>ASSENTO COMPLETO</h2>
                 </div>
                 <div class="f-intro-right animate-up delay-1">
-                    <p>A Frisokar é a origem do FK Grupo. Pioneira no mercado de componentes, foi por décadas a
-                        engrenagem por trás das marcas mais reconhecidas do setor, construindo com excelência o conforto
-                        e a performance dos assentos corporativos no Brasil.</p>
-                    <p>Cada giro, inclinação e apoio começou aqui. Somos referência em inovação industrial, com
-                        processos conectados para entregar desempenho onde você menos percebe e mais precisa.</p>
+                    <p>A Frisokar deu origem ao FK Grupo. Sua história começou na fabricação de componentes e avançou
+                        até um portfólio completo de assentos corporativos produzidos no Brasil.</p>
+                    <p>PU, PP e aço passam por processos integrados de engenharia, automação e controle para garantir
+                        ajuste, resistência e conforto no uso diário.</p>
                 </div>
             </div>
         </section>
@@ -156,9 +161,9 @@
                 <div class="f-statement-text animate-up">
                     <span class="f-statement-label">INDÚSTRIA EM MOVIMENTO</span>
                     <h2 class="f-statement-mobile-title">TECNOLOGIA<br>EM CADA ETAPA.</h2>
-                    <p>Hoje, a Frisokar transforma matéria-prima em <strong>soluções inteligentes</strong> que combinam
-                        tecnologia, conceito e funcionalidade. Democratizamos o acesso ao mobiliário de qualidade e
-                        design no mercado nacional.</p>
+                    <p>A Frisokar conecta engenharia de componentes, produção automatizada e montagem final. Cada
+                        mecanismo, apoio e acabamento é desenvolvido para responder ao uso real em escritórios, áreas
+                        colaborativas e ambientes de alta permanência.</p>
                 </div>
             </div>
             <div class="f-statement-img animate-up delay-1">
@@ -171,9 +176,9 @@
         <section class="f-vision">
             <div class="f-vision-container">
                 <div class="f-vision-text animate-up">
-                    <span class="f-vision-label">VISÃO FRISOKAR</span>
-                    <p>Novas possibilidades movem a nossa evolução.
-                        <strong>Criamos com paixão para transformar ambientes.</strong>
+                    <span class="f-vision-label">PRINCÍPIO DE PROJETO</span>
+                    <p>Forma, ajuste e movimento trabalham juntos.
+                        <strong>Ergonomia que começa no projeto e se confirma no uso.</strong>
                     </p>
                 </div>
             </div>
@@ -184,19 +189,19 @@
             <div class="f-scroll-campaign-stage">
                 <header class="f-scroll-camp-copy f-scroll-camp-intro">
                     <span class="f-scroll-camp-kicker">FRISOKAR EM MOVIMENTO</span>
-                    <h2 id="f-scroll-campaign-title">Formas que movem o futuro.</h2>
-                    <p>Design, ergonomia e cor em uma composição criada para transformar cada ambiente.</p>
+                    <h2 id="f-scroll-campaign-title">Forma, função e movimento.</h2>
+                    <p>Uma leitura visual do portfólio: assentos para trabalhar, colaborar e permanecer.</p>
                 </header>
 
                 <header class="f-scroll-camp-copy f-scroll-camp-outro">
-                    <span class="f-scroll-camp-kicker">PERSPECTIVAS FRISOKAR</span>
-                    <h2>Uma visão. Novas perspectivas.</h2>
-                    <p>Soluções criadas para acompanhar pessoas, espaços e novas formas de trabalhar.</p>
+                    <span class="f-scroll-camp-kicker">PORTFÓLIO FRISOKAR</span>
+                    <h2>Um assento para cada contexto.</h2>
+                    <p>Soluções corporativas desenvolvidas para diferentes usos, tempos e espaços.</p>
                 </header>
 
                 <div class="f-scroll-camp-center">
-                    <span>DESIGN EM MOVIMENTO</span>
-                    <strong>Equilíbrio em cada forma.</strong>
+                    <span>PROJETO EM MOVIMENTO</span>
+                    <strong>Conforto em cada ajuste.</strong>
                 </div>
 
                 <div class="f-scroll-camp-cards" aria-hidden="true">
@@ -243,8 +248,9 @@
                 </div>
 
                 <div class="f-scroll-camp-cta">
-                    <a href="#" class="f-glass-button" aria-label="Conheça as oportunidades no FK Grupo">
-                        <span>Junte-se a nós</span>
+                    <a href="https://fkgrupo.com/frisokar/" class="f-glass-button" target="_blank" rel="noopener"
+                        aria-label="Conheça o portfólio da Frisokar">
+                        <span>Conheça o portfólio</span>
                         <span class="f-glass-button-arrow" aria-hidden="true">&rarr;</span>
                     </a>
                 </div>
@@ -266,7 +272,8 @@
                         decoding="async">
                 </a>
                 <p class="footer-tagline">Desde 1985</p>
-                <p class="footer-brand-copy">Indústria, design e tecnologia para transformar ambientes.</p>
+                <p class="footer-brand-copy">Projetamos, produzimos e distribuímos mobiliário para trabalho e
+                    saúde.</p>
                 <div class="footer-brand-tags" aria-label="Marcas do FK Grupo">
                     <span>Maxdesign</span>
                     <span>Frisokar</span>
@@ -281,31 +288,40 @@
                 <div class="footer-column">
                     <h4>Empresa</h4>
                     <ul>
-                        <li><a href="#">O FK Grupo</a></li>
-                        <li><a href="#">Marcas</a></li>
-                        <li><a href="#">Carreira</a></li>
-                        <li><a href="#">Blog FK Grupo</a></li>
-                        <li><a href="#">Contato</a></li>
+                        <li><a href="https://fkgrupo.com/fk-grupo/" target="_blank" rel="noopener">O FK Grupo</a></li>
+                        <li><a href="index.html#home-brands">Marcas</a></li>
+                        <li><a href="https://fkgrupo.com/carreira/" target="_blank" rel="noopener">Carreira</a></li>
+                        <li><a href="https://fkgrupo.com/blog/" target="_blank" rel="noopener">Blog FK Grupo</a></li>
+                        <li><a href="https://fkgrupo.com/contato/" target="_blank" rel="noopener">Contato</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h4>Sustentabilidade</h4>
                     <ul>
-                        <li><a href="#">Compromisso Ambiental</a></li>
-                        <li><a href="#">Inovação Sustentável</a></li>
-                        <li><a href="#">Responsabilidade Social</a></li>
-                        <li><a href="#">Certificações</a></li>
-                        <li><a href="#">Licitação</a></li>
+                        <li><a href="https://fkgrupo.com/sustentabilidade/compromisso-ambiental/" target="_blank"
+                                rel="noopener">Compromisso Ambiental</a></li>
+                        <li><a href="https://fkgrupo.com/sustentabilidade/inovacao-sustentavel/" target="_blank"
+                                rel="noopener">Inovação Sustentável</a></li>
+                        <li><a href="https://fkgrupo.com/sustentabilidade/responsabilidade-social/" target="_blank"
+                                rel="noopener">Responsabilidade Social</a></li>
+                        <li><a href="https://fkgrupo.com/sustentabilidade/certificacoes/" target="_blank"
+                                rel="noopener">Certificações</a></li>
+                        <li><a href="https://fkgrupo.com/biblioteca/licitacao/" target="_blank"
+                                rel="noopener">Licitação</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h4>Links Úteis</h4>
                     <ul>
-                        <li><a href="#">Canal de Denúncias</a></li>
-                        <li><a href="#">Código de Conduta</a></li>
-                        <li><a href="#">Portal RH</a></li>
-                        <li><a href="#">Política de Privacidade</a></li>
-                        <li><a href="#">Manuais de Montagem</a></li>
+                        <li><a href="https://canal.ouvidordigital.com.br/fkgrupo" target="_blank" rel="noopener">Canal
+                                de Denúncias</a></li>
+                        <li><a href="https://fkgrupo.com/codigo-conduta/" target="_blank" rel="noopener">Código de
+                                Conduta</a></li>
+                        <li><a href="https://meurh.frisokar.com.br/" target="_blank" rel="noopener">Portal RH</a></li>
+                        <li><a href="https://fkgrupo.com/politica-de-privacidade/" target="_blank"
+                                rel="noopener">Política de Privacidade</a></li>
+                        <li><a href="https://fkgrupo.com/manuais-montagem-usabilidade/" target="_blank"
+                                rel="noopener">Manuais de Montagem</a></li>
                     </ul>
                 </div>
             </nav>
@@ -315,9 +331,12 @@
                 <h4>Contato</h4>
                 <address>Rod. Braz Fortunato,<br>KM2, S/N<br>Bariri – SP<br>CEP: 17255-755</address>
                 <div class="contact-icons">
-                    <a href="#" title="WhatsApp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" title="Telefone" aria-label="Telefone"><i class="fas fa-phone-alt"></i></a>
-                    <a href="#" title="E-mail" aria-label="E-mail"><i class="far fa-envelope"></i></a>
+                    <a href="https://wa.me/5514997674395" target="_blank" rel="noopener" title="WhatsApp"
+                        aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="tel:+5514997674395" title="Telefone" aria-label="Telefone"><i
+                            class="fas fa-phone-alt"></i></a>
+                    <a href="mailto:sac@fkgrupo.com" title="E-mail" aria-label="E-mail"><i
+                            class="far fa-envelope"></i></a>
                 </div>
             </div>
 
@@ -327,17 +346,19 @@
         <div class="footer-bottom">
             <p>© 2026 FK Grupo S.A. — Todos os direitos reservados.</p>
             <div class="footer-bottom-links">
-                <a href="#">Política de Privacidade</a>
-                <a href="#">Termos de Uso</a>
-                <a href="#">Transparência Salarial</a>
+                <a href="https://fkgrupo.com/politica-de-privacidade/" target="_blank" rel="noopener">Política de
+                    Privacidade</a>
+                <a href="https://fkgrupo.com/termos-condicoes-site/" target="_blank" rel="noopener">Termos de Uso</a>
+                <a href="https://fkgrupo.com/relatorio-transparencia-salarial/" target="_blank"
+                    rel="noopener">Transparência Salarial</a>
             </div>
         </div>
 
     </footer>
 
-    <script src="script.js?v=20260727-1"></script>
+    <script src="script.js?v=20260727-2"></script>
     <!-- Premium GSAP Animations -->
-    <script src="gsap-animations.js?v=20260725-4"></script>
+    <script src="gsap-animations.js?v=20260727-3"></script>
 </body>
 
 </html>

@@ -371,6 +371,17 @@ ul {
     color: #fff;
 }
 
+.language-option:disabled {
+    cursor: not-allowed;
+    opacity: 0.42;
+}
+
+.language-option:disabled:hover,
+.language-option:disabled:focus-visible {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.56);
+}
+
 .language-option-mark {
     width: 0;
     height: 1px;
@@ -1934,6 +1945,12 @@ ul {
     object-fit: cover;
 }
 
+.f-scroll-card:nth-child(7) img,
+.f-scroll-card:nth-child(8) img,
+.f-scroll-card:nth-child(10) img {
+    object-position: center;
+}
+
 .f-scroll-campaign.is-motion-ready .f-scroll-camp-outro {
     display: block;
     opacity: 0;
@@ -2848,6 +2865,32 @@ ul {
     line-height: 1.55;
 }
 
+.cookie-notice p a {
+    color: inherit;
+    text-decoration-color: rgba(25, 25, 25, 0.35);
+    text-underline-offset: 3px;
+}
+
+.cookie-notice p a:hover,
+.cookie-notice p a:focus-visible {
+    color: #191919;
+    text-decoration-color: currentColor;
+}
+
+.search-result-focus {
+    animation: search-result-focus 1.15s ease both;
+}
+
+@keyframes search-result-focus {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    42% {
+        opacity: 0.38;
+    }
+}
+
 .cookie-notice__accept {
     min-width: 142px;
     height: 48px;
@@ -2962,7 +3005,9 @@ ul {
 @media (prefers-reduced-motion: reduce) {
     .cookie-notice,
     .cookie-notice__accept,
-    .cookie-notice__accept-icon {
+    .cookie-notice__accept-icon,
+    .search-result-focus {
         transition: none;
+        animation: none;
     }
 }

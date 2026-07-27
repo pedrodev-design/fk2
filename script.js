@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const marcasLink = marcasDropdown?.querySelector(':scope > a');
     const languageSwitchers = document.querySelectorAll('.language-switcher');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const supportedLanguages = ['pt-BR', 'en', 'es', 'it'];
+    const supportedLanguages = ['pt-BR'];
     const languageNames = {
         'pt-BR': 'Português',
         en: 'English',
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     languageSwitchers.forEach((switcher) => {
         const trigger = switcher.querySelector('.language-trigger');
         const menu = switcher.querySelector('.language-menu');
-        const options = Array.from(switcher.querySelectorAll('.language-option'));
+        const options = Array.from(switcher.querySelectorAll('.language-option:not(:disabled)'));
 
         trigger?.addEventListener('click', () => {
             const willOpen = !switcher.classList.contains('is-open');
@@ -176,6 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h2 id="cookie-notice-title">Uma experiência do seu jeito.</h2>
                 <p id="cookie-notice-description">
                     Usamos cookies essenciais para lembrar suas preferências e tornar sua navegação mais fluida.
+                    Consulte nossa <a href="https://fkgrupo.com/politica-de-privacidade/" target="_blank"
+                        rel="noopener">Política de Privacidade</a>.
                 </p>
             </div>
             <button class="cookie-notice__accept" type="button">
@@ -207,6 +209,53 @@ document.addEventListener('DOMContentLoaded', () => {
             }, prefersReducedMotion ? 0 : 450);
         });
     }
+
+    const normalizeSearchText = (value) => value
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLocaleLowerCase('pt-BR')
+        .trim();
+
+    const searchableElements = Array.from(document.querySelectorAll(
+        'main h1, main h2, main h3, main h4, main p, main .home-section-label, main .f-label'
+    ));
+
+    document.querySelectorAll('.search-bar input').forEach((input) => {
+        input.addEventListener('input', () => input.setCustomValidity(''));
+        input.addEventListener('keydown', (event) => {
+            if (event.key !== 'Enter') {
+                return;
+            }
+
+            event.preventDefault();
+            const query = normalizeSearchText(input.value);
+            if (!query) {
+                input.setCustomValidity('Digite um termo para pesquisar.');
+                input.reportValidity();
+                return;
+            }
+
+            const match = searchableElements.find((element) =>
+                element.offsetParent !== null &&
+                normalizeSearchText(element.textContent || '').includes(query)
+            );
+
+            if (!match) {
+                input.setCustomValidity('Nenhum resultado encontrado nesta página.');
+                input.reportValidity();
+                return;
+            }
+
+            input.setCustomValidity('');
+            match.scrollIntoView({
+                behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                block: 'center'
+            });
+            match.classList.remove('search-result-focus');
+            window.requestAnimationFrame(() => match.classList.add('search-result-focus'));
+            window.setTimeout(() => match.classList.remove('search-result-focus'), 1300);
+        });
+    });
 
     if (!mobileMenuToggle || !mainNav) {
         return;

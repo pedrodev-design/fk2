@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260727-1">
-    <link rel="stylesheet" href="home-redesign.css?v=20260725-6">
-    <link rel="stylesheet" href="animations.css?v=20260724-2">
+    <link rel="stylesheet" href="style.css?v=20260727-2">
+    <link rel="stylesheet" href="home-redesign.css?v=20260727-6">
+    <link rel="stylesheet" href="animations.css?v=20260727-1">
     <!-- Lenis Smooth Scroll -->
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <!-- GSAP + ScrollTrigger -->
@@ -35,12 +35,14 @@
             <nav class="main-nav" id="main-navigation" aria-label="Navegação principal">
                 <ul>
                     <li class="dropdown marcas-dropdown">
-                        <a href="#" aria-haspopup="true" aria-expanded="false" aria-controls="brands-mega-menu">Marcas
+                        <a href="#home-brands" aria-haspopup="true" aria-expanded="false"
+                            aria-controls="brands-mega-menu">Marcas
                             <i class="fas fa-chevron-down"></i></a>
                         <!-- Mega Menu -->
                         <div class="mega-menu" id="brands-mega-menu">
                             <div class="mega-menu-container">
-                                <a href="#" class="mega-brand">
+                                <a href="https://fkgrupo.com/maxdesign-brasil/" class="mega-brand" target="_blank"
+                                    rel="noopener">
                                     <img src="Maxdesign.png" alt="Maxdesign" class="mega-logo" width="911" height="168"
                                         decoding="async">
                                 </a>
@@ -48,15 +50,18 @@
                                     <img src="frisokar-logo-branco.webp" alt="Frisokar" class="mega-logo" width="298"
                                         height="65" decoding="async">
                                 </a>
-                                <a href="#" class="mega-brand">
+                                <a href="https://fkgrupo.com/fkwellness/" class="mega-brand" target="_blank"
+                                    rel="noopener">
                                     <img src="FK-WELLNESS-AMBIENTES-DE-SAUDE_branco-scaled-e1753301969819-1400x328.png"
                                         alt="FK Wellness" class="mega-logo" width="1400" height="328" decoding="async">
                                 </a>
-                                <a href="#" class="mega-brand">
+                                <a href="https://fkgrupo.com/arkhe-mobiliario-corporativo/" class="mega-brand"
+                                    target="_blank" rel="noopener">
                                     <img src="Logo-arkhe-branco.png" alt="Arkhé" class="mega-logo" width="316"
                                         height="75" decoding="async">
                                 </a>
-                                <a href="#" class="mega-brand">
+                                <a href="https://fkgrupo.com/kokuyo-ing/" class="mega-brand" target="_blank"
+                                    rel="noopener">
                                     <img src="Kokuyo_logo_branco-01_resp.png" alt="Kokuyo" class="mega-logo" width="196"
                                         height="47" decoding="async">
                                 </a>
@@ -64,13 +69,14 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a href="#">Sustentabilidade <i class="fas fa-chevron-down"></i></a>
+                        <a href="#sustentabilidade">Sustentabilidade <i class="fas fa-chevron-down"></i></a>
                     </li>
                     <li class="dropdown">
-                        <a href="#">Biblioteca <i class="fas fa-chevron-down"></i></a>
+                        <a href="https://fkgrupo.com/biblioteca/" target="_blank" rel="noopener">Biblioteca <i
+                                class="fas fa-chevron-down"></i></a>
                     </li>
-                    <li><a href="#">Carreira</a></li>
-                    <li><a href="#">Contato</a></li>
+                    <li><a href="https://fkgrupo.com/carreira/" target="_blank" rel="noopener">Carreira</a></li>
+                    <li><a href="https://fkgrupo.com/contato/" target="_blank" rel="noopener">Contato</a></li>
                 </ul>
             </nav>
 
@@ -93,16 +99,16 @@
                             aria-checked="true" data-language="pt-BR">
                             <span>Português</span><span class="language-option-mark" aria-hidden="true"></span>
                         </button>
-                        <button class="language-option" type="button" role="menuitemradio"
-                            aria-checked="false" data-language="en">
+                        <button class="language-option" type="button" role="menuitemradio" aria-checked="false"
+                            aria-disabled="true" data-language="en" disabled title="Disponível no projeto completo">
                             <span>English</span><span class="language-option-mark" aria-hidden="true"></span>
                         </button>
-                        <button class="language-option" type="button" role="menuitemradio"
-                            aria-checked="false" data-language="es">
+                        <button class="language-option" type="button" role="menuitemradio" aria-checked="false"
+                            aria-disabled="true" data-language="es" disabled title="Disponível no projeto completo">
                             <span>Español</span><span class="language-option-mark" aria-hidden="true"></span>
                         </button>
-                        <button class="language-option" type="button" role="menuitemradio"
-                            aria-checked="false" data-language="it">
+                        <button class="language-option" type="button" role="menuitemradio" aria-checked="false"
+                            aria-disabled="true" data-language="it" disabled title="Disponível no projeto completo">
                             <span>Italiano</span><span class="language-option-mark" aria-hidden="true"></span>
                         </button>
                     </div>
@@ -197,38 +203,38 @@
         <section class="home-stats-section" id="home-stats">
             <div class="home-stats-container">
                 <div class="home-stat">
-                    <img src="planta-fabril.svg" alt="" loading="lazy" decoding="async">
+                    <span class="home-stat-index" aria-hidden="true">01</span>
                     <div class="home-stat-text">
                         <h3>+95 mil m²</h3>
-                        <p>de área construída</p>
+                        <p>de área construída em seis plantas</p>
                     </div>
                 </div>
                 <div class="home-stat">
-                    <img src="colaboradores.svg" alt="" loading="lazy" decoding="async">
+                    <span class="home-stat-index" aria-hidden="true">02</span>
                     <div class="home-stat-text">
                         <h3>+1.200</h3>
                         <p>colaboradores</p>
                     </div>
                 </div>
                 <div class="home-stat">
-                    <img src="centro-distribuicao.svg" alt="" loading="lazy" decoding="async">
+                    <span class="home-stat-index" aria-hidden="true">03</span>
                     <div class="home-stat-text">
                         <h3>9</h3>
-                        <p>centros de distribuição</p>
+                        <p>centros de distribuição no Brasil</p>
                     </div>
                 </div>
                 <div class="home-stat">
-                    <img src="celulas-roboticas.svg" alt="" loading="lazy" decoding="async">
+                    <span class="home-stat-index" aria-hidden="true">04</span>
                     <div class="home-stat-text">
                         <h3>51</h3>
                         <p>células robóticas</p>
                     </div>
                 </div>
                 <div class="home-stat">
-                    <img src="producao-diaria.svg" alt="" loading="lazy" decoding="async">
+                    <span class="home-stat-index" aria-hidden="true">05</span>
                     <div class="home-stat-text">
                         <h3>+110 mil</h3>
-                        <p>itens por dia</p>
+                        <p>itens produzidos por dia</p>
                     </div>
                 </div>
             </div>
@@ -238,25 +244,30 @@
         <section class="home-brands-section" id="home-brands">
             <div class="home-brands-header">
                 <div>
-                    <span class="home-section-label">GRUPO DE MARCAS</span>
-                    <h2>Um ecossistema de<br>marcas complementares.</h2>
+                    <span class="home-section-label">PORTFÓLIO FK</span>
+                    <h2>Cinco marcas.<br>Uma estrutura integrada.</h2>
                 </div>
                 <div class="home-brands-desc">
-                    <p>Soluções especializadas para trabalho, saúde,<br>colaboração e design corporativo.</p>
+                    <p>Assentos corporativos, mobiliário para saúde e design internacional<br>produzidos e
+                        distribuídos pelo grupo.</p>
                 </div>
             </div>
             <div class="home-brands-logos">
                 <a href="frisokar.html"><img src="frisokar-logo-branco.webp" alt="Frisokar" class="invert-logo"
                         width="298" height="65" loading="lazy" decoding="async"></a>
-                <a href="#"><img src="Maxdesign.png" alt="Maxdesign" class="invert-logo" width="911" height="168"
-                        loading="lazy" decoding="async"></a>
-                <a href="#"><img src="FK-WELLNESS-AMBIENTES-DE-SAUDE_branco-scaled-e1753301969819-1400x328.png"
+                <a href="https://fkgrupo.com/maxdesign-brasil/" target="_blank" rel="noopener"><img src="Maxdesign.png"
+                        alt="Maxdesign" class="invert-logo" width="911" height="168" loading="lazy"
+                        decoding="async"></a>
+                <a href="https://fkgrupo.com/fkwellness/" target="_blank" rel="noopener"><img
+                        src="FK-WELLNESS-AMBIENTES-DE-SAUDE_branco-scaled-e1753301969819-1400x328.png"
                         alt="FK Wellness" class="invert-logo" width="1400" height="328" loading="lazy"
                         decoding="async"></a>
-                <a href="#"><img src="Logo-arkhe-branco.png" alt="Arkhé" class="invert-logo" width="316" height="75"
+                <a href="https://fkgrupo.com/arkhe-mobiliario-corporativo/" target="_blank" rel="noopener"><img
+                        src="Logo-arkhe-branco.png" alt="Arkhé" class="invert-logo" width="316" height="75"
                         loading="lazy" decoding="async"></a>
-                <a href="#"><img src="Kokuyo_logo_branco-01_resp.png" alt="Kokuyo" class="invert-logo" width="196"
-                        height="47" loading="lazy" decoding="async"></a>
+                <a href="https://fkgrupo.com/kokuyo-ing/" target="_blank" rel="noopener"><img
+                        src="Kokuyo_logo_branco-01_resp.png" alt="Kokuyo" class="invert-logo" width="196" height="47"
+                        loading="lazy" decoding="async"></a>
             </div>
         </section>
 
@@ -266,29 +277,29 @@
             <div class="capacity-content">
                 <span class="home-section-label">CAPACIDADE INDUSTRIAL</span>
                 <h2>Precisão industrial<br>em escala nacional.</h2>
-                <p>Da matéria-prima ao acabamento final, o grupo integra engenharia, automação e controle de
-                    qualidade para entregar desempenho, consistência e confiança.</p>
+                <p>Do PU, PP e aço ao produto final, o grupo reúne engenharia, automação e controle de qualidade em
+                    uma cadeia produtiva nacional.</p>
 
                 <div class="capacity-features">
                     <div class="cap-feat">
-                        <i class="fas fa-industry"></i>
+                        <span class="cap-feat-marker" aria-hidden="true">06</span>
                         <div>
-                            <h4>Produção nacional</h4>
-                            <p>Fábricas próprias e cadeia produtiva integrada.</p>
+                            <h4>Produção integrada</h4>
+                            <p>Seis plantas e domínio das principais matérias-primas.</p>
                         </div>
                     </div>
                     <div class="cap-feat">
-                        <i class="fas fa-check-circle"></i>
+                        <span class="cap-feat-marker" aria-hidden="true">LAB</span>
                         <div>
-                            <h4>Controle de qualidade</h4>
-                            <p>Processos certificados e rigor em cada etapa.</p>
+                            <h4>Qualidade verificada</h4>
+                            <p>LabChair acreditado pelo CGCRE/Inmetro.</p>
                         </div>
                     </div>
                     <div class="cap-feat">
-                        <i class="fas fa-cogs"></i>
+                        <span class="cap-feat-marker" aria-hidden="true">51</span>
                         <div>
-                            <h4>Tecnologia e automação</h4>
-                            <p>Robótica, engenharia e inovação para mais eficiência.</p>
+                            <h4>Automação industrial</h4>
+                            <p>51 células robóticas conectadas à produção.</p>
                         </div>
                     </div>
                 </div>
@@ -311,30 +322,27 @@
             </div>
             <div class="about-content">
                 <span class="home-section-label">SOBRE O FK GRUPO</span>
-                <h2>Mais do que mobiliário: <br>um sistema completo.</h2>
-                <p>Unimos design, ergonomia, produção e distribuição para criar <br>soluções inteligentes que
-                    transformam ambientes em experiências <br>mais humanas, eficientes e sustentáveis.</p>
+                <h2>Engenharia, produção e distribuição <br>no mesmo sistema.</h2>
+                <p>Da especificação ao abastecimento, o FK Grupo conecta desenvolvimento de produto, seis plantas
+                    industriais e nove centros de distribuição.</p>
 
                 <div class="about-features">
                     <div class="abt-feat">
-                        <i class="fas fa-user-edit"></i>
                         <div>
-                            <h4>Design e ergonomia</h4>
-                            <p>Soluções pensadas para conforto, <br>saúde e produtividade.</p>
+                            <h4>Projeto e ergonomia</h4>
+                            <p>Produtos pensados para uso prolongado e diferentes contextos.</p>
                         </div>
                     </div>
                     <div class="abt-feat">
-                        <i class="fas fa-box-open"></i>
                         <div>
-                            <h4>Produção integrada</h4>
-                            <p>Fábricas próprias e processos <br>industriais de alta performance.</p>
+                            <h4>Escala produtiva</h4>
+                            <p>Mais de 110 mil itens produzidos por dia.</p>
                         </div>
                     </div>
                     <div class="abt-feat">
-                        <i class="fas fa-globe-americas"></i>
                         <div>
-                            <h4>Distribuição nacional</h4>
-                            <p>Presença e logística para <br>atender todo o território brasileiro.</p>
+                            <h4>Cobertura nacional</h4>
+                            <p>Nove centros de distribuição no Brasil.</p>
                         </div>
                     </div>
                 </div>
@@ -342,25 +350,22 @@
         </section>
 
         <!-- Sustainability Section -->
-        <section class="home-sustainability-section">
+        <section class="home-sustainability-section" id="sustentabilidade">
             <div class="sust-inner">
                 <div class="sust-left">
                     <span class="home-section-label">SUSTENTABILIDADE E GOVERNANÇA</span>
                     <h2>Comprometidos<br>com o amanhã.</h2>
-                    <p>Produzimos com responsabilidade ambiental desde a matéria-prima, operando com governança
-                        transparente e eficiência produtiva para gerar valor real e duradouro.</p>
-                    <div class="sust-pillars">
+                    <p>Redução de resíduos, logística reversa e uso responsável de recursos orientam a produção e a
+                        governança do grupo.</p>
+                    <div class="sust-pillars" aria-label="Pilares de atuação">
                         <div class="sust-pillar">
-                            <span class="sust-pillar-num">01</span>
                             <span class="sust-pillar-label">Governança</span>
                         </div>
                         <div class="sust-pillar">
-                            <span class="sust-pillar-num">02</span>
                             <span class="sust-pillar-label">Certificações</span>
                         </div>
                         <div class="sust-pillar">
-                            <span class="sust-pillar-num">03</span>
-                            <span class="sust-pillar-label">Inovação</span>
+                            <span class="sust-pillar-label">Qualidade</span>
                         </div>
                     </div>
                 </div>
@@ -383,8 +388,8 @@
                             <p>Anos de compromisso<br>ambiental contínuo</p>
                         </div>
                     </div>
-                    <a href="#" class="sust-cta">
-                        <span>Ver Relatório ESG</span>
+                    <a href="https://fkgrupo.com/sustentabilidade/" class="sust-cta" target="_blank" rel="noopener">
+                        <span>Conhecer compromissos</span>
                         <span class="sust-cta-arrow" aria-hidden="true">→</span>
                     </a>
                 </div>
@@ -393,10 +398,10 @@
 
         <!-- CTA Banner Section -->
         <section class="home-cta-banner">
-            <h2>VAMOS CONSTRUIR O PRÓXIMO<br>AMBIENTE DA SUA MARCA.</h2>
+            <h2>DA ESPECIFICAÇÃO À ENTREGA,<br>FALE COM QUEM PRODUZ.</h2>
             <div class="cta-banner-buttons">
-                <a href="#" class="btn-primary">
-                    <span>FALAR COM UM ESPECIALISTA</span>
+                <a href="https://fkgrupo.com/contato/" class="btn-primary" target="_blank" rel="noopener">
+                    <span>INICIAR UM PROJETO</span>
                     <span class="btn-arrow" aria-hidden="true">&rarr;</span>
                 </a>
 
@@ -417,7 +422,8 @@
                         loading="lazy" decoding="async">
                 </a>
                 <p class="footer-tagline">Desde 1985</p>
-                <p class="footer-brand-copy">Indústria, design e tecnologia para transformar ambientes.</p>
+                <p class="footer-brand-copy">Projetamos, produzimos e distribuímos mobiliário para trabalho e
+                    saúde.</p>
                 <div class="footer-brand-tags" aria-label="Marcas do FK Grupo">
                     <span>Maxdesign</span>
                     <span>Frisokar</span>
@@ -432,31 +438,40 @@
                 <div class="footer-column">
                     <h4>Empresa</h4>
                     <ul>
-                        <li><a href="#">O FK Grupo</a></li>
-                        <li><a href="#">Marcas</a></li>
-                        <li><a href="#">Carreira</a></li>
-                        <li><a href="#">Blog FK Grupo</a></li>
-                        <li><a href="#">Contato</a></li>
+                        <li><a href="https://fkgrupo.com/fk-grupo/" target="_blank" rel="noopener">O FK Grupo</a></li>
+                        <li><a href="#home-brands">Marcas</a></li>
+                        <li><a href="https://fkgrupo.com/carreira/" target="_blank" rel="noopener">Carreira</a></li>
+                        <li><a href="https://fkgrupo.com/blog/" target="_blank" rel="noopener">Blog FK Grupo</a></li>
+                        <li><a href="https://fkgrupo.com/contato/" target="_blank" rel="noopener">Contato</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h4>Sustentabilidade</h4>
                     <ul>
-                        <li><a href="#">Compromisso Ambiental</a></li>
-                        <li><a href="#">Inovação Sustentável</a></li>
-                        <li><a href="#">Responsabilidade Social</a></li>
-                        <li><a href="#">Certificações</a></li>
-                        <li><a href="#">Licitação</a></li>
+                        <li><a href="https://fkgrupo.com/sustentabilidade/compromisso-ambiental/" target="_blank"
+                                rel="noopener">Compromisso Ambiental</a></li>
+                        <li><a href="https://fkgrupo.com/sustentabilidade/inovacao-sustentavel/" target="_blank"
+                                rel="noopener">Inovação Sustentável</a></li>
+                        <li><a href="https://fkgrupo.com/sustentabilidade/responsabilidade-social/" target="_blank"
+                                rel="noopener">Responsabilidade Social</a></li>
+                        <li><a href="https://fkgrupo.com/sustentabilidade/certificacoes/" target="_blank"
+                                rel="noopener">Certificações</a></li>
+                        <li><a href="https://fkgrupo.com/biblioteca/licitacao/" target="_blank"
+                                rel="noopener">Licitação</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h4>Links Úteis</h4>
                     <ul>
-                        <li><a href="#">Canal de Denúncias</a></li>
-                        <li><a href="#">Código de Conduta</a></li>
-                        <li><a href="#">Portal RH</a></li>
-                        <li><a href="#">Política de Privacidade</a></li>
-                        <li><a href="#">Manuais de Montagem</a></li>
+                        <li><a href="https://canal.ouvidordigital.com.br/fkgrupo" target="_blank" rel="noopener">Canal
+                                de Denúncias</a></li>
+                        <li><a href="https://fkgrupo.com/codigo-conduta/" target="_blank" rel="noopener">Código de
+                                Conduta</a></li>
+                        <li><a href="https://meurh.frisokar.com.br/" target="_blank" rel="noopener">Portal RH</a></li>
+                        <li><a href="https://fkgrupo.com/politica-de-privacidade/" target="_blank"
+                                rel="noopener">Política de Privacidade</a></li>
+                        <li><a href="https://fkgrupo.com/manuais-montagem-usabilidade/" target="_blank"
+                                rel="noopener">Manuais de Montagem</a></li>
                     </ul>
                 </div>
             </nav>
@@ -466,9 +481,12 @@
                 <h4>Contato</h4>
                 <address>Rod. Braz Fortunato,<br>KM2, S/N<br>Bariri – SP<br>CEP: 17255-755</address>
                 <div class="contact-icons">
-                    <a href="#" title="WhatsApp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" title="Telefone" aria-label="Telefone"><i class="fas fa-phone-alt"></i></a>
-                    <a href="#" title="E-mail" aria-label="E-mail"><i class="far fa-envelope"></i></a>
+                    <a href="https://wa.me/5514997674395" target="_blank" rel="noopener" title="WhatsApp"
+                        aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="tel:+5514997674395" title="Telefone" aria-label="Telefone"><i
+                            class="fas fa-phone-alt"></i></a>
+                    <a href="mailto:sac@fkgrupo.com" title="E-mail" aria-label="E-mail"><i
+                            class="far fa-envelope"></i></a>
                 </div>
             </div>
 
@@ -478,15 +496,17 @@
         <div class="footer-bottom">
             <p>© 2026 FK Grupo S.A. — Todos os direitos reservados.</p>
             <div class="footer-bottom-links">
-                <a href="#">Política de Privacidade</a>
-                <a href="#">Termos de Uso</a>
-                <a href="#">Transparência Salarial</a>
+                <a href="https://fkgrupo.com/politica-de-privacidade/" target="_blank" rel="noopener">Política de
+                    Privacidade</a>
+                <a href="https://fkgrupo.com/termos-condicoes-site/" target="_blank" rel="noopener">Termos de Uso</a>
+                <a href="https://fkgrupo.com/relatorio-transparencia-salarial/" target="_blank"
+                    rel="noopener">Transparência Salarial</a>
             </div>
         </div>
 
     </footer>
 
-    <script src="script.js?v=20260727-1"></script>
+    <script src="script.js?v=20260727-2"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const videoHost = document.querySelector('#about-video-player');
@@ -636,7 +656,7 @@
         });
     </script>
     <!-- Premium GSAP Animations -->
-    <script src="gsap-animations.js?v=20260725-4"></script>
+    <script src="gsap-animations.js?v=20260727-3"></script>
 </body>
 
 </html>
