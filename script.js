@@ -176,12 +176,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const youtubeHost = document.querySelector('#about-youtube-player');
     const youtubeSoundButton = document.querySelector('.about-video-sound');
+    const youtubePlayButton = document.querySelector('.about-video-play');
 
-    if (youtubeHost && youtubeSoundButton) {
+    if (youtubeHost && youtubeSoundButton && youtubePlayButton) {
         const videoId = youtubeHost.dataset.videoId;
         let youtubePlayer = null;
         let youtubeSoundEnabled = false;
         let qualityTimers = [];
+        let captionTimers = [];
+
+        const setYoutubePlayButtonVisible = (isVisible) => {
+            youtubePlayButton.classList.toggle('is-visible', isVisible);
+            youtubePlayButton.setAttribute('aria-hidden', String(!isVisible));
+            youtubePlayButton.tabIndex = isVisible ? 0 : -1;
+        };
 
         const updateYoutubeSoundButton = () => {
             youtubeSoundButton.setAttribute('aria-pressed', String(youtubeSoundEnabled));
@@ -216,6 +224,47 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         };
 
+        const disableYoutubeCaptions = () => {
+            if (!youtubePlayer) {
+                return;
+            }
+
+            if (typeof youtubePlayer.setOption === 'function') {
+                try {
+                    youtubePlayer.setOption('captions', 'track', {});
+                } catch {
+                    // O módulo de legenda pode ainda não estar disponível.
+                }
+
+                try {
+                    youtubePlayer.setOption('cc', 'track', {});
+                } catch {
+                    // Alguns players expõem somente o módulo "captions".
+                }
+            }
+
+            if (typeof youtubePlayer.unloadModule === 'function') {
+                try {
+                    youtubePlayer.unloadModule('captions');
+                } catch {
+                    // Mantém a reprodução caso o módulo já esteja descarregado.
+                }
+
+                try {
+                    youtubePlayer.unloadModule('cc');
+                } catch {
+                    // Mantém compatibilidade entre versões do player.
+                }
+            }
+        };
+
+        const scheduleYoutubeCaptionsOff = () => {
+            captionTimers.forEach((timer) => window.clearTimeout(timer));
+            captionTimers = [0, 350, 1200].map((delay) =>
+                window.setTimeout(disableYoutubeCaptions, delay)
+            );
+        };
+
         const createYoutubePlayer = () => {
             if (youtubePlayer || !window.YT?.Player) {
                 return;
@@ -232,6 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     loop: 1,
                     playlist: videoId,
                     controls: 0,
+                    cc_load_policy: 0,
                     disablekb: 1,
                     fs: 0,
                     iv_load_policy: 3,
@@ -251,21 +301,51 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (!prefersReducedMotion) {
                             event.target.playVideo();
                         }
+                        youtubePlayButton.disabled = false;
                         youtubeSoundButton.disabled = false;
                         updateYoutubeSoundButton();
                         scheduleYoutubeQuality();
+                        scheduleYoutubeCaptionsOff();
                     },
                     onStateChange: (event) => {
                         if (event.data === window.YT.PlayerState.PLAYING) {
+                            setYoutubePlayButtonVisible(false);
                             scheduleYoutubeQuality();
+                            scheduleYoutubeCaptionsOff();
                         } else if (event.data === window.YT.PlayerState.ENDED) {
+                            setYoutubePlayButtonVisible(false);
                             event.target.seekTo(0, true);
                             event.target.playVideo();
+                        } else if (
+                            event.data === window.YT.PlayerState.PAUSED ||
+                            event.data === window.YT.PlayerState.CUED ||
+                            event.data === window.YT.PlayerState.UNSTARTED
+                        ) {
+                            setYoutubePlayButtonVisible(true);
                         }
+                    },
+                    onError: () => {
+                        setYoutubePlayButtonVisible(true);
                     }
                 }
             });
         };
+
+        youtubePlayButton.addEventListener('click', () => {
+            if (!youtubePlayer || typeof youtubePlayer.playVideo !== 'function') {
+                return;
+            }
+
+            if (youtubeSoundEnabled) {
+                youtubePlayer.setVolume(100);
+                youtubePlayer.unMute();
+            } else {
+                youtubePlayer.mute();
+            }
+
+            youtubePlayer.playVideo();
+            scheduleYoutubeCaptionsOff();
+        });
 
         youtubeSoundButton.addEventListener('click', () => {
             if (!youtubePlayer || typeof youtubePlayer.isMuted !== 'function') {
