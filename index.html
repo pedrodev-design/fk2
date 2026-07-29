@@ -19,7 +19,7 @@
         href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=20260729-1">
-    <link rel="stylesheet" href="home-redesign.css?v=20260729-1">
+    <link rel="stylesheet" href="home-redesign.css?v=20260729-2">
     <link rel="stylesheet" href="animations.css?v=20260727-1">
     <!-- Lenis Smooth Scroll -->
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
@@ -334,11 +334,10 @@
 
         <!-- About System Section -->
         <section class="home-about-section">
-            <div class="about-image">
-                <video class="about-video about-video-local" autoplay muted loop playsinline preload="metadata"
-                    aria-label="Vídeo institucional colorido do FK Grupo">
-                    <source src="sobre-fk.webm" type="video/mp4">
-                </video>
+            <div class="about-image" role="group" aria-label="Vídeo institucional do FK Grupo">
+                <div class="about-video about-video-youtube" aria-hidden="true">
+                    <div id="about-youtube-player" data-video-id="qob_qC6bGxY"></div>
+                </div>
                 <button class="about-video-sound" type="button" aria-label="Ativar som do vídeo" aria-pressed="false"
                     disabled>
                     <i class="fas fa-volume-xmark" aria-hidden="true"></i>
@@ -856,38 +855,7 @@
 
     </footer>
 
-    <script src="script.js?v=20260727-8"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const video = document.querySelector('.about-video-local');
-            const soundButton = document.querySelector('.about-video-sound');
-            if (!video || !soundButton) {
-                return;
-            }
-
-            const updateSoundButton = () => {
-                const soundIsOn = !video.muted;
-                soundButton.setAttribute('aria-pressed', String(soundIsOn));
-                soundButton.setAttribute(
-                    'aria-label',
-                    soundIsOn ? 'Desativar som do vídeo' : 'Ativar som do vídeo'
-                );
-                const icon = soundButton.querySelector('i');
-                icon?.classList.toggle('fa-volume-xmark', !soundIsOn);
-                icon?.classList.toggle('fa-volume-high', soundIsOn);
-            };
-
-            video.muted = true;
-            soundButton.disabled = false;
-            updateSoundButton();
-
-            soundButton.addEventListener('click', () => {
-                video.muted = !video.muted;
-                video.play().catch(() => { });
-                updateSoundButton();
-            });
-        });
-    </script>
+    <script src="script.js?v=20260729-2"></script>
     <!-- Premium GSAP Animations -->
     <script src="gsap-animations.js?v=20260729-2"></script>
 </body>
