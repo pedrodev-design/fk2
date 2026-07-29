@@ -153,6 +153,25 @@ document.addEventListener('DOMContentLoaded', () => {
             video.removeAttribute('autoplay');
             video.pause();
         });
+    } else if ('IntersectionObserver' in window) {
+        const autoplayVideos = document.querySelectorAll('video[autoplay]');
+        const autoplayObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                const video = entry.target;
+                if (entry.isIntersecting) {
+                    video.play().catch(() => {
+                        // Browsers may still defer autoplay; muted video remains usable.
+                    });
+                } else {
+                    video.pause();
+                }
+            });
+        }, {
+            rootMargin: '180px 0px',
+            threshold: 0.01
+        });
+
+        autoplayVideos.forEach((video) => autoplayObserver.observe(video));
     }
 
     const cookieConsentKey = 'fk-cookie-consent-v1';
@@ -257,6 +276,158 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    const historyViewport = document.querySelector('.home-history-viewport');
+    const historyItems = Array.from(document.querySelectorAll('.home-history-item'));
+    const historyPrevious = document.querySelector('.home-history-prev');
+    const historyNext = document.querySelector('.home-history-next');
+    const historyCount = document.querySelector('.home-history-count');
+    const historyProgress = document.querySelector('.home-history-progress span');
+
+    if (historyViewport && historyItems.length) {
+        let historyActiveIndex = 0;
+        let historyFrame = 0;
+        let historyDragging = false;
+        let historyDragStartX = 0;
+        let historyDragStartScroll = 0;
+        let historyDragged = false;
+
+        const scrollToHistoryItem = (index) => {
+            const nextIndex = Math.max(0, Math.min(historyItems.length - 1, index));
+            historyViewport.scrollTo({
+                left: historyItems[nextIndex].offsetLeft,
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+        };
+
+        const updateHistoryState = () => {
+            historyFrame = 0;
+            const viewportLeft = historyViewport.getBoundingClientRect().left;
+            let closestDistance = Number.POSITIVE_INFINITY;
+            let closestIndex = 0;
+
+            historyItems.forEach((item, index) => {
+                const distance = Math.abs(item.getBoundingClientRect().left - viewportLeft);
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestIndex = index;
+                }
+            });
+
+            historyActiveIndex = closestIndex;
+            historyItems.forEach((item, index) => {
+                item.classList.toggle('is-active', index === historyActiveIndex);
+            });
+
+            historyPrevious?.toggleAttribute('disabled', historyActiveIndex === 0);
+            historyNext?.toggleAttribute('disabled', historyActiveIndex === historyItems.length - 1);
+
+            if (historyCount) {
+                historyCount.textContent =
+                    `${historyActiveIndex + 1} de ${historyItems.length}`;
+            }
+
+            if (historyProgress) {
+                historyProgress.style.width = `${((historyActiveIndex + 1) / historyItems.length) * 100}%`;
+            }
+        };
+
+        const requestHistoryUpdate = () => {
+            if (!historyFrame) {
+                historyFrame = window.requestAnimationFrame(updateHistoryState);
+            }
+        };
+
+        historyPrevious?.addEventListener('click', () => {
+            scrollToHistoryItem(historyActiveIndex - 1);
+        });
+
+        historyNext?.addEventListener('click', () => {
+            scrollToHistoryItem(historyActiveIndex + 1);
+        });
+
+        historyViewport.addEventListener('scroll', requestHistoryUpdate, { passive: true });
+        historyViewport.addEventListener('pointerdown', (event) => {
+            if (event.pointerType !== 'mouse' || event.button !== 0) {
+                return;
+            }
+
+            historyDragging = true;
+            historyDragged = false;
+            historyDragStartX = event.clientX;
+            historyDragStartScroll = historyViewport.scrollLeft;
+            historyViewport.classList.add('is-dragging');
+            historyViewport.setPointerCapture?.(event.pointerId);
+        });
+
+        historyViewport.addEventListener('pointermove', (event) => {
+            if (!historyDragging) {
+                return;
+            }
+
+            const distance = event.clientX - historyDragStartX;
+            if (Math.abs(distance) > 4) {
+                historyDragged = true;
+            }
+            historyViewport.scrollLeft = historyDragStartScroll - distance;
+        });
+
+        const finishHistoryDrag = (event) => {
+            if (!historyDragging) {
+                return;
+            }
+
+            historyDragging = false;
+            historyViewport.classList.remove('is-dragging');
+            if (historyViewport.hasPointerCapture?.(event.pointerId)) {
+                historyViewport.releasePointerCapture(event.pointerId);
+            }
+            updateHistoryState();
+
+            if (historyDragged) {
+                scrollToHistoryItem(historyActiveIndex);
+            }
+        };
+
+        historyViewport.addEventListener('pointerup', finishHistoryDrag);
+        historyViewport.addEventListener('pointercancel', finishHistoryDrag);
+        historyViewport.addEventListener('dragstart', (event) => event.preventDefault());
+        historyViewport.addEventListener('wheel', (event) => {
+            const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY)
+                ? event.deltaX
+                : event.deltaY;
+            const maxScroll = historyViewport.scrollWidth - historyViewport.clientWidth;
+            const canMoveBack = delta < 0 && historyViewport.scrollLeft > 1;
+            const canMoveForward = delta > 0 && historyViewport.scrollLeft < maxScroll - 1;
+
+            if (Math.abs(delta) < 2 || (!canMoveBack && !canMoveForward)) {
+                return;
+            }
+
+            event.preventDefault();
+            historyViewport.scrollLeft += delta;
+        }, { passive: false });
+        historyViewport.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                scrollToHistoryItem(historyActiveIndex + 1);
+            } else if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                scrollToHistoryItem(historyActiveIndex - 1);
+            } else if (event.key === 'Home') {
+                event.preventDefault();
+                scrollToHistoryItem(0);
+            } else if (event.key === 'End') {
+                event.preventDefault();
+                scrollToHistoryItem(historyItems.length - 1);
+            }
+        });
+
+        window.addEventListener('resize', requestHistoryUpdate);
+        window.addEventListener('pageshow', requestHistoryUpdate);
+        window.setTimeout(requestHistoryUpdate, 120);
+        updateHistoryState();
+    }
+
     if (!mobileMenuToggle || !mainNav) {
         return;
     }
@@ -342,6 +513,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.addEventListener('keydown', (event) => {
+        if (event.key === 'Tab' && mainNav.classList.contains('active')) {
+            const focusableElements = [mobileMenuToggle, ...mainNav.querySelectorAll('a, button')]
+                .filter((element) => {
+                    const styles = window.getComputedStyle(element);
+                    return !element.hasAttribute('disabled') &&
+                        styles.display !== 'none' &&
+                        styles.visibility !== 'hidden';
+                });
+
+            const firstFocusable = focusableElements[0];
+            const lastFocusable = focusableElements[focusableElements.length - 1];
+
+            if (event.shiftKey && document.activeElement === firstFocusable) {
+                event.preventDefault();
+                lastFocusable?.focus();
+            } else if (!event.shiftKey && document.activeElement === lastFocusable) {
+                event.preventDefault();
+                firstFocusable?.focus();
+            }
+        }
+
         if (event.key === 'Escape') {
             closeLanguageMenus(true);
             if (mainNav.classList.contains('active')) {

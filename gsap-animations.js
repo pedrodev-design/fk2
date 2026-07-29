@@ -276,9 +276,12 @@
                         trigger: section,
                         start: 'top top',
                         end: 'bottom bottom',
-                        // Preserve the cinematic pacing without making the interface feel
-                        // disconnected from the user's gesture when they reverse the scroll.
-                        scrub: isMobile ? 1.15 : 3.2,
+                        /*
+                         * A cena acompanha a distância realmente percorrida.
+                         * A pequena inércia suaviza trackpad, roda e toque sem
+                         * capturar o gesto nem levar a pessoa direto ao final.
+                         */
+                        scrub: 0.42,
                         invalidateOnRefresh: true,
                         onUpdate: (self) => {
                             const visualProgress = self.animation
@@ -297,48 +300,49 @@
                 timeline
                     .to(intro, {
                         opacity: 0,
-                        y: -36,
-                        filter: 'blur(14px)',
-                        duration: 0.13,
-                        ease: 'power2.in'
-                    }, 0.035)
+                        y: -22,
+                        filter: 'blur(10px)',
+                        duration: 0.34,
+                        ease: 'power2.inOut'
+                    }, 0.17)
                     .to(frame, {
                         clipPath: 'inset(0% 0% 0% round 0px)',
-                        duration: 0.66,
+                        duration: 0.7,
                         ease: 'power2.inOut'
-                    }, 0.18)
+                    }, 0.04)
                     .to(video, {
                         scale: 1,
                         duration: 0.72,
                         ease: 'power2.inOut'
-                    }, 0.18)
+                    }, 0.04)
                     .to(shade, {
                         opacity: 0.68,
-                        duration: 0.25,
+                        duration: 0.3,
                         ease: 'power1.out'
-                    }, isMobile ? 0.56 : 0.62)
+                    }, isMobile ? 0.39 : 0.42)
                     .to(reveal, {
                         opacity: 1,
                         y: 0,
                         filter: 'blur(0px)',
-                        duration: 0.22,
+                        duration: 0.3,
                         ease: 'power3.out'
-                    }, isMobile ? 0.62 : 0.7)
+                    }, isMobile ? 0.47 : 0.5)
                     .to(revealParts, {
                         opacity: 1,
                         y: 0,
-                        stagger: 0.025,
-                        duration: 0.22,
+                        stagger: 0.03,
+                        duration: 0.28,
                         ease: 'power3.out'
-                    }, isMobile ? 0.66 : 0.74)
+                    }, isMobile ? 0.51 : 0.54)
                     .to(reveal, {
                         opacity: 1,
-                        duration: isMobile ? 0.32 : 0.12,
+                        duration: isMobile ? 0.2 : 0.15,
                         ease: 'none'
-                    }, 0.96);
+                    }, 0.94);
 
                 return () => {
                     section.setAttribute('data-theme', 'light');
+                    updateHeaderTheme();
                 };
             }
         );
@@ -369,6 +373,7 @@
             '.solution-card',
             '.cap-feat',
             '.abt-feat',
+            '.home-history-item',
             '.sust-pillar',
             '.sust-stat'
         ].join(',');
@@ -425,6 +430,7 @@
             { items: '.solution-card', trigger: '.home-solutions-grid' },
             { items: '.cap-feat', trigger: '.capacity-features' },
             { items: '.abt-feat', trigger: '.about-features' },
+            { items: '.home-history-item', trigger: '.home-history-viewport', start: 'top 88%' },
             { items: '.sust-pillar', trigger: '.sust-pillars' },
             { items: '.sust-stat', trigger: '.sust-stat-grid' },
             { items: '.footer-column', trigger: '.footer-links-area' }
